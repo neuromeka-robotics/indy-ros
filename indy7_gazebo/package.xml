@@ -1,0 +1,26 @@
+<package>
+  <name>indy7_gazebo</name>
+  <version>0.1.0</version>
+  <description>indy7_gazebo</description>
+  <maintainer email="gwanwoo.kim@neuromeka.com">Gwanwoo Kim</maintainer>
+
+  <license>BSD</license>
+
+  <url type="website">http://wiki.neuromeka.net/index.php?title=ROS_Indy</url>
+  <url type="repository">https://github.com/neuromeka-robotics/ros_indy</url>
+  <url type="bugtracker">https://github.com/neuromeka-robotics/ros_indyissues</url>
+
+  <buildtool_depend>catkin</buildtool_depend>
+
+  <run_depend>gazebo_plugins</run_depend>
+  <run_depend>gazebo_ros</run_depend>
+  <run_depend>gazebo_ros_control</run_depend>
+  <run_depend>joint_state_publisher</run_depend>
+  <run_depend>robot_state_publisher</run_depend>
+  <run_depend>indy_driver</run_depend>
+  <run_depend>indy7_description</run_depend>
+  <run_depend>xacro</run_depend>
+
+  <export>
+  </export>
+</package>

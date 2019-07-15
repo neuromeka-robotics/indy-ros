@@ -1,0 +1,11 @@
+moveit_setup_assistant_config:
+  URDF:
+    package: indyrp2_description
+    relative_path: urdf/indyrp2.xacro
+    xacro_args: "--inorder "
+  SRDF:
+    relative_path: config/indyrp2.srdf
+  CONFIG:
+    author_name: Thach Do
+    author_email: thach.do@neuromeka.com
+    generated_timestamp: 1542621678

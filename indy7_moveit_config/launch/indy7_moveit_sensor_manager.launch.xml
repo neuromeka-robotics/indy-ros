@@ -1,0 +1,17 @@
+<launch>
+
+  <!-- This file makes it easy to include the settings for sensor managers -->  
+  
+  <!-- Set the file describing which sensor(s) to use to build the octomap  -->
+  <arg name="moveit_octomap_sensor_params_file" default="$(find indy7_moveit_config)/config/sensors_kinect_pointcloud.yaml" />
+
+  <rosparam command="load" file="$(arg moveit_octomap_sensor_params_file)" />
+  <!--<rosparam command="load" file="$(find invite_motoman_moveit_config)/config/sensors_rs200.yaml" />-->
+
+  <!-- Params for the octomap monitor -->
+  <!--  <param name="octomap_frame" type="string" value="some frame in which the robot moves" /> -->
+  <param name="octomap_frame" type="string" value="ground" />
+  <param name="octomap_resolution" type="double" value="0.025" />
+  <param name="max_range" type="double" value="5.0" />
+  
+</launch>

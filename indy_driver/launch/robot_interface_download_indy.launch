@@ -1,0 +1,18 @@
+<!--
+  Manipulator specific version of indy_driver's 'robot_interface.launch'.
+  Usage:
+    robot_interface_download_indy.launch robot_ip:=<value>
+-->
+<launch>
+  <arg name="robot_ip" doc="IP of the controller"/>
+  <arg name="robot_name" doc="Name of Indy robot"/>
+  <arg name="robot_redundancy" doc="Robot Redundancy" default="false" />  
+  
+  <!--<rosparam command="load" file="$(find indy_support)/config/joint_names_indy.yaml" />-->
+
+  <include file="$(find indy_driver)/launch/indy_interface.launch">
+    <arg name="robot_ip" value="$(arg robot_ip)" />
+    <arg name="robot_name" value="$(arg robot_name)" />
+    <arg name="robot_redundancy" value="$(arg robot_redundancy)" />
+  </include>
+</launch>

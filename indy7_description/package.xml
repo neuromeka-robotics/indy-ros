@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>indy7_description</name>
+  <version>1.0.3</version>
+  <description>The indy7_description package</description>
+  <author>Thach Do</author>
+  <maintainer email="thach.do@neuromeka.com">Thach Do</maintainer>
+  
+  <license>BSD</license>
+  
+  <url type="website">http://wiki.neuromeka.net/index.php?title=ROS_Indy</url>
+  <url type="repository">https://github.com/neuromeka-robotics/ros_indy</url>
+  <url type="bugtracker">https://github.com/neuromeka-robotics/ros_indyissues</url>
+
+  <buildtool_depend>catkin</buildtool_depend>
+  
+</package>

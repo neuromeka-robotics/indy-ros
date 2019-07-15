@@ -1,0 +1,9 @@
+controller_list:
+  - name: fake_indy7_controller
+    joints:
+      - joint0
+      - joint1
+      - joint2
+      - joint3
+      - joint4
+      - joint5

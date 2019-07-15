@@ -1,0 +1,11 @@
+moveit_setup_assistant_config:
+  URDF:
+    package: indy7_description
+    relative_path: urdf/indy7.xacro
+    xacro_args: ""
+  SRDF:
+    relative_path: config/indy7.srdf
+  CONFIG:
+    author_name: Thach Do
+    author_email: thach.do@neuromeka.com
+    generated_timestamp: 1542673771

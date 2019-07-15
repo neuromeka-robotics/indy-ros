@@ -1,0 +1,47 @@
+<launch>
+
+  <!-- This launch file provides a socket-based connection to Indy robots
+       using the standard ROS Industrial simple_message protocol.
+         ** a new parameter is added to control J23-linkage correction **
+       Several nodes are started, to supply both low-level robot communication
+       and higher-level actionlib support:
+         - robot_state : publishes current joint positions and robot state data
+         - motion_download_interface : command robot motion by sending motion points to robot
+         - joint_trajectory_action : actionlib interface to control robot motion
+    Usage:
+      robot_interface.launch robot_ip:=<value>
+  -->
+
+  <!-- robot_ip: IP-address of the robot's socket-messaging server -->
+  <arg name="robot_ip" doc="IP of the controller" default="127.0.0.1" />
+
+  <!-- robot_name: The general name of Indy robot (e.g. IndyRP, Indy7, Indy15, etc.) -->
+  <arg name="robot_name" doc="Name of Indy robot" default=""/>  
+  <arg name="robot_redundancy" doc="Robot Redundancy" default="false" />  
+  
+  <!-- copy the specified arguments to the Parameter Server, for use by nodes below -->
+  <param name="robot_ip_address" type="str" value="$(arg robot_ip)"/>
+  <param name="robot_name" type="str" value="$(arg robot_name)"/>
+        
+  <!-- for 7-dof robots -->
+  <group if="$(arg robot_redundancy)">
+	  <!-- robot_state: publishes joint positions and robot-state data (from socket connection to robot) -->
+	  <node pkg="indy_driver" type="indy7d_state_publisher" name="indy7d_state_publisher" output="screen"/>
+	  
+	  <!-- motion_download_interface: sends robot motion commands by DOWNLOADING path to robot (using socket connection to robot) -->
+	  <node pkg="indy_driver" type="indy7d_motion_downloader" name="indy7d_motion_downloader" output="screen"/>
+  </group>
+
+  <!-- for 6-dof robots -->
+  <group unless="$(arg robot_redundancy)">
+	  <!-- robot_state: publishes joint positions and robot-state data (from socket connection to robot) -->
+	  <node pkg="indy_driver" type="indy6d_state_publisher" name="indy6d_state_publisher" output="screen"/>
+	  
+	  <!-- motion_download_interface: sends robot motion commands by DOWNLOADING path to robot (using socket connection to robot) -->
+	  <node pkg="indy_driver" type="indy6d_motion_downloader" name="indy6d_motion_downloader" output="screen"/>
+  </group>
+  
+  <!-- joint_trajectory_action: provides actionlib interface for high-level robot control -->
+  <node pkg="industrial_robot_client" type="joint_trajectory_action" name="joint_trajectory_action"/>
+
+</launch>
