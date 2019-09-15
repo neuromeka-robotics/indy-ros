@@ -1,0 +1,213 @@
+<?xml version="1.0" ?>
+<robot name = "indyrp" xmlns:xacro="http://ros.org/wiki/xacro">
+	<xacro:include filename="$(find indyrp_description)/urdf/materials.xacro" />
+	<xacro:property name="PI" value="3.1415926535897931"/>
+	<xacro:property name="indy_material" value="metal_grey"/>
+	<!-- <material name="grey">
+		<color rgba="0.5 0.5 0.5 1"/>
+   	</material> -->
+
+	<link name = "ground" />
+    <link name = "link0">
+        <visual>
+            <origin xyz = "0 0 0" rpy = "0 0 0"/>
+           	<geometry>
+				<mesh filename="package://indyrp_description/meshes/stl/IndyRP_0.stl" />
+			</geometry>
+			<material name="${indy_material}"/>
+        </visual>
+         <collision>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+           	<geometry>
+				<mesh filename="package://indyrp_description/meshes/stl/IndyRP_0.stl" />
+			</geometry>
+        </collision>        
+         <inertial>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <mass value="5.59800930" />
+            <inertia ixx="0.03168210" iyy="0.03138407" izz="0.01729349" ixy="-0.00002297" iyz="0.00001722" ixz="-0.00046833"/>
+        </inertial>
+    </link>
+
+     <link name = "link1">
+        <visual>
+            <origin xyz = "0 0 0" rpy = "0 0 0"/>
+           	<geometry>
+				<mesh filename="package://indyrp_description/meshes/stl/IndyRP_1.stl" />
+			</geometry>
+			<material name="${indy_material}"/>
+        </visual>
+         <collision>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+           	<geometry>
+				<mesh filename="package://indyrp_description/meshes/stl/IndyRP_1.stl" />
+			</geometry>
+        </collision>    
+         <inertial>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <mass value="4.72201812" />
+            <inertia ixx="0.02108002" iyy="0.01030922" izz="0.02187573" ixy="0.00000028" iyz="0.00090083" ixz="0.00000135" />
+        </inertial>
+    </link>
+
+    <link name = "link2">
+        <visual>
+            <origin xyz = "0 0 0" rpy = "0 0 0"/>
+           	<geometry>
+				<mesh filename="package://indyrp_description/meshes/stl/IndyRP_2.stl" />
+			</geometry>
+			<material name="${indy_material}"/>
+        </visual>
+         <collision>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+           	<geometry>
+				<mesh filename="package://indyrp_description/meshes/stl/IndyRP_2.stl" />
+			</geometry>
+        </collision>
+         <inertial>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <mass value="6.17608031" />
+            <inertia ixx="0.21693693" iyy="0.16765616" izz="0.06791448" ixy="-0.00032160" iyz="-0.00138650" ixz="-0.00172838"/>
+        </inertial>
+    </link>
+
+    <link name = "link3">
+    	<visual>
+            <origin xyz = "0 0 0" rpy = "0 0 0"/>
+           	<geometry>
+				<mesh filename="package://indyrp_description/meshes/stl/IndyRP_3.stl" />
+			</geometry>
+			<material name="${indy_material}"/>
+        </visual>
+         <collision>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+           	<geometry>
+				<mesh filename="package://indyrp_description/meshes/stl/IndyRP_3.stl" />
+			</geometry>
+        </collision>
+         <inertial>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <mass value="6.54934398" />
+            <inertia ixx="0.03351822" iyy="0.04667803" izz="0.04212738" ixy="-0.00106877" iyz="-0.00474420" ixz="0.00317186"/>
+        </inertial>
+    </link>
+
+    <link name = "link4">
+    	<visual>
+            <origin xyz = "0 0 0" rpy = "0 0 0"/>
+           	<geometry>
+				<mesh filename="package://indyrp_description/meshes/stl/IndyRP_4.stl" />
+			</geometry>
+			<material name="${indy_material}"/>
+        </visual>
+         <collision>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+           	<geometry>
+				<mesh filename="package://indyrp_description/meshes/stl/IndyRP_4.stl" />
+			</geometry>
+        </collision>
+         <inertial>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <mass value="1.92396795" />
+            <inertia ixx="0.00429949" iyy="0.02468357" izz="0.02325623" ixy="-0.00005294" iyz="-0.00000475" ixz="-0.00049892"/>
+        </inertial>
+    </link>
+
+    <link name = "link5">
+    	<visual>
+            <origin xyz = "0 0 0" rpy = "0 0 0"/>
+           	<geometry>
+				<mesh filename="package://indyrp_description/meshes/stl/IndyRP_5.stl" />
+			</geometry>
+			<material name="${indy_material}"/>
+        </visual>
+         <collision>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+           	<geometry>
+				<mesh filename="package://indyrp_description/meshes/stl/IndyRP_5.stl" />
+			</geometry>
+        </collision>
+         <inertial>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <mass value="3.30989986" />
+            <inertia ixx="0.02267898" iyy="0.02815802" izz="0.00751991" ixy="-0.00006355" iyz="0.00010380" ixz="0.00175079"/>
+        </inertial>
+    </link>
+
+    <link name = "link6">
+    	<visual>
+            <origin xyz = "0 0 0" rpy = "0 0 0"/>
+           	<geometry>
+				<mesh filename="package://indyrp_description/meshes/stl/IndyRP_6.stl" />
+			</geometry>
+			<material name="${indy_material}"/>
+        </visual>
+         <collision>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+           	<geometry>
+				<mesh filename="package://indyrp_description/meshes/stl/IndyRP_6.stl" />
+			</geometry>
+        </collision>
+         <inertial>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <mass value="0.0913" />
+            <inertia ixx="0.0001" iyy="0.0001" izz="0.0001" ixy="0.0" iyz="0.0" ixz="0.0"/>
+        </inertial>
+    </link>
+    <link name = "tcp" />
+
+    <joint name = "global" type = "fixed">
+    	<parent link = "ground"/>
+    	<child link = "link0"/>
+    	<origin xyz = "0 0 0" rpy = "0 0 0"/>
+    </joint>
+
+    <joint name = "joint0" type = "continuous">
+    	<parent link = "link0"/>
+    	<child link = "link1"/>
+    	<origin xyz = "0 -0 0.1834" rpy = "0 0 0"/>
+    	<axis xyz = "0 0 1"/>
+    </joint>
+
+    <joint name = "joint1" type = "continuous">
+    	<parent link = "link1"/>
+    	<child link = "link2"/>
+    	<origin xyz = "0 0.098 0.08" rpy = "-${PI/2} 0 0"/>
+    	<axis xyz = "0 0 1"/>
+    </joint>
+
+    <joint name = "joint2" type = "continuous">
+    	<parent link = "link2"/>
+    	<child link = "link3"/>
+    	<origin xyz = "0.0 -0.4250 0.0" rpy = "0 0 0"/>
+    	<axis xyz = "0 0 1"/>
+    </joint>
+
+    <joint name = "joint3" type = "continuous">
+    	<parent link = "link3"/>
+    	<child link = "link4"/>
+    	<origin xyz = "0.3445 -0.1 -0.098" rpy = "${PI/2} 0 ${PI/2}"/>
+    	<axis xyz = "0 0 1"/>
+    </joint>
+
+    <joint name = "joint4" type = "continuous">
+    	<parent link = "link4"/>
+    	<child link = "link5"/>
+    	<origin xyz = "-0.078 0.0 0.071" rpy = "0 -${PI/2} 0"/>
+    	<axis xyz = "0 0 1"/>
+    </joint>
+
+    <joint name = "joint5" type = "continuous">
+    	<parent link = "link5"/>
+    	<child link = "link6"/>
+    	<origin xyz = "0.0643 0.0 0.0749" rpy = "0 ${PI/2} 0"/>
+    	<axis xyz = "0 0 1"/>
+    </joint>
+
+    <joint name = "tcp" type = "fixed">
+    	<parent link = "link6"/>
+    	<child link = "tcp"/>
+    	<origin xyz = "0 0 0.045" rpy = "0 0 0"/>
+    </joint>
+
+</robot>
