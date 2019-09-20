@@ -26,19 +26,21 @@
   <!-- for 7-dof robots -->
   <group if="$(arg robot_redundancy)">
 	  <!-- robot_state: publishes joint positions and robot-state data (from socket connection to robot) -->
-	  <node pkg="indy_driver" type="indy7d_state_publisher" name="indy7d_state_publisher" output="screen"/>
+	  <!-- <node pkg="indy_driver" type="indy7d_state_publisher" name="indy7d_state_publisher" output="screen"/> -->
 	  
 	  <!-- motion_download_interface: sends robot motion commands by DOWNLOADING path to robot (using socket connection to robot) -->
-	  <node pkg="indy_driver" type="indy7d_motion_downloader" name="indy7d_motion_downloader" output="screen"/>
+	  <!-- <node pkg="indy_driver" type="indy7d_motion_downloader" name="indy7d_motion_downloader" output="screen"/> -->
+    <node pkg="indy_driver" type="indy7d_driver" name="indy7d_driver" output="screen"/>
   </group>
 
   <!-- for 6-dof robots -->
   <group unless="$(arg robot_redundancy)">
 	  <!-- robot_state: publishes joint positions and robot-state data (from socket connection to robot) -->
-	  <node pkg="indy_driver" type="indy6d_state_publisher" name="indy6d_state_publisher" output="screen"/>
+	  <!-- <node pkg="indy_driver" type="indy6d_state_publisher" name="indy6d_state_publisher" output="screen"/> -->
 	  
 	  <!-- motion_download_interface: sends robot motion commands by DOWNLOADING path to robot (using socket connection to robot) -->
-	  <node pkg="indy_driver" type="indy6d_motion_downloader" name="indy6d_motion_downloader" output="screen"/>
+	  <!-- <node pkg="indy_driver" type="indy6d_motion_downloader" name="indy6d_motion_downloader" output="screen"/> -->
+    <node pkg="indy_driver" type="indy6d_driver" name="indy6d_driver" output="screen"/>
   </group>
   
   <!-- joint_trajectory_action: provides actionlib interface for high-level robot control -->

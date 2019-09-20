@@ -8,8 +8,9 @@ typedef trajectory_msgs::JointTrajectoryPoint  ros_JointTrajPt;
 
 #define ROS_ERROR_RETURN(rtn,...) do {ROS_ERROR(__VA_ARGS__); return(rtn);} while(0)
 
-JointTrajectoryDownloader::JointTrajectoryDownloader(int joint_dof)
-: _joint_dof(joint_dof)
+JointTrajectoryDownloader::JointTrajectoryDownloader(IndyDCPSocket & indySocket, int joint_dof)
+: _indySocket(indySocket)
+, _joint_dof(joint_dof)
 {
 }
 
@@ -18,38 +19,9 @@ JointTrajectoryDownloader::~JointTrajectoryDownloader()
 	trajectoryStop();
 	this->sub_joint_trajectory_.shutdown();
 }
-bool JointTrajectoryDownloader::init(std::string default_ip, int default_port)
+
+bool JointTrajectoryDownloader::init()
 {
-	std::string robotName, ip;
-	int port;
-
-	// override IP/port with ROS params, if available
-	ros::param::param<std::string>("robot_name", robotName, "");
-	ros::param::param<std::string>("robot_ip_address", ip, default_ip);
-  ros::param::param<int>("~port", port, default_port);
-
-	// check for valid parameter values
-	if (robotName.empty())
-	{
-		ROS_ERROR("No valid robot's name found.  Please set ROS 'robot_name' param");
-		return false;
-	}
-	if (ip.empty())
-	{
-		ROS_ERROR("No valid robot IP address found.  Please set ROS 'robot_ip_address' param");
-		return false;
-	}
-	if (port <= 0)
-	{
-		ROS_ERROR("No valid robot IP port found.  Please set ROS '~port' param");
-		return false;
-	}
-
-	/* Make socket connection */
-	/********************************/
-	_indySocket.init(robotName, ip, port);
-	// ROS_INFO("JointTrajectoryDownloader : Init MotionSocket(%s, %s, %d)", robotName.c_str(), ip.c_str(), port);
-
 	this->srv_stop_motion_ = this->node_.advertiseService("stop_motion", &JointTrajectoryDownloader::stopMotionCB, this);
 	this->srv_joint_trajectory_ = this->node_.advertiseService("joint_path_command", &JointTrajectoryDownloader::jointTrajectoryCB, this);
 	this->sub_joint_trajectory_ = this->node_.subscribe("joint_path_command", 1, &JointTrajectoryDownloader::jointTrajectoryCB, this);
@@ -136,11 +108,18 @@ void JointTrajectoryDownloader::jointTrajectoryCB(const trajectory_msgs::JointTr
 // copy robot JointState into local cache
 void JointTrajectoryDownloader::jointStateCB(const sensor_msgs::JointStateConstPtr &msg)
 {
-  this->cur_joint_pos_ = *msg;
-  // printf("Received Joint States: ");
-  // for (int i = 0; i < _joint_dof; i++)
-  // 	printf("[%s]: %f, ", this->cur_joint_pos_.name[i].c_str(), this->cur_joint_pos_.position[i]*180.0/3.1415);
-  // printf("\n");
+	this->cur_joint_pos_ = *msg;
+	// printf("Received Joint States: ");
+	// for (int i = 0; i < _joint_dof; i++)
+	// 	printf("[%s]: %f, ", this->cur_joint_pos_.name[i].c_str(), this->cur_joint_pos_.position[i]*180.0/3.1415);
+	// printf("\n");
+  
+	control_msgs::FollowJointTrajectoryFeedback control_state;
+
+	control_state.header.stamp = ros::Time::now();
+	control_state.joint_names = cur_joint_pos_.name;
+	control_state.actual.positions = cur_joint_pos_.position;
+	this->pub_joint_control_state_.publish(control_state);
 }
 
 void JointTrajectoryDownloader::run()
@@ -156,4 +135,14 @@ void JointTrajectoryDownloader::run()
 		ros::spinOnce();
 		loop_rate.sleep();
 	}
+}
+
+void JointTrajectoryDownloader::updateJointState(const sensor_msgs::JointState & curJointState)
+{
+	control_msgs::FollowJointTrajectoryFeedback control_state;
+
+	control_state.header.stamp = ros::Time::now();
+	control_state.joint_names = curJointState.name;
+	control_state.actual.positions = curJointState.position;
+	this->pub_joint_control_state_.publish(control_state);
 }

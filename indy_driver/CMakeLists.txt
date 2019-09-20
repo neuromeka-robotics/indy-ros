@@ -157,33 +157,27 @@ include_directories(
 
 add_subdirectory(src/SocketHandler)
 
-add_executable(indy6d_state_publisher src/indy6d_state_publisher.cpp)
-target_link_libraries(indy6d_state_publisher 
+add_executable(indy6d_driver 
+  src/indy6d_driver.cpp 
+  src/TrajectoryDownloader/JointTrajectoryDownloader.cpp
+)
+target_link_libraries(indy6d_driver 
   ${catkin_LIBRARIES}
   IndyDCPSocket
   industrial_robot_client
 )
 
-add_executable(indy6d_motion_downloader src/indy6d_motion_downloader.cpp src/TrajectoryDownloader/JointTrajectoryDownloader.cpp)
-target_link_libraries(indy6d_motion_downloader 
-  ${catkin_LIBRARIES}  
-  IndyDCPSocket
-  industrial_robot_client
+add_executable(indy7d_driver 
+  src/indy7d_driver.cpp 
+  src/TrajectoryDownloader/JointTrajectoryDownloader.cpp
 )
-
-add_executable(indy7d_state_publisher src/indy7d_state_publisher.cpp)
-target_link_libraries(indy7d_state_publisher 
+target_link_libraries(indy7d_driver 
   ${catkin_LIBRARIES}
   IndyDCPSocket
   industrial_robot_client
 )
 
-add_executable(indy7d_motion_downloader src/indy7d_motion_downloader.cpp src/TrajectoryDownloader/JointTrajectoryDownloader.cpp)
-target_link_libraries(indy7d_motion_downloader 
-  ${catkin_LIBRARIES}  
-  IndyDCPSocket
-  industrial_robot_client
-)
+
 #############
 ## Install ##
 #############

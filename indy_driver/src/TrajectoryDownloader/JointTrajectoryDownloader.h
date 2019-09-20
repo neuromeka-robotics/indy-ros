@@ -22,14 +22,16 @@ class JointTrajectoryDownloader
 {
 
 public:
-	JointTrajectoryDownloader(int joint_dof);
+	JointTrajectoryDownloader(IndyDCPSocket & indySocket, int joint_dof);
 	~JointTrajectoryDownloader();
 
 	void trajectoryStop();
 
-	bool init(std::string default_ip = SERVER_IP, int default_port = SERVER_PORT);
+	bool init();
 	void run();
 
+	void updateJointState(const sensor_msgs::JointState & curJointState);
+	
 	void jointStateCB(const sensor_msgs::JointStateConstPtr &msg);
 	bool stopMotionCB(industrial_msgs::StopMotion::Request &req,
                                     industrial_msgs::StopMotion::Response &res);
@@ -38,6 +40,7 @@ public:
                          industrial_msgs::CmdJointTrajectory::Response &res);
 
 private:
+	IndyDCPSocket & _indySocket;
 	ros::NodeHandle node_;
 	ros::Subscriber sub_cur_pos_;  // handle for joint-state topic subscription
 	ros::Subscriber sub_joint_trajectory_; // handle for joint-trajectory topic subscription
@@ -46,7 +49,6 @@ private:
 	ros::Publisher pub_joint_control_state_;
 	sensor_msgs::JointState cur_joint_pos_;  // cache of last received joint state
 
-	IndyDCPSocket _indySocket;
 
 	int _joint_dof;
 };

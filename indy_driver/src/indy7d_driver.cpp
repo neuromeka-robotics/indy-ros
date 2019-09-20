@@ -3,21 +3,20 @@
 #include <sensor_msgs/JointState.h>
 
 #include "SocketHandler/IndyDCPSocket.h"
+#include "TrajectoryDownloader/JointTrajectoryDownloader.h"
 
-#define JOINT_DOF 6
+#define JOINT_DOF 7
+#define DEGREE M_PI/180
 
 int main(int argc, char ** argv)
 {
-	ros::init(argc, argv, "indy6d_state_publisher");
+	ros::init(argc, argv, "indy7d_driver");
 	ros::NodeHandle n;
-	ros::Publisher joint_pub = n.advertise<sensor_msgs::JointState>("joint_states", 10);
-
-	ros::Rate loop_rate(5);
-
-	const double degree = M_PI/180;
 
 	std::string robotName, ip;
 	int port;
+	double q[JOINT_DOF];
+	sensor_msgs::JointState joint_state;
 
 	// override IP/port with ROS params, if available
 	ros::param::param<std::string>("robot_name", robotName, "");
@@ -43,11 +42,15 @@ int main(int argc, char ** argv)
 
 	IndyDCPSocket indySocket;
 	indySocket.init(robotName, ip, port);
-	double q[JOINT_DOF];
 
-	// message declaration
-	sensor_msgs::JointState joint_state;
+	ros::Publisher joint_pub = n.advertise<sensor_msgs::JointState>("joint_states", 10);
 
+	JointTrajectoryDownloader jmotionInterface(indySocket, JOINT_DOF);
+	jmotionInterface.init();
+	// jmotionInterface.run();
+
+	unsigned int publishCnt = 5;
+	ros::Rate loop_rate(5);
 	while (ros::ok())
 	{
 		if (indySocket.isWorking())
@@ -59,7 +62,10 @@ int main(int argc, char ** argv)
 			indySocket.getFeedback(320, data, len);
 			// printf("q: ");
 			for (int i = 0; i < JOINT_DOF; i++)
-				q[i] = data.double6dArr[i];
+			{
+				q[i] = data.double7dArr[i];
+				// printf("%f, ", q[i]);
+			}
 			// printf("\n");
 		}
 
@@ -68,23 +74,27 @@ int main(int argc, char ** argv)
 		joint_state.position.resize(JOINT_DOF);
 
 		joint_state.name[0] = "joint0";
-		joint_state.position[0] = q[0] * degree;
+		joint_state.position[0] = q[0] * DEGREE;
 		joint_state.name[1] = "joint1";
-		joint_state.position[1] = q[1] * degree;
+		joint_state.position[1] = q[1] * DEGREE;
 		joint_state.name[2] = "joint2";
-		joint_state.position[2] = q[2] * degree;
+		joint_state.position[2] = q[2] * DEGREE;
 		joint_state.name[3] = "joint3";
-		joint_state.position[3] = q[3] * degree;
+		joint_state.position[3] = q[3] * DEGREE;
 		joint_state.name[4] = "joint4";
-		joint_state.position[4] = q[4] * degree;
+		joint_state.position[4] = q[4] * DEGREE;
 		joint_state.name[5] = "joint5";
-		joint_state.position[5] = q[5] * degree;
+		joint_state.position[5] = q[5] * DEGREE;
+		joint_state.name[6] = "joint6";
+		joint_state.position[6] = q[6] * DEGREE;
 
 		joint_pub.publish(joint_state);
+		// jmotionInterface.updateJointState(joint_state);
 
 		ros::spinOnce();
 		loop_rate.sleep();
 	}
+
 	indySocket.stop();
 
 	return 0;
