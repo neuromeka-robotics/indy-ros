@@ -29,12 +29,12 @@ bool IndyDCPSocket::init(std::string robotName, std::string ip, int port)
 }
 
 bool IndyDCPSocket::isWorking()
-{ 	
+{
 	return (!_isQuit);
 }
 
-void IndyDCPSocket::stop() 
-{ 
+void IndyDCPSocket::stop()
+{
 	_isQuit = true;
 	_thread->join();
 	delete _thread;
@@ -48,7 +48,7 @@ bool IndyDCPSocket::sendCommand(const int cmdID, const Data & data, const unsign
 	HeaderCommand header;
 	strcpy(header.val.robotName, _robotName.c_str());
 	header.val.robotVersion[0] = '\0';
-	header.val.stepInfo = 0x02;
+	header.val.stepInfo = 0x00;
 	header.val.sof = 0x34;
 	header.val.invokeId = _invokeID++;
 	header.val.cmdId = cmdID;
@@ -190,7 +190,7 @@ void IndyDCPSocket::run(void)
 			server_addr.sin_family = AF_INET;
 			server_addr.sin_port = htons(_port);
 
-			if (connect(_sockFd, (struct sockaddr *)&server_addr, sizeof(server_addr)) == -1) 
+			if (connect(_sockFd, (struct sockaddr *)&server_addr, sizeof(server_addr)) == -1)
 			{
 				printf("IndyDCPSocket : Socket connection failed.\n");
 				close(_sockFd);

@@ -26,7 +26,7 @@ bool JointTrajectoryDownloader::init(std::string default_ip, int default_port)
 	// override IP/port with ROS params, if available
 	ros::param::param<std::string>("robot_name", robotName, "");
 	ros::param::param<std::string>("robot_ip_address", ip, default_ip);
-  	ros::param::param<int>("~port", port, default_port);
+  ros::param::param<int>("~port", port, default_port);
 
 	// check for valid parameter values
 	if (robotName.empty())

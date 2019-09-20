@@ -11,7 +11,7 @@ int main(int argc, char ** argv)
 	ros::init(argc, argv, "indy7d_state_publisher");
 	ros::NodeHandle n;
 	ros::Publisher joint_pub = n.advertise<sensor_msgs::JointState>("joint_states", 10);
-	
+
 	ros::Rate loop_rate(5);
 
 	const double degree = M_PI/180;
@@ -22,7 +22,7 @@ int main(int argc, char ** argv)
 	// override IP/port with ROS params, if available
 	ros::param::param<std::string>("robot_name", robotName, "");
 	ros::param::param<std::string>("robot_ip_address", ip, SERVER_IP);
-  	ros::param::param<int>("~port", port, SERVER_PORT);
+	ros::param::param<int>("~port", port, SERVER_PORT);
 
 	// check for valid parameter values
 	if (robotName.empty())
@@ -47,19 +47,19 @@ int main(int argc, char ** argv)
 
 	// message declaration
 	sensor_msgs::JointState joint_state;
-	
+
 	while (ros::ok())
 	{
 		if (indySocket.isWorking())
 		{
 			Data data;
 			unsigned int len;
-			
+
 			indySocket.sendCommand(320, data, 0);
 			indySocket.getFeedback(320, data, len);
 			// printf("q: ");
 			for (int i = 0; i < JOINT_DOF; i++)
-				q[i] = data.double7dArr[i];			
+				q[i] = data.double7dArr[i];
 			// printf("\n");
 		}
 
@@ -83,7 +83,7 @@ int main(int argc, char ** argv)
 		joint_state.position[6] = q[6] * degree;
 
 		joint_pub.publish(joint_state);
-		
+
 		ros::spinOnce();
 		loop_rate.sleep();
 	}
