@@ -1,17 +1,21 @@
 cmake_minimum_required(VERSION 2.8.3)
-set(CMAKE_BUILD_TYPE Debug)
-project(indy_driver)
+project(indy7_simulation)
 
 ## Compile as C++11, supported in ROS Kinetic and newer
-add_compile_options(-std=c++11 -pthread -Wl,--no-as-needed)
+# add_compile_options(-std=c++11)
 
 ## Find catkin macros and libraries
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED COMPONENTS
-  roscpp
+  controller_manager
+  gazebo_ros
+  joint_state_publisher
+  robot_state_publisher
   industrial_robot_client
-# message_generation
+  roscpp
+  rospy
+  rviz
 )
 
 ## System dependencies are found with CMake's conventions
@@ -69,10 +73,10 @@ find_package(catkin REQUIRED COMPONENTS
 # )
 
 ## Generate added messages and services with any dependencies listed here
-#  generate_messages(
-#    DEPENDENCIES
-#    	std_msgs  # Or other packages containing msgs
-#  )
+# generate_messages(
+#   DEPENDENCIES
+#   std_msgs  # Or other packages containing msgs
+# )
 
 ################################################
 ## Declare ROS dynamic reconfigure parameters ##
@@ -104,12 +108,12 @@ find_package(catkin REQUIRED COMPONENTS
 ## CATKIN_DEPENDS: catkin_packages dependent projects also need
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
-   # INCLUDE_DIRS include
-#  LIBRARIES indy_driver
-   CATKIN_DEPENDS 
-   		roscpp
+#  INCLUDE_DIRS include
+#  LIBRARIES indy7_simulation
+   CATKIN_DEPENDS
+   	roscpp 
 		industrial_robot_client
-#  		message_runtime
+#  controller_manager gazebo_ros joint_state_publisher robot_state_publisher rospy rviz
 #  DEPENDS system_lib
 )
 
@@ -119,7 +123,6 @@ catkin_package(
 
 ## Specify additional locations of header files
 ## Your package locations should be listed before other locations
-
 include_directories(
 # include
   ${catkin_INCLUDE_DIRS}
@@ -127,7 +130,7 @@ include_directories(
 
 ## Declare a C++ library
 # add_library(${PROJECT_NAME}
-#   src/${PROJECT_NAME}/indy_driver.cpp
+#   src/${PROJECT_NAME}/indy7_simulation.cpp
 # )
 
 ## Add cmake target dependencies of the library
@@ -138,7 +141,7 @@ include_directories(
 ## Declare a C++ executable
 ## With catkin_make all packages are built within a single CMake context
 ## The recommended prefix ensures that target names across packages don't collide
-# add_executable(${PROJECT_NAME}_node src/indy_driver_node.cpp)
+# add_executable(${PROJECT_NAME}_node src/indy7_simulation_node.cpp)
 
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
@@ -155,36 +158,16 @@ include_directories(
 #   ${catkin_LIBRARIES}
 # )
 
-add_subdirectory(src/SocketHandler)
+#add_subdirectory(src/SocketHandler)
 
-add_executable(indy6d_driver 
-  src/indy6d_driver.cpp 
-  src/TrajectoryDownloader/JointTrajectoryDownloader.cpp
-)
-target_link_libraries(indy6d_driver 
-  ${catkin_LIBRARIES}
-  IndyDCPSocket
-  industrial_robot_client
-)
-
-add_executable(indy7d_driver 
-  src/indy7d_driver.cpp 
-  src/TrajectoryDownloader/JointTrajectoryDownloader.cpp
-)
-target_link_libraries(indy7d_driver 
-  ${catkin_LIBRARIES}
-  IndyDCPSocket
-  industrial_robot_client
-)
-
-add_executable(indy6d_monitor
-  src/indy6d_monitor.cpp
-)
-target_link_libraries(indy6d_monitor 
-  ${catkin_LIBRARIES}
-  IndyDCPSocket
-  industrial_robot_client
-)
+#add_executable(indy7_connector 
+#  src/indy7_connector.cpp
+#)
+#target_link_libraries(indy7_connector 
+#  ${catkin_LIBRARIES}
+#  IndyDCPSocket
+#  industrial_robot_client
+#)
 
 #############
 ## Install ##
@@ -226,7 +209,7 @@ target_link_libraries(indy6d_monitor
 #############
 
 ## Add gtest based cpp test target and link libraries
-# catkin_add_gtest(${PROJECT_NAME}-test test/test_indy_driver.cpp)
+# catkin_add_gtest(${PROJECT_NAME}-test test/test_indy7_simulation.cpp)
 # if(TARGET ${PROJECT_NAME}-test)
 #   target_link_libraries(${PROJECT_NAME}-test ${PROJECT_NAME})
 # endif()

@@ -1,0 +1,41 @@
+rostopic pub /indy7/indy7_trajectory_controller/command trajectory_msgs/JointTrajectory    "{joint_names: \
+        ['joint0',  'joint1', 'joint2', 'joint3', 'joint4', 'joint5'], \
+     points: [ \
+{time_from_start: {secs: 2}, \
+        positions: [0.15, 3.14,  -1.570,  2.14, 3.1, -1.59]}, \
+{time_from_start: {secs: 4}, \
+        positions: [-0.35, 3.14,  -0.6,  2.3, 3.0, -1.59]}, \
+{time_from_start: {secs: 6}, \
+        positions: [-0.35, 3.14,  -0.5,  2.3, 3.05, -1.59]}, \
+]}" -1
+
+
+rostopic pub /indy7/indy7_trajectory_controller/command trajectory_msgs/JointTrajectory    "{joint_names: \
+        ['joint0',  'joint1', 'joint2', 'joint3', 'joint4', 'joint5'], \
+     points: [ \
+{time_from_start: {secs: 2}, \
+        positions: [0, 0, 0, 0, 0, 0]},
+]}" -1
+
+rostopic pub /indy7/indy7_trajectory_controller/command trajectory_msgs/JointTrajectory    "{joint_names: \
+        ['joint0',  'joint1', 'joint2', 'joint3', 'joint4', 'joint5'], \
+     points: [ \
+{time_from_start: {secs: 1}, \
+        positions: [1.15, -0.9, -1.557, 0, -0.502, -0.524]},
+]}" -1
+
+rostopic pub /indy7/indy7_trajectory_controller/command trajectory_msgs/JointTrajectory    "{joint_names: \
+        ['joint0',  'joint1', 'joint2', 'joint3', 'joint4', 'joint5'], \
+     points: [ \
+{time_from_start: {secs: 1}, \
+        positions: [0, 0, 0, 0, 0, 0]},
+]}" -1
+
+rostopic pub /indy7/indy7_trajectory_controller/command trajectory_msgs/JointTrajectory    "{joint_names: \
+        ['joint0',  'joint1', 'joint2', 'joint3', 'joint4', 'joint5'], \
+     points: [ \
+{time_from_start: {secs: 1}, \
+        positions: [0, 0, 1.0, 0, 1.0, 0]},
+]}" -1
+
+rosrun gazebo_ros spawn_model -sdf -x 1.1 -y 1.1 -z 1.0 -R 0 -P 0 -Y 0 -file `catkin_find factory_simulation --share --first-only`/models/piston_rod_part_ariac/model.sdf -model piston_rod_part_0

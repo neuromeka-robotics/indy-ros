@@ -1,0 +1,32 @@
+<?xml version="1.0" ?>
+<robot name = "indy7" xmlns:xacro="http://ros.org/wiki/xacro">
+	<xacro:include filename="$(find indy7_simulation)/urdf/indy7.xacro" />
+
+    <link name = "robot_base">
+        <visual>
+            <origin xyz = "0 0 0" rpy = "0 0 0"/>
+           	<geometry>
+				<cylinder radius = "0.2" length = "0.8"/>
+			</geometry>
+			<material name="${indy_material}"/>
+        </visual>
+         <collision>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+           	<geometry>
+				<cylinder radius = "0.2" length = "0.8"/>
+			</geometry>
+        </collision>        
+         <inertial>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <mass value="500" />
+            <inertia ixx="31.67" iyy="31.67" izz="10.0" ixy="0" iyz="0" ixz="0"/>
+        </inertial>
+    </link>
+    
+
+    <joint name = "fixed_base" type = "fixed">
+    	<parent link = "robot_base"/>
+    	<child link = "ground"/>
+    	<origin xyz = "0 0 0.4" rpy = "0 0 0"/>
+    </joint>
+</robot>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<launch>
+
+	<!-- robot_ip: IP-address of the robot's socket-messaging server -->
+	<arg name="robot_ip" doc="IP of the controller" default="192.168.1.8" />
+
+	<!-- robot_name: The general name of Indy robot (e.g. IndyRP, Indy7, Indy15, etc.) -->
+	<arg name="robot_name" doc="Name of Indy robot" default="NRMK-Indy7"/>  
+	
+	<param name="robot_ip_address" type="str" value="$(arg robot_ip)"/>
+	<param name="robot_name" type="str" value="$(arg robot_name)"/>
+  
+    <!-- <arg name = "ns" default = "indy7" /> 
+	<rosparam file="$(find indy7_simulation)/config/indy7_controllers.yaml" command="load"/>
+
+	<node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false" output="screen"
+			ns="/indy7" args="	joint_state_controllers
+								joint0_position_controller
+								joint1_position_controller
+								joint2_position_controller
+								joint3_position_controller
+								joint4_position_controller
+								joint5_position_controller
+								"/>-->
+
+	<rosparam file="$(find indy7_simulation)/config/indy7_controllers.yaml" ns="" command="load"/>
+  	<node name="arm_controller_spawner" pkg="controller_manager" type="controller_manager"
+        args="spawn indy7" respawn="false" output="screen"/>
+        
+	<node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" respawn="false" output="screen">
+		<remap from="/robot1/joint_states" to="/indy7/joint_states"/>
+	</node>
+	<!-- <node name="joint_state_controller_spawner" pkg="controller_manager" type="controller_manager"
+        args="spawn joint_state_controller" respawn="false" output="screen" /> -->
+        
+	<!-- <node pkg="indy7_simulation" type="indy7_connector" name="indy7_connector" output="screen"/>	-->
+</launch>

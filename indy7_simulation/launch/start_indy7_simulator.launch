@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<launch>
+	<group ns="robot1">
+		<include file="$(find indy7_simulation)/launch/spawn_indy7_model.launch">
+	        <arg name="model_name" value="robot1" />
+	        <arg name="x" value="0.0" />
+	        <arg name="y" value="0.0" />
+	        <arg name="z" value="0.05" />
+	    </include>
+		<include file="$(find indy7_simulation)/launch/indy7_controllers.launch">
+	        <arg name="model_name" value="robot1" />
+	        <arg name="indycb_ip" value="192.168.2.104" />
+	        <arg name="robot_name" value="NRMK-Indy7" />
+	    </include>
+	</group>
+
+	<group ns="robot2">
+		<include file="$(find indy7_simulation)/launch/spawn_indy7_model.launch">
+	        <arg name="model_name" value="robot2" />
+	        <arg name="x" value="1.0" />
+	        <arg name="y" value="1.0" />
+	        <arg name="z" value="0.05" />
+	    </include>
+		<include file="$(find indy7_simulation)/launch/indy7_controllers.launch">
+	        <arg name="model_name" value="robot2" />
+	        <arg name="indycb_ip" value="192.168.2.112" />
+	        <arg name="robot_name" value="NRMK-Indy7" />
+	    </include>
+	</group>
+</launch>
