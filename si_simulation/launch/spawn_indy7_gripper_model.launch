@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<launch>
+    <arg name = "x" default = "0.0" />
+    <arg name = "y" default = "0.0" />
+    <arg name = "z" default = "0.05" />
+    <arg name = "model_name" default = "indy7" />
+
+    <arg name = "xacro_robot_file" default = "$(find si_simulation)/urdf/indy7_with_vacuum_gripper.xacro" />
+    
+    <param name = "robot_description" command = "$(find xacro)/xacro --inorder '$(arg xacro_robot_file)'" />
+    <node name = "urdf_spawner" pkg = "gazebo_ros" type = "spawn_model" respawn = "false" output = "screen" args = "-urdf -x $(arg x) -y $(arg y) -z $(arg z) -model $(arg model_name) -param robot_description" />
+</launch>

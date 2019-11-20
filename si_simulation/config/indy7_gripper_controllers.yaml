@@ -3,6 +3,10 @@ joint_state_controllers:
   type: joint_state_controller/JointStateController
   publish_rate: 50
 
+  extra_joints:
+    - name: 'vacuum_gripper_joint'
+      position: 0.0
+
 # indy7:
   # Position controllers
 joint0_position_controller:

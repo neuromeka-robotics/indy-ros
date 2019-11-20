@@ -2,7 +2,7 @@
 
 <launch>
 	<group ns="robot1">
-		<include file="$(find indy7_simulation)/launch/spawn_indy7_model.launch">
+		<include file="$(find indy7_simulation)/launch/sample_spawn_indy7_model.launch">
 	        <arg name="model_name" value="robot1" />
 	        <arg name="x" value="0.0" />
 	        <arg name="y" value="0.0" />
@@ -16,7 +16,7 @@
 	</group>
 
 	<group ns="robot2">
-		<include file="$(find indy7_simulation)/launch/spawn_indy7_model.launch">
+		<include file="$(find indy7_simulation)/launch/sample_spawn_indy7_model.launch">
 	        <arg name="model_name" value="robot2" />
 	        <arg name="x" value="1.0" />
 	        <arg name="y" value="1.0" />

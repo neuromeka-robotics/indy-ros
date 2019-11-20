@@ -1,0 +1,21 @@
+<?xml version="1.0" ?>
+<robot name = "indy7" xmlns:xacro="http://ros.org/wiki/xacro">
+    
+    <xacro:include filename="$(find indy7_description)/urdf/indy7.xacro" />
+    <xacro:property name="end_effector" value="link6" />
+
+    <xacro:include filename="$(find vacuum_gripper_simulation)/urdf/vacuum_gripper.urdf.xacro" />
+    
+    <xacro:create_vacuum_gripper end_effector="${end_effector}">
+        <origin xyz="0 0 0.06" rpy="0 0 0" />
+
+        <grippable_model_types>
+            <type>disk_part</type>
+            <type>gasket_part</type>
+            <type>gear_part</type>
+            <type>piston_rod_part</type>
+            <type>pulley_part</type>
+        </grippable_model_types>
+        <drops_info></drops_info>
+    </xacro:create_vacuum_gripper>
+</robot>
