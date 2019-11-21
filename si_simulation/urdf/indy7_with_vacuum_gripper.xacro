@@ -1,7 +1,7 @@
 <?xml version="1.0" ?>
 <robot name = "indy7" xmlns:xacro="http://ros.org/wiki/xacro">
     
-    <xacro:include filename="$(find indy7_description)/urdf/indy7.xacro" />
+    <xacro:include filename="$(find indy7_simulation)/urdf/indy7_gazebo.xacro" />
     <xacro:property name="end_effector" value="link6" />
 
     <xacro:include filename="$(find vacuum_gripper_simulation)/urdf/vacuum_gripper.urdf.xacro" />

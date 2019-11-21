@@ -151,7 +151,7 @@ namespace gazebo
     public: int detachSteps;
 
     /// \brief Namespace of the gripper.
-    public: std::string namespace;
+    public: std::string nameSpace;
 
     /// \brief Name of the gripper.
     public: std::string name;
@@ -225,6 +225,15 @@ void VacuumGripperPlugin::Load(physics::ModelPtr _model, sdf::ElementPtr _sdf)
   this->dataPtr->node = transport::NodePtr(new transport::Node());
   this->dataPtr->node->Init(this->dataPtr->world->Name());
   this->dataPtr->name = _sdf->Get<std::string>("name");
+
+  if (_sdf->HasElement("robotNamespace"))
+  {
+    this->dataPtr->nameSpace = _sdf->GetElement("robotNamespace")->Get<std::string>();
+  }
+  else
+  {
+    this->dataPtr->nameSpace = _model->GetName(); // default
+  }
 
   // Create the joint that will attach the objects to the suction cup
   this->dataPtr->fixedJoint =
@@ -376,7 +385,7 @@ void VacuumGripperPlugin::Load(physics::ModelPtr _model, sdf::ElementPtr _sdf)
   {
     // Create a filter to receive collision information
     auto mgr = this->dataPtr->world->Physics()->GetContactManager();
-    auto topic = mgr->CreateFilter(this->Name()+this->dataPtr->namespace, this->dataPtr->collisions);
+    auto topic = mgr->CreateFilter(this->Name()+this->dataPtr->nameSpace, this->dataPtr->collisions);
     if (!this->dataPtr->contactSub)
     {
       this->dataPtr->contactSub = this->dataPtr->node->Subscribe(topic,
@@ -432,12 +441,6 @@ void VacuumGripperPlugin::Disable()
   // and the joint will be detached in the next OnUpdate callback in the physics thread.
   std::lock_guard<std::mutex> lock(this->dataPtr->mutex);
   this->dataPtr->disableRequested = true;
-}
-
-/////////////////////////////////////////////////
-void VacuumGripperPlugin::setNamespace(std::string namespace)
-{
-  this->dataPtr->namespace = namespace;
 }
 
 /////////////////////////////////////////////////
@@ -702,7 +705,8 @@ bool VacuumGripperPlugin::CheckModelContact()
     // Alignment of > 0.95 represents alignment angle of < acos(0.95) = ~18 degrees
     
     gzdbg << "Alignment: " << alignment << std::endl;    
-    if (alignment > 0.95) {
+//    if (alignment > 0.95) {
+    if (std::fabs(alignment) > 0.95) {
       modelInContact = true;
     }
   }

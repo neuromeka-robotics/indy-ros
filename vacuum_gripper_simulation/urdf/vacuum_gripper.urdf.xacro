@@ -55,13 +55,13 @@
         <min_contact_count>1</min_contact_count>
       </grasp_check>
 
-      <!-- <xacro:insert_block name="grippable_model_types" /> -->
+      <xacro:insert_block name="grippable_model_types" />
 
       <xacro:insert_block name="drops_info" />
 
       <suction_cup_link>vacuum_gripper_link</suction_cup_link>
 
-      <!-- <robotNamespace>"/indy7"</robotNamespace> -->
+      <!-- <robotNamespace>"/robot"</robotNamespace> -->
       <control_topic>gripper/control</control_topic>
       <state_topic>gripper/state</state_topic>
     </plugin>

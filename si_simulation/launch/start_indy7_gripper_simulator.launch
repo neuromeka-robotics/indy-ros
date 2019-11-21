@@ -19,7 +19,7 @@
 	    </include>
 		<include file="$(find indy7_simulation)/launch/indy7_controllers.launch">
 	        <arg name="model_name" value="robot1" />
-	        <arg name="indycb_ip" value="192.168.2.104" />
+	        <arg name="indycb_ip" value="192.168.1.10" />
 	        <arg name="robot_name" value="NRMK-Indy7" />
 	    </include>
 		<include file="$(find vacuum_gripper_simulation)/launch/gripper_controller.launch"/>
@@ -34,7 +34,7 @@
 	    </include>
 		<include file="$(find indy7_simulation)/launch/indy7_controllers.launch">
 	        <arg name="model_name" value="robot2" />
-	        <arg name="indycb_ip" value="192.168.2.112" />
+	        <arg name="indycb_ip" value="192.168.1.20" />
 	        <arg name="robot_name" value="NRMK-Indy7" />
 	    </include>
 		<include file="$(find vacuum_gripper_simulation)/launch/gripper_controller.launch"/>

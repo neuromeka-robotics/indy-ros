@@ -1,0 +1,13 @@
+<?xml version="1.0" ?>
+<robot name = "indy7" xmlns:xacro="http://ros.org/wiki/xacro">
+	<xacro:include filename="$(find indy7_description)/urdf/indy7.xacro" />
+
+    <link name="world"/>
+
+    <joint name = "fixed_base" type = "fixed">
+        <parent link = "world"/>
+        <child link = "ground"/>
+        <origin xyz = "0 0 0.05" rpy = "0 0 0"/>
+    </joint>
+
+</robot>

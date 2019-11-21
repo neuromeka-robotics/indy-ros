@@ -68,9 +68,6 @@ namespace gazebo
     /// \brief Disable the suction.
     public: void Disable();
 
-    /// \brief Set gripper's namespace
-    public: void setNamespace(std::string namespace);
-
     /// \brief Update the gripper.
     private: void OnUpdate();
 
