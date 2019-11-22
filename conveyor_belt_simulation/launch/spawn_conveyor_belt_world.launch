@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<launch>
+  
+
+  <arg name="limited" default="false" />
+  <arg name="gui" default="true"/>
+  <arg name="debug" default="false"/>
+  <arg name="verbose" default="false"/>
+  <arg name="gazebo_ros_output" default="screen"/>
+  <arg name="world_path" default="$(find factory_simulation)/world/factory.world"/>
+  <arg name="gear_urdf_xacro" default="$(find conveyor_belt_simulation)/urdf/conveyor_belt.xacro"/>
+  <arg name="state_log_dir" value="$(env HOME)/.ariac/log/gazebo" />
+  <!-- <arg name="arm_urdf_dir" /> -->
+
+  <arg name="competition_mode" value="1" />
+  <arg unless="$(arg competition_mode)" name="enable_gz_ros_network" value="true"/>
+  <arg     if="$(arg competition_mode)" name="enable_gz_ros_network" value="false"/>
+
+  <!-- startup simulated world -->
+  <include file="$(find osrf_gear)/launch/empty_world.launch">
+    <arg name="world_name" default="$(arg world_path)"/>
+    <!-- Always start paused because the arm spawn needs it that way. -->
+     <arg name="paused" value="false"/>
+    <arg name="enable_ros_network" value="$(arg enable_gz_ros_network)"/>
+    <arg name="gui" value="$(arg gui)"/>    
+    <arg name="debug" value="$(arg debug)" />
+    <arg name="verbose" value="$(arg verbose)" />
+    <arg name="output" value="$(arg gazebo_ros_output)" /> 
+  </include>
+  
+   <!-- load the URDF excluding the robot arm model 
+  <param name="sensors_description"
+    command="$(find xacro)/xacro '$(arg gear_urdf_xacro)'" />-->
+
+  <!-- publish transforms of bins/sensors/rail
+  <node pkg="robot_state_publisher" type="robot_state_publisher" name="sensors_tf_publisher">
+    <remap from="robot_description" to="sensors_description" />
+    <param name="publish_frequency" type="double" value="50.0" />
+    <param name="tf_prefix" type="string" value="" />
+  </node>-->
+
+  <!-- spawn sensors 
+  <node name="spawn_gazebo_sensors" pkg="gazebo_ros" type="spawn_model"
+        args="
+          -gazebo_namespace /gazebo
+          -urdf
+          -param sensors_description
+          -model gear_objects
+          -x 0.0
+          -y -0.0
+          -z -0.0"
+        respawn="false" output="screen">
+  </node>-->
+
+</launch>

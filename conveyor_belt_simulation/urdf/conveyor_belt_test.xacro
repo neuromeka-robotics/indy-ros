@@ -1,0 +1,87 @@
+<?xml version="1.0"?>
+
+<robot name="conveyor_belt" xmlns:xacro="http://ros.org/wiki/xacro">
+
+  <!-- world link -->
+  <link name="world" />
+
+  <link name = "conveyor_belt_fixed">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+<!--      <geometry>-->
+<!--        <mesh filename="package://conveyor_belt_simulation/meshes/conveyor_belt.dae"/>-->
+<!--      </geometry>-->
+      <geometry>
+        <box size = "7.5 0.75461 0.18862" />
+      </geometry>
+    </visual>
+  </link>
+
+  <link name = "conveyor_belt_moving">
+    <visual>
+      <geometry>
+        <box size = "7.5 0.75461 0.18862" />
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <box size = "7.5 0.75461 0.18862" />
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="100"/>
+      <inertia ixx="100" iyy="1781.5" izz="1784.72" ixy="0" iyz="0" ixz="0"/>
+    </inertial>
+  </link>
+
+  <gazebo reference="conveyor_belt_fixed">
+    <mu>1.0</mu>
+    <mu2>1.0</mu2>
+    <material>Gazebo/White</material>
+  </gazebo>
+
+  <gazebo reference="conveyor_belt_moving">
+    <mu>1.0</mu>
+    <mu2>1.0</mu2>
+    <material>Gazebo/GreenTransparent</material>
+<!--    <surface>-->
+<!--      <friction>-->
+<!--        <ode>-->
+<!--          <mu>1.0</mu>-->
+<!--          <mu2>1.0</mu2>-->
+<!--        </ode>-->
+<!--        <torsional>-->
+<!--          <coefficient>1000.0</coefficient>-->
+<!--          <patch_radius>0.1</patch_radius>-->
+<!--        </torsional>-->
+<!--      </friction>-->
+<!--    </surface>-->
+  </gazebo>
+
+  <joint name="conveyor_belt_fixed_joint" type="fixed">
+    <parent link="world" />
+    <child link="conveyor_belt_fixed" />
+    <origin xyz="1.16 4.2 0.8" rpy="0 0 -1.57079" />
+  </joint>
+
+  <joint name = "belt_joint" type = "prismatic">
+    <parent link = "conveyor_belt_fixed"/>
+    <child link = "conveyor_belt_moving"/>
+    <origin xyz = "3.12 0 -0.45" rpy = "0 0 0"/>
+    <limit effort = "30" velocity = "100" lower = "0" upper = "1.0" />
+    <axis xyz = "1 0 0"/>
+  </joint>
+
+  <gazebo>
+    <plugin name="conveyor_belt_plugin" filename="libROSConveyorBeltPlugin.so">
+      <enable_topic>conveyor_enable</enable_topic>
+      <population_rate_modifier_topic>population/rate_modifier</population_rate_modifier_topic>
+      <link>conveyor_belt_moving</link>
+      <power>0</power>
+      <update_rate>10</update_rate>
+    </plugin>
+  </gazebo>
+
+</robot>

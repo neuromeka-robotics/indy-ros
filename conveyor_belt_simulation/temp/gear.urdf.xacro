@@ -1,0 +1,138 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro"
+       name="gear" >
+
+  <!-- world link -->
+  <link name="world" />
+
+  <!-- sensor links and fixed joints -->
+
+  <!-- a laser_profiler type sensor in the frame laser_profiler_1_frame -->
+  <link name="laser_profiler_1_frame" />
+  <joint name="laser_profiler_1_joint" type="fixed">
+    <parent link="world" />
+    <child link="laser_profiler_1_frame" />
+    <origin xyz="1.21 4.0 1.6" rpy="-3.14159265359 1.57079632679 1.57079632679" />
+  </joint>
+
+  <!-- Frame from which laser scan data originates -->
+  <link name="laser_profiler_1_laser_source_frame" />
+  <joint name="laser_profiler_1_laser_source_joint" type="fixed">
+    <parent link="laser_profiler_1_frame" />
+    <child link="laser_profiler_1_laser_source_frame" />
+    <origin xyz="0 0 0.06" rpy="0 0 0" />
+  </joint>
+
+
+  <!-- a depth_camera type sensor in the frame depth_camera_1_frame -->
+  <link name="depth_camera_1_frame" />
+  <joint name="depth_camera_1_joint" type="fixed">
+    <parent link="world" />
+    <child link="depth_camera_1_frame" />
+    <origin xyz="-0.3 -0.383 1.2" rpy="0.0 1.5707 0.0" />
+  </joint>
+
+
+
+  <!-- a proximity_sensor type sensor in the frame proximity_sensor_1_frame -->
+  <link name="proximity_sensor_1_frame" />
+  <joint name="proximity_sensor_1_joint" type="fixed">
+    <parent link="world" />
+    <child link="proximity_sensor_1_frame" />
+    <origin xyz="0.95 2.6 0.92" rpy="0.0 0.0 0.0" />
+  </joint>
+
+
+
+  <!-- a quality_control type sensor in the frame quality_control_sensor_2_frame -->
+  <link name="quality_control_sensor_2_frame" />
+  <joint name="quality_control_sensor_2_joint" type="fixed">
+    <parent link="world" />
+    <child link="quality_control_sensor_2_frame" />
+    <origin xyz="0.3 -3.5 1.5" rpy="0 1.574 1.574" />
+  </joint>
+
+
+
+  <!-- a quality_control type sensor in the frame quality_control_sensor_1_frame -->
+  <link name="quality_control_sensor_1_frame" />
+  <joint name="quality_control_sensor_1_joint" type="fixed">
+    <parent link="world" />
+    <child link="quality_control_sensor_1_frame" />
+    <origin xyz="0.3 3.5 1.5" rpy="0 1.574 -1.574" />
+  </joint>
+
+
+
+  <!-- a break_beam type sensor in the frame break_beam_1_frame -->
+  <link name="break_beam_1_frame" />
+  <joint name="break_beam_1_joint" type="fixed">
+    <parent link="world" />
+    <child link="break_beam_1_frame" />
+    <origin xyz="1.6 2.25 0.91" rpy="0.0 0.0 3.14159265359" />
+  </joint>
+
+
+  <!-- a bin in the frame bin5_frame -->
+  <link name="bin5_frame" />
+  <joint name="bin5_joint" type="fixed">
+    <parent link="world" />
+    <child link="bin5_frame" />
+    <origin xyz="-0.3 1.15 0.72" rpy="0 0.0 3.14159" />
+  </joint>
+  <!-- a bin in the frame bin4_frame -->
+  <link name="bin4_frame" />
+  <joint name="bin4_joint" type="fixed">
+    <parent link="world" />
+    <child link="bin4_frame" />
+    <origin xyz="-0.3 0.383 0.72" rpy="0 0.0 3.14159" />
+  </joint>
+  <!-- a bin in the frame bin6_frame -->
+  <link name="bin6_frame" />
+  <joint name="bin6_joint" type="fixed">
+    <parent link="world" />
+    <child link="bin6_frame" />
+    <origin xyz="-0.3 1.916 0.72" rpy="0 0.0 3.14159" />
+  </joint>
+  <!-- a bin in the frame bin1_frame -->
+  <link name="bin1_frame" />
+  <joint name="bin1_joint" type="fixed">
+    <parent link="world" />
+    <child link="bin1_frame" />
+    <origin xyz="-0.3 -1.916 0.72" rpy="0 0.0 3.14159" />
+  </joint>
+  <!-- a bin in the frame bin3_frame -->
+  <link name="bin3_frame" />
+  <joint name="bin3_joint" type="fixed">
+    <parent link="world" />
+    <child link="bin3_frame" />
+    <origin xyz="-0.3 -0.383 0.72" rpy="0 0.0 3.14159" />
+  </joint>
+  <!-- a bin in the frame bin2_frame -->
+  <link name="bin2_frame" />
+  <joint name="bin2_joint" type="fixed">
+    <parent link="world" />
+    <child link="bin2_frame" />
+    <origin xyz="-0.3 -1.15 0.72" rpy="0 0.0 3.14159" />
+  </joint>
+  <link name="belt_frame" />
+  <joint name="belt_joint" type="fixed">
+    <parent link="world" />
+    <child link="belt_frame" />
+    <origin xyz="1.24 0.15 0.91" rpy="0 0 0" />
+  </joint>
+
+
+  <!-- plugin to spawn gazebo scene data into the moveit scene -->
+  <!--
+  <gazebo>
+    <plugin filename="libgazebo_ros_moveit_planning_scene.so" name="gazebo_ros_moveit_planning_scene">
+      <topicName>/planning_scene</topicName>
+      <sceneName>workcell</sceneName>
+      <robotName>robot</robotName>
+      <updatePeriod>0.5</updatePeriod>
+    </plugin>
+  </gazebo>
+  -->
+
+</robot>

@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro"
+       name="conveyor_belt" >
+
+  <material name="metal_grey">
+    <color rgba="0.768627450980392 0.749019607843137 0.729411764705882 1" />
+  </material>
+  <xacro:property name="metal" value="metal_grey"/>
+
+  <!-- world link -->
+  <link name="world" />
+
+  <link name = "conveyor_belt_fixed">
+    <visual>
+        <!-- <origin xyz = "1.16 4.2 0.8" rpy = "0 0 -1.57079"/>         -->
+        <!-- <origin xyz = "0 0 0" rpy = "0 0 -1.57079"/> -->
+      <geometry>
+        <box size = "7.5 0.75461 0.18862" />
+      </geometry>
+      <material name="${metal}"/>
+    </visual>
+  </link>
+
+  <link name = "conveyor_belt_moving">
+    <visual>
+      <!-- <origin xyz = "1.16 -4.12 0.35" rpy = "0 0 -1.57079"/> -->
+      <!-- <origin xyz = "0 0 0" rpy = "0 0 -1.57079"/> -->
+      <geometry>
+        <box size = "7.5 0.75461 0.18862" />
+      </geometry>
+      <material name="${metal}"/>
+    </visual>
+  </link>
+
+  <joint name="conveyor_belt_fixed_joint" type="fixed">
+    <parent link="world" />
+    <child link="conveyor_belt_fixed" />
+    <origin xyz="1.16 4.2 0.8" rpy="0 0 -1.57079" />
+  </joint>
+
+  <joint name = "belt_joint" type = "prismatic">
+    <parent link = "conveyor_belt_fixed"/>
+    <child link = "conveyor_belt_moving"/>
+    <origin xyz = "3.12 0 -0.45" rpy = "0 0 0"/>
+    <limit effort = "30" velocity = "100" lower = "0" upper = "1.0" />
+    <axis xyz = "1 0 0"/>
+  </joint>
+
+</robot>

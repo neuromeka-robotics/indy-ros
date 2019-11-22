@@ -1,0 +1,146 @@
+<?xml version="1.0"?>
+<launch>
+  <arg name="competition_mode" value="$(optenv ARIAC_COMPETITION false)" />
+
+  <arg name="limited" default="false" />
+  <arg name="gui" default="true"/>
+  <arg name="debug" default="false"/>
+  <arg name="verbose" default="false"/>
+  <arg name="gazebo_ros_output" default="screen"/>
+  <arg name="world_path" />
+  <arg name="gear_urdf_xacro" />
+  <arg name="arm_urdf_dir" />
+  <arg name="state_log_dir" value="$(env HOME)/.ariac/log/gazebo" />
+
+  <!-- run startup script -->
+  <node name="startup_ariac" pkg="osrf_gear" type="startup.sh" output="screen" />
+
+  <arg unless="$(arg competition_mode)" name="enable_gz_ros_network" value="true"/>
+  <arg     if="$(arg competition_mode)" name="enable_gz_ros_network" value="false"/>
+  <!-- startup simulated world -->
+  <include file="$(find osrf_gear)/launch/empty_world.launch">
+    <arg name="world_name" default="$(arg world_path)"/>
+    <!-- Always start paused because the arm spawn needs it that way. -->
+    <arg name="paused" value="true"/>
+    <arg name="enable_ros_network" value="$(arg enable_gz_ros_network)"/>
+    <arg name="gui" value="$(arg gui)"/>
+    <arg name="extra_gazebo_args" value="" />
+    <arg name="debug" value="$(arg debug)" />
+    <arg name="verbose" value="$(arg verbose)" />
+    <arg name="output" value="$(arg gazebo_ros_output)" />
+  </include>
+
+  <!-- load the URDF excluding the robot arm model -->
+  <param name="sensors_description"
+    command="$(find xacro)/xacro &#x002D;&#x002D;inorder '$(arg gear_urdf_xacro)'" />
+
+  <!-- publish transforms of bins/sensors/rail-->
+  <node pkg="robot_state_publisher" type="robot_state_publisher" name="sensors_tf_publisher">
+    <remap from="robot_description" to="sensors_description" />
+    <param name="publish_frequency" type="double" value="50.0" />
+    <param name="tf_prefix" type="string" value="" />
+  </node>
+
+  <!-- spawn sensors -->
+  <node name="spawn_gazebo_sensors" pkg="gazebo_ros" type="spawn_model"
+        args="
+          -gazebo_namespace /gazebo
+          -urdf
+          -param sensors_description
+          -model gear_objects
+          -x 0.0
+          -y -0.0
+          -z -0.0"
+        respawn="false" output="screen">
+  </node>
+
+
+<!-- Load urdf of the arm model -->
+  <group ns="ariac/arm2">
+    <!-- Load arm urdf into a paramter -->
+    <param name="robot_description"
+      command="$(find xacro)/xacro &#x002D;&#x002D;inorder '$(arg arm_urdf_dir)arm2.urdf.xacro'
+        hardware_interface:=EffortJointInterface
+        use_effort_interface:=true joint_limited:=$(arg limited)
+      " />
+    <!-- Remap and rewrite tf topics because robot description has same link names -->
+    <node name="tf_relay" pkg="osrf_gear" type="tf2_relay">
+      <remap from="~/in/tf" to="tf"/>
+      <remap from="~/in/tf_static" to="tf_static"/>
+      <remap from="~/out/tf" to="/tf"/>
+      <remap from="~/out/tf_static" to="/tf_static"/>
+      <rosparam>
+        prefix: arm2_
+        frames:
+          - linear_arm_actuator
+          - base_link
+          - base
+          - shoulder_link
+          - upper_arm_link
+          - forearm_link
+          - wrist_1_link
+          - wrist_2_link
+          - wrist_3_link
+          - ee_link
+          - vacuum_gripper_link
+          - tool0
+      </rosparam>
+    </node>
+    <remap from="/tf" to="tf"/>
+    <remap from="/tf_static" to="tf_static"/>
+
+    <!-- load ur10 in gazebo, start robot state publisher, etc -->
+    <include file="$(find osrf_gear)/launch/ur10/ur10.xml">
+      <arg name="limited" value="$(arg limited)" />
+      <arg name="extra_spawn_model_args" value="-J elbow_joint 2.14 -J linear_arm_actuator_joint 0 -J shoulder_pan_joint 3.14 -J wrist_3_joint 0 -J wrist_1_joint 3.27 -J shoulder_lift_joint -2.0 -J wrist_2_joint -1.51" />
+      <arg name="set_robot_description" value="false" />
+      <arg name="robot_name" value="arm2" />
+    </include>
+  </group>
+<!-- Load urdf of the arm model -->
+  <group ns="ariac/arm1">
+    <!-- Load arm urdf into a paramter -->
+    <param name="robot_description"
+      command="$(find xacro)/xacro &#x002D;&#x002D;inorder '$(arg arm_urdf_dir)arm1.urdf.xacro'
+        hardware_interface:=EffortJointInterface
+        use_effort_interface:=true joint_limited:=$(arg limited)
+      " />
+    <!-- Remap and rewrite tf topics because robot description has same link names -->
+    <node name="tf_relay" pkg="osrf_gear" type="tf2_relay">
+      <remap from="~/in/tf" to="tf"/>
+      <remap from="~/in/tf_static" to="tf_static"/>
+      <remap from="~/out/tf" to="/tf"/>
+      <remap from="~/out/tf_static" to="/tf_static"/>
+      <rosparam>
+        prefix: arm1_
+        frames:
+          - linear_arm_actuator
+          - base_link
+          - base
+          - shoulder_link
+          - upper_arm_link
+          - forearm_link
+          - wrist_1_link
+          - wrist_2_link
+          - wrist_3_link
+          - ee_link
+          - vacuum_gripper_link
+          - tool0
+      </rosparam>
+    </node>
+    <remap from="/tf" to="tf"/>
+    <remap from="/tf_static" to="tf_static"/>
+
+    <!-- load ur10 in gazebo, start robot state publisher, etc -->
+    <include file="$(find osrf_gear)/launch/ur10/ur10.xml">
+      <arg name="limited" value="$(arg limited)" />
+      <arg name="extra_spawn_model_args" value="-J elbow_joint 2.14 -J linear_arm_actuator_joint 0 -J shoulder_pan_joint 3.14 -J wrist_3_joint 0 -J wrist_1_joint 3.27 -J shoulder_lift_joint -2.0 -J wrist_2_joint -1.51" />
+      <arg name="set_robot_description" value="false" />
+      <arg name="robot_name" value="arm1" />
+    </include>
+  </group>
+
+
+  <node name="gazebo_unpauser" pkg="osrf_gear" type="gazebo_unpauser.py" output="screen"/>
+
+</launch>

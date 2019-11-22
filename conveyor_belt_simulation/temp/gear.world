@@ -1,0 +1,1368 @@
+<?xml version="1.0" ?>
+<sdf version="1.5">
+  <world name="default">
+    <!-- Set the initial camera pose to be looking at the workspace. -->
+    <gui fullscreen='0'>
+      <camera name='user_camera'>
+        <!-- pretty overview shot -->
+        <pose frame=''>-7.56272 4.06148 6.60308 0 0.636 -0.467992</pose>
+
+        <!-- Top down part placement
+        <pose frame=''>-0.475239 0 4.863623 0 1.570796 0</pose> -->
+
+        <!-- Shipment placement AGV 1
+        <pose frame=''>0.301627 3.242337 2.584521 0 1.570796</pose> -->
+
+        <!-- Shipment placement AGV 2
+        <pose frame=''>0.301627 -3.242337 2.584521 0 1.570796</pose> -->
+
+        <view_controller>orbit</view_controller>
+        <projection_type>perspective</projection_type>
+      </camera>
+    </gui>
+
+
+    <!-- Disable shadows. -->
+    <scene>
+      <shadows>false</shadows>
+    </scene>
+
+
+
+    <!-- A global light source -->
+    <light type="directional" name="sun">
+      <cast_shadows>true</cast_shadows>
+      <pose>0 0 10 0 0 0</pose>
+      <diffuse>0.8 0.8 0.8 1</diffuse>
+      <specular>0.2 0.2 0.2 1</specular>
+      <attenuation>
+        <range>1000</range>
+        <constant>0.9</constant>
+        <linear>0.01</linear>
+        <quadratic>0.001</quadratic>
+      </attenuation>
+      <direction>-0.5 0.1 -0.9</direction>
+    </light>
+
+    <!-- A directed light source -->
+    <light name="camera_spot_light" type='spot'>
+      <pose>14 -3.0 3.0 -1.55 0.0 -1.62</pose>
+      <diffuse>0.5 0.5 0.5 1</diffuse>
+      <specular>0.1 0.1 0.1 1</specular>
+      <direction>0 0 -1</direction>
+      <attenuation>
+        <range>50</range>
+        <constant>0.5</constant>
+        <linear>0.01</linear>
+        <quadratic>0.001</quadratic>
+      </attenuation>
+      <cast_shadows>0</cast_shadows>
+      <spot>
+        <inner_angle>0.6</inner_angle>
+        <outer_angle>1</outer_angle>
+        <falloff>1</falloff>
+      </spot>
+    </light>
+
+    <!-- the workcell -->
+    <include>
+      <uri>model://workcell</uri>
+      <pose>0 0 0 0 0 1.57</pose>
+    </include>
+
+    <include>
+      <name>bin5</name>
+      <uri>model://workcell_bin</uri>
+      <pose>-0.3 1.15 0 0 0.0 3.14159</pose>
+    </include>
+    <include>
+      <name>bin4</name>
+      <uri>model://workcell_bin</uri>
+      <pose>-0.3 0.383 0 0 0.0 3.14159</pose>
+    </include>
+    <include>
+      <name>bin6</name>
+      <uri>model://workcell_bin</uri>
+      <pose>-0.3 1.916 0 0 0.0 3.14159</pose>
+    </include>
+    <include>
+      <name>bin1</name>
+      <uri>model://workcell_bin</uri>
+      <pose>-0.3 -1.916 0 0 0.0 3.14159</pose>
+    </include>
+    <include>
+      <name>bin3</name>
+      <uri>model://workcell_bin</uri>
+      <pose>-0.3 -0.383 0 0 0.0 3.14159</pose>
+    </include>
+    <include>
+      <name>bin2</name>
+      <uri>model://workcell_bin</uri>
+      <pose>-0.3 -1.15 0 0 0.0 3.14159</pose>
+    </include>
+
+
+
+    <!-- a laser profiler called laser_profiler_1 -->
+    <model name="laser_profiler_1">
+      <pose>1.21 4.0 1.6 -3.14159265359 1.57079632679 1.57079632679</pose>
+      <static>true</static>
+      <link name="link">
+        <visual name="body">
+          <geometry>
+            <box>
+              <size>0.093 0.05 0.167</size>
+            </box>
+          </geometry>
+        </visual>
+        <collision name='collision'>
+          <geometry>
+            <box>
+              <size>0.093 0.05 0.167</size>
+            </box>
+          </geometry>
+        </collision>
+        <sensor name="laser_profiler" type="ray">
+          <update_rate>30</update_rate>
+          <pose>0 0 0.06 0 0 0</pose>
+          <plugin name="proximity_ray_plugin" filename="libROSLaserPlugin.so" >
+            <!-- If the namespace is set to ariac, the frame will also be namespaced -->
+            <!-- So, we manually namespace the topic only -->
+            <robotNamespace>/</robotNamespace>
+            <frameName>laser_profiler_1_laser_source_frame</frameName>
+            <topicName>ariac/laser_profiler_1</topicName>
+            <activation_topic>/ariac/sensor_enable</activation_topic>
+          </plugin>
+          <ray>
+            <range>
+              <min>0.181</min>
+              <max>0.725</max>
+              <resolution>0.001</resolution>
+            </range>
+            <scan>
+              <horizontal>
+                <samples>400</samples>
+                <resolution>1</resolution>
+                <min_angle>-0.35</min_angle>
+                <max_angle>0.35</max_angle>
+              </horizontal>
+            </scan>
+
+            <!-- nothing below this line really needs to be modified upon change of sensor model -->
+
+            <noise>
+              <type>gaussian</type>
+              <mean>0.0</mean>
+              <stddev>0.001</stddev>
+            </noise>
+          </ray>
+
+          <always_on>true</always_on>
+          <visualize>True</visualize>
+        </sensor>
+        <gravity>false</gravity>
+        <inertial>
+          <mass>0.1</mass>
+        </inertial>
+      </link>
+    </model>
+
+
+
+    <!-- a laser profiler called depth_camera_1 -->
+    <model name="depth_camera_1">
+      <pose>-0.3 -0.383 1.2 0.0 1.5707 0.0</pose>
+      <static>true</static>
+      <link name="link">
+        <visual name="visual">
+          <pose>0.007 0 -0.033 0 0 0</pose>
+            <geometry>
+            <mesh>
+                <uri>model://swissranger_camera_ariac/meshes/SR4000.stl</uri>
+            </mesh>
+            </geometry>
+            <material>
+                <ambient>0.15 0.15 0.15 1</ambient>
+                <diffuse>0.15 0.15 0.15 1</diffuse>
+                <specular>0.1 0.1 0.1 1</specular>
+                <emissive>0 0 0 0</emissive>
+            </material>
+        </visual>
+        <collision name='collision'>
+          <geometry>
+            <box>
+              <size>0.07 0.065 0.065</size>
+            </box>
+          </geometry>
+        </collision>
+        <sensor name="laser_profiler" type="ray">
+          <update_rate>5</update_rate>
+          <pose>0 0 0.0 0 0 0</pose>
+          <plugin name="sensor_blackout_plugin" filename="libSensorBlackoutPlugin.so" >
+            <activation_topic>/ariac/sensor_enable</activation_topic>
+          </plugin>
+          <plugin name="proximity_ray_plugin" filename="libgazebo_ros_block_laser.so" >
+            <!-- If the namespace is set to ariac, the frame will also be namespaced -->
+            <!-- So, we manually namespace the topic only -->
+            <robotNamespace>/</robotNamespace>
+            <frameName>depth_camera_1_frame</frameName>
+            <topicName>ariac/depth_camera_1</topicName>
+            <alwaysOn>true</alwaysOn>
+          </plugin>
+          <ray>
+            <range>
+              <min>0.4</min>
+              <max>1.0</max>
+              <resolution>0.001</resolution>
+            </range>
+            <scan>
+              <horizontal>
+                <samples>50</samples>
+                <resolution>1</resolution>
+                <min_angle>-0.3</min_angle>
+                <max_angle>0.3</max_angle>
+              </horizontal>
+              <vertical>
+                <samples>50</samples>
+                <resolution>1</resolution>
+                <min_angle>-0.4</min_angle>
+                <max_angle>0.4</max_angle>
+              </vertical>
+            </scan>
+
+            <!-- nothing below this line really needs to be modified upon change of sensor model -->
+
+            <noise>
+              <type>gaussian</type>
+              <mean>0.0</mean>
+              <stddev>0.001</stddev>
+            </noise>
+          </ray>
+
+          <always_on>1</always_on>
+          <visualize>True</visualize>
+        </sensor>
+        <gravity>false</gravity>
+        <inertial>
+          <mass>0.1</mass>
+        </inertial>
+      </link>
+    </model>
+
+
+
+    <!-- a logical camera called logical_camera_1 -->
+    <model name="logical_camera_1">
+      <static>true</static>
+      <pose>-0.3 0.383 1.27 0.2 1.5707 0.0</pose>
+      <plugin name="ros_logical_camera" filename="libROSLogicalCameraPlugin.so">
+        <robotNamespace>ariac</robotNamespace>
+        <position_noise>
+          <noise>
+            <type>gaussian</type>
+            <mean>0.0</mean>
+            <stddev>0.001</stddev>
+          </noise>
+        </position_noise>
+        <orientation_noise>
+          <noise>
+            <type>gaussian</type>
+            <mean>0.0</mean>
+            <stddev>0.01</stddev>
+          </noise>
+        </orientation_noise>
+        <known_model_types>
+          <type>disk_part</type>
+          <type>gasket_part</type>
+          <type>gear_part</type>
+          <type>piston_rod_part</type>
+          <type>pulley_part</type>
+          <type>shipping_box</type>
+        </known_model_types>
+        <anonymize_models>false</anonymize_models>
+        <activation_topic>/ariac/sensor_enable</activation_topic>
+      </plugin>
+      <link name="link">
+        <gravity>false</gravity>
+        <inertial>
+          <mass>0.1</mass>
+          <inertia>
+            <ixx>0.000166667</ixx>
+            <iyy>0.000166667</iyy>
+            <izz>0.000166667</izz>
+          </inertia>
+        </inertial>
+
+        <collision name="collision">
+          <pose>0 0.02 0 0 0 -1.5708</pose>
+          <geometry>
+            <mesh>
+              <uri>model://logical_camera_ariac/meshes/camera.dae</uri>
+            </mesh>
+          </geometry>
+        </collision>
+
+        <visual name="visual">
+          <pose>0 0.02 0 0 0 -1.5708</pose>
+          <geometry>
+            <mesh>
+              <uri>model://logical_camera_ariac/meshes/camera.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+
+        <sensor name="logical_camera" type="logical_camera">
+          <logical_camera>
+            <near>0.2</near>
+            <far>0.55</far>
+            <horizontal_fov>1.0</horizontal_fov>
+            <aspect_ratio>1.3</aspect_ratio>
+          </logical_camera>
+
+          <visualize>True</visualize>
+          <always_on>true</always_on>
+          <update_rate>10</update_rate>
+        </sensor>
+      </link>
+    </model>
+
+
+
+
+    <!-- a proximity sensor called proximity_sensor_1 -->
+    <model name="proximity_sensor_1">
+      <pose>0.95 2.6 0.92 0.0 0.0 0.0</pose>
+      <static>true</static>
+      <link name="body">
+        <visual name="visual">
+          <pose>0 0 0 0 1.5708 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.006</radius> <!-- diameter of sensing head -->
+              <length>0.046</length> <!-- length of sensor body -->
+            </cylinder>
+          </geometry>
+        </visual>
+        <collision name="collision">
+          <pose>0 0 0 0 1.5708 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.006</radius> <!-- diameter of sensing head -->
+              <length>0.046</length> <!-- length of sensor body -->
+            </cylinder>
+          </geometry>
+        </collision>
+        <sensor name="proximity_sensor_1" type="ray">
+          <pose>0.023 0 0 0 0 0</pose>
+          <plugin name="sensor_blackout_plugin" filename="libSensorBlackoutPlugin.so" >
+            <activation_topic>/ariac/sensor_enable</activation_topic>
+          </plugin>
+          <plugin filename="libgazebo_ros_range.so" name="gazebo_ros_range">
+            <gaussianNoise>0.001</gaussianNoise>
+            <alwaysOn>true</alwaysOn>
+            <update_rate>10</update_rate>
+            <topicName>proximity_sensor_1</topicName>
+            <frameName>proximity_sensor_1_frame</frameName>
+            <robotNamespace>ariac</robotNamespace>
+            <fov>0.125</fov>
+            <radiation>ultrasound</radiation>
+          </plugin>
+
+          <ray>
+            <range>
+              <min>0.01</min>
+              <max>0.15</max>
+              <resolution>0.01</resolution>
+            </range>
+            <scan>
+              <horizontal>
+                  <samples>5</samples>
+                  <resolution>1.0</resolution>
+                  <min_angle>-0.0625</min_angle>
+                  <max_angle>0.0625</max_angle>
+                </horizontal>
+                <vertical>
+                  <samples>5</samples>
+                  <resolution>1</resolution>
+                  <min_angle>-0.0625</min_angle>
+                  <max_angle>0.0625</max_angle>
+                </vertical>
+            </scan>
+          </ray>
+
+          <always_on>1</always_on>
+          <visualize>True</visualize>
+        </sensor>
+        <gravity>false</gravity>
+        <inertial>
+          <mass>0.1</mass>
+        </inertial>
+      </link>
+      <link name="cord">
+        <gravity>false</gravity>
+        <visual name="visual">
+          <pose>-0.025 0 0 0 1.5708 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.001</radius> <!-- diameter of sensing head -->
+              <length>0.02</length> <!-- length of sensor body -->
+            </cylinder>
+          </geometry>
+        </visual>
+        <collision name="collision">
+          <pose>-0.025 0 0 0 1.5708 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.001</radius> <!-- diameter of sensing head -->
+              <length>0.02</length> <!-- length of sensor body -->
+            </cylinder>
+          </geometry>
+        </collision>
+      </link>
+    </model>
+
+
+    <!-- a quality control sensor called quality_control_sensor_2 -->
+    <model name="quality_control_sensor_2">
+      <static>true</static>
+      <pose>0.3 -3.5 1.5 0 1.574 1.574</pose>
+      <plugin name="ros_logical_camera" filename="libROSLogicalCameraPlugin.so">
+        <robotNamespace>ariac</robotNamespace>
+        <position_noise>
+          <noise>
+            <type>gaussian</type>
+            <mean>0.0</mean>
+            <stddev>0.001</stddev>
+          </noise>
+        </position_noise>
+        <orientation_noise>
+          <noise>
+            <type>gaussian</type>
+            <mean>0.0</mean>
+            <stddev>0.01</stddev>
+          </noise>
+        </orientation_noise>
+        <known_model_names>
+          <name>piston_rod_part_5</name>
+        </known_model_names>
+        <anonymize_models>true</anonymize_models>
+        <activation_topic>/ariac/sensor_enable</activation_topic>
+      </plugin>
+      <link name="link">
+        <gravity>false</gravity>
+        <inertial>
+          <mass>0.1</mass>
+          <inertia>
+            <ixx>0.000166667</ixx>
+            <iyy>0.000166667</iyy>
+            <izz>0.000166667</izz>
+          </inertia>
+        </inertial>
+
+        <collision name="collision">
+          <pose>0 0.02 0 0 0 -1.5708</pose>
+          <geometry>
+            <mesh>
+              <uri>model://logical_camera_ariac/meshes/camera.dae</uri>
+            </mesh>
+          </geometry>
+        </collision>
+
+        <visual name="visual">
+          <pose>0 0.02 0 0 0 -1.5708</pose>
+          <geometry>
+            <mesh>
+              <uri>model://logical_camera_ariac/meshes/camera.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+
+        <sensor name="logical_camera" type="logical_camera">
+          <logical_camera>
+            <near>0.73</near>
+            <far>0.78</far>
+            <horizontal_fov>0.7</horizontal_fov>
+            <aspect_ratio>0.35</aspect_ratio>
+          </logical_camera>
+
+          <visualize>True</visualize>
+          <always_on>true</always_on>
+          <update_rate>10</update_rate>
+        </sensor>
+      </link>
+    </model>
+
+
+
+    <!-- a quality control sensor called quality_control_sensor_1 -->
+    <model name="quality_control_sensor_1">
+      <static>true</static>
+      <pose>0.3 3.5 1.5 0 1.574 -1.574</pose>
+      <plugin name="ros_logical_camera" filename="libROSLogicalCameraPlugin.so">
+        <robotNamespace>ariac</robotNamespace>
+        <position_noise>
+          <noise>
+            <type>gaussian</type>
+            <mean>0.0</mean>
+            <stddev>0.001</stddev>
+          </noise>
+        </position_noise>
+        <orientation_noise>
+          <noise>
+            <type>gaussian</type>
+            <mean>0.0</mean>
+            <stddev>0.01</stddev>
+          </noise>
+        </orientation_noise>
+        <known_model_names>
+          <name>piston_rod_part_5</name>
+        </known_model_names>
+        <anonymize_models>true</anonymize_models>
+        <activation_topic>/ariac/sensor_enable</activation_topic>
+      </plugin>
+      <link name="link">
+        <gravity>false</gravity>
+        <inertial>
+          <mass>0.1</mass>
+          <inertia>
+            <ixx>0.000166667</ixx>
+            <iyy>0.000166667</iyy>
+            <izz>0.000166667</izz>
+          </inertia>
+        </inertial>
+
+        <collision name="collision">
+          <pose>0 0.02 0 0 0 -1.5708</pose>
+          <geometry>
+            <mesh>
+              <uri>model://logical_camera_ariac/meshes/camera.dae</uri>
+            </mesh>
+          </geometry>
+        </collision>
+
+        <visual name="visual">
+          <pose>0 0.02 0 0 0 -1.5708</pose>
+          <geometry>
+            <mesh>
+              <uri>model://logical_camera_ariac/meshes/camera.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+
+        <sensor name="logical_camera" type="logical_camera">
+          <logical_camera>
+            <near>0.73</near>
+            <far>0.78</far>
+            <horizontal_fov>0.7</horizontal_fov>
+            <aspect_ratio>0.35</aspect_ratio>
+          </logical_camera>
+
+          <visualize>True</visualize>
+          <always_on>true</always_on>
+          <update_rate>10</update_rate>
+        </sensor>
+      </link>
+    </model>
+
+
+
+
+    <!-- a break beam sensor called break_beam_1 -->
+    <model name="break_beam_1">
+      <pose>1.6 2.25 0.91 0.0 0.0 3.14159265359</pose>
+      <link name="link">
+        <sensor name="break_beam_1" type="ray">
+          <update_rate>10</update_rate>
+          <pose>0.025 0 0 0 0 0</pose>
+          <!-- publishes the state on a ROS topic for use by users -->
+          <plugin name="ros_proximity_ray_plugin" filename="libROSProximityRayPlugin.so" >
+            <robotNamespace>ariac</robotNamespace>
+            <time_delay>0.05</time_delay><!-- this modifies the update rate of the ray sensor -->
+            <activation_topic>/ariac/sensor_enable</activation_topic>
+          </plugin>
+          <plugin name="sensor_blackout_plugin" filename="libSensorBlackoutPlugin.so" >
+            <activation_topic>/ariac/sensor_enable</activation_topic>
+          </plugin>
+          <ray>
+            <range>
+              <min>0.0</min>
+              <max>1.0</max> <!-- this represents the distance at which the reflector's placed. max 12m -->
+              <resolution>0.001</resolution>
+            </range>
+
+            <!-- nothing below this line really needs to be modified upon change of sensor model -->
+
+            <scan>
+              <horizontal>
+                <samples>1</samples>
+                <resolution>1</resolution>
+                <min_angle>0</min_angle>
+                <max_angle>0</max_angle>
+              </horizontal>
+            </scan>
+            <noise>
+              <type>gaussian</type>
+              <mean>0.0</mean>
+              <stddev>0.001</stddev>
+            </noise>
+          </ray>
+
+          <always_on>1</always_on>
+          <visualize>True</visualize>
+        </sensor>
+        <gravity>false</gravity>
+        <inertial>
+          <mass>0.1</mass>
+        </inertial>
+        <visual name="visual">
+          <geometry>
+            <mesh>
+              <uri>model://hokuyo_ariac/meshes/hokuyo.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name="collision">
+          <geometry>
+            <mesh>
+              <uri>model://hokuyo_ariac/meshes/hokuyo.dae</uri>
+            </mesh>
+          </geometry>
+        </collision>
+      </link>
+      <static>true</static>
+    </model>
+
+
+
+
+    <!-- a logical camera called logical_camera_2 -->
+    <model name="logical_camera_2">
+      <static>true</static>
+      <pose>0.3 3.15 1.5 0.0 1.57079632679 0.0</pose>
+      <plugin name="ros_logical_camera" filename="libROSLogicalCameraPlugin.so">
+        <robotNamespace>ariac</robotNamespace>
+        <position_noise>
+          <noise>
+            <type>gaussian</type>
+            <mean>0.0</mean>
+            <stddev>0.001</stddev>
+          </noise>
+        </position_noise>
+        <orientation_noise>
+          <noise>
+            <type>gaussian</type>
+            <mean>0.0</mean>
+            <stddev>0.01</stddev>
+          </noise>
+        </orientation_noise>
+        <known_model_types>
+          <type>disk_part</type>
+          <type>gasket_part</type>
+          <type>gear_part</type>
+          <type>piston_rod_part</type>
+          <type>pulley_part</type>
+          <type>shipping_box</type>
+        </known_model_types>
+        <anonymize_models>false</anonymize_models>
+        <activation_topic>/ariac/sensor_enable</activation_topic>
+      </plugin>
+      <link name="link">
+        <gravity>false</gravity>
+        <inertial>
+          <mass>0.1</mass>
+          <inertia>
+            <ixx>0.000166667</ixx>
+            <iyy>0.000166667</iyy>
+            <izz>0.000166667</izz>
+          </inertia>
+        </inertial>
+
+        <collision name="collision">
+          <pose>0 0.02 0 0 0 -1.5708</pose>
+          <geometry>
+            <mesh>
+              <uri>model://logical_camera_ariac/meshes/camera.dae</uri>
+            </mesh>
+          </geometry>
+        </collision>
+
+        <visual name="visual">
+          <pose>0 0.02 0 0 0 -1.5708</pose>
+          <geometry>
+            <mesh>
+              <uri>model://logical_camera_ariac/meshes/camera.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+
+        <sensor name="logical_camera" type="logical_camera">
+          <logical_camera>
+            <near>0.2</near>
+            <far>0.55</far>
+            <horizontal_fov>1.0</horizontal_fov>
+            <aspect_ratio>1.3</aspect_ratio>
+          </logical_camera>
+
+          <visualize>True</visualize>
+          <always_on>true</always_on>
+          <update_rate>10</update_rate>
+        </sensor>
+      </link>
+    </model>
+
+
+
+
+    <!-- a logical camera called logical_camera_3 -->
+    <model name="logical_camera_3">
+      <static>true</static>
+      <pose>0.3 -3.15 1.5 0.0 1.57079632679 0.0</pose>
+      <plugin name="ros_logical_camera" filename="libROSLogicalCameraPlugin.so">
+        <robotNamespace>ariac</robotNamespace>
+        <position_noise>
+          <noise>
+            <type>gaussian</type>
+            <mean>0.0</mean>
+            <stddev>0.001</stddev>
+          </noise>
+        </position_noise>
+        <orientation_noise>
+          <noise>
+            <type>gaussian</type>
+            <mean>0.0</mean>
+            <stddev>0.01</stddev>
+          </noise>
+        </orientation_noise>
+        <known_model_types>
+          <type>disk_part</type>
+          <type>gasket_part</type>
+          <type>gear_part</type>
+          <type>piston_rod_part</type>
+          <type>pulley_part</type>
+          <type>shipping_box</type>
+        </known_model_types>
+        <anonymize_models>false</anonymize_models>
+        <activation_topic>/ariac/sensor_enable</activation_topic>
+      </plugin>
+      <link name="link">
+        <gravity>false</gravity>
+        <inertial>
+          <mass>0.1</mass>
+          <inertia>
+            <ixx>0.000166667</ixx>
+            <iyy>0.000166667</iyy>
+            <izz>0.000166667</izz>
+          </inertia>
+        </inertial>
+
+        <collision name="collision">
+          <pose>0 0.02 0 0 0 -1.5708</pose>
+          <geometry>
+            <mesh>
+              <uri>model://logical_camera_ariac/meshes/camera.dae</uri>
+            </mesh>
+          </geometry>
+        </collision>
+
+        <visual name="visual">
+          <pose>0 0.02 0 0 0 -1.5708</pose>
+          <geometry>
+            <mesh>
+              <uri>model://logical_camera_ariac/meshes/camera.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+
+        <sensor name="logical_camera" type="logical_camera">
+          <logical_camera>
+            <near>0.2</near>
+            <far>0.55</far>
+            <horizontal_fov>1.0</horizontal_fov>
+            <aspect_ratio>1.3</aspect_ratio>
+          </logical_camera>
+
+          <visualize>True</visualize>
+          <always_on>true</always_on>
+          <update_rate>10</update_rate>
+        </sensor>
+      </link>
+    </model>
+
+
+
+    <!-- a wall to delete objects at the end of the belt -->
+    <include>
+      <uri>model://deletion_wall</uri>
+      <pose>1.2 -4.1 1.41 0 0 1.5708</pose>
+    </include>
+
+
+
+    <!-- Pool of piston_rod_part objects -->
+    <include>
+      <uri>model://piston_rod_part_ariac</uri>
+      <name>piston_rod_part_0</name>
+      <pose>7.5 -9.8 -5.0 0 0 0</pose>
+    </include>
+    <include>
+      <uri>model://piston_rod_part_ariac</uri>
+      <name>piston_rod_part_1</name>
+      <pose>7.5 -9.55 -5.0 0 0 0</pose>
+    </include>
+    <include>
+      <uri>model://piston_rod_part_ariac</uri>
+      <name>piston_rod_part_2</name>
+      <pose>7.5 -9.3 -5.0 0 0 0</pose>
+    </include>
+    <!-- Pool of gear_part objects -->
+    <include>
+      <uri>model://gear_part_ariac</uri>
+      <name>gear_part_0</name>
+      <pose>7.75 -9.8 -5.0 0 0 0</pose>
+    </include>
+    <include>
+      <uri>model://gear_part_ariac</uri>
+      <name>gear_part_1</name>
+      <pose>7.75 -9.55 -5.0 0 0 0</pose>
+    </include>
+    <include>
+      <uri>model://gear_part_ariac</uri>
+      <name>gear_part_2</name>
+      <pose>7.75 -9.3 -5.0 0 0 0</pose>
+    </include>
+
+    <!-- an invisible conveyor belt -->
+      <include>
+        <name>conveyor_belt</name>
+        <pose>0.07 0.8 0.464 0 0 0</pose>
+        <uri>model://conveyor_belt_tall_ariac</uri>
+      </include>
+
+    <!-- Populate the bins -->
+    <include>
+      <name>bin3|gear_part_7</name>
+      <uri>model://gear_part_ariac</uri>
+      <pose>-0.3 -0.316333333333 0.8 0.0 -0.0 0.0</pose>
+    </include>
+    <include>
+      <name>bin3|gear_part_1</name>
+      <uri>model://gear_part_ariac</uri>
+      <pose>-0.5 -0.583 0.8 0.0 -0.0 0.0</pose>
+    </include>
+    <include>
+      <name>bin2|piston_rod_part_8</name>
+      <uri>model://piston_rod_part_ariac</uri>
+      <pose>-0.25 -1.15 0.8 0.0 -0.0 0.785398163397</pose>
+    </include>
+    <include>
+      <name>bin3|gear_part_12</name>
+      <uri>model://gear_part_ariac</uri>
+      <pose>-0.1 -0.183 0.8 0.0 -0.0 0.0</pose>
+    </include>
+    <include>
+      <name>bin3|gear_part_2</name>
+      <uri>model://gear_part_ariac</uri>
+      <pose>-0.5 -0.449666666667 0.8 0.0 -0.0 0.0</pose>
+    </include>
+    <include>
+      <name>bin3|gear_part_10</name>
+      <uri>model://gear_part_ariac</uri>
+      <pose>-0.1 -0.449666666667 0.8 0.0 -0.0 0.0</pose>
+    </include>
+    <include>
+      <name>bin3|gear_part_11</name>
+      <uri>model://gear_part_ariac</uri>
+      <pose>-0.1 -0.316333333333 0.8 0.0 -0.0 0.0</pose>
+    </include>
+    <include>
+      <name>bin3|gear_part_8</name>
+      <uri>model://gear_part_ariac</uri>
+      <pose>-0.3 -0.183 0.8 0.0 -0.0 0.0</pose>
+    </include>
+    <include>
+      <name>bin3|gear_part_9</name>
+      <uri>model://gear_part_ariac</uri>
+      <pose>-0.1 -0.583 0.8 0.0 -0.0 0.0</pose>
+    </include>
+    <include>
+      <name>bin4|gasket_part_1</name>
+      <uri>model://gasket_part_ariac</uri>
+      <pose>-0.5 0.283 0.8 0.0 -0.0 0.785398163397</pose>
+    </include>
+    <include>
+      <name>bin4|gasket_part_3</name>
+      <uri>model://gasket_part_ariac</uri>
+      <pose>-0.5 0.583 0.8 0.0 -0.0 0.785398163397</pose>
+    </include>
+    <include>
+      <name>bin4|gasket_part_2</name>
+      <uri>model://gasket_part_ariac</uri>
+      <pose>-0.5 0.433 0.8 0.0 -0.0 0.785398163397</pose>
+    </include>
+    <include>
+      <name>bin4|gasket_part_5</name>
+      <uri>model://gasket_part_ariac</uri>
+      <pose>-0.2 0.433 0.8 0.0 -0.0 0.785398163397</pose>
+    </include>
+    <include>
+      <name>bin4|gasket_part_4</name>
+      <uri>model://gasket_part_ariac</uri>
+      <pose>-0.2 0.283 0.8 0.0 -0.0 0.785398163397</pose>
+    </include>
+    <include>
+      <name>bin2|piston_rod_part_9</name>
+      <uri>model://piston_rod_part_ariac</uri>
+      <pose>-0.25 -1.0 0.8 0.0 -0.0 0.785398163397</pose>
+    </include>
+    <include>
+      <name>bin4|gasket_part_6</name>
+      <uri>model://gasket_part_ariac</uri>
+      <pose>-0.2 0.583 0.8 0.0 -0.0 0.785398163397</pose>
+    </include>
+    <include>
+      <name>bin2|piston_rod_part_7</name>
+      <uri>model://piston_rod_part_ariac</uri>
+      <pose>-0.25 -1.3 0.8 0.0 -0.0 0.785398163397</pose>
+    </include>
+    <include>
+      <name>bin2|piston_rod_part_6</name>
+      <uri>model://piston_rod_part_ariac</uri>
+      <pose>-0.375 -1.0 0.8 0.0 -0.0 0.785398163397</pose>
+    </include>
+    <include>
+      <name>bin2|piston_rod_part_5</name>
+      <uri>model://piston_rod_part_ariac</uri>
+      <pose>-0.375 -1.15 0.8 0.0 -0.0 0.785398163397</pose>
+    </include>
+    <include>
+      <name>bin2|piston_rod_part_4</name>
+      <uri>model://piston_rod_part_ariac</uri>
+      <pose>-0.375 -1.3 0.8 0.0 -0.0 0.785398163397</pose>
+    </include>
+    <include>
+      <name>bin2|piston_rod_part_3</name>
+      <uri>model://piston_rod_part_ariac</uri>
+      <pose>-0.5 -1.0 0.8 0.0 -0.0 0.785398163397</pose>
+    </include>
+    <include>
+      <name>bin2|piston_rod_part_2</name>
+      <uri>model://piston_rod_part_ariac</uri>
+      <pose>-0.5 -1.15 0.8 0.0 -0.0 0.785398163397</pose>
+    </include>
+    <include>
+      <name>bin2|piston_rod_part_1</name>
+      <uri>model://piston_rod_part_ariac</uri>
+      <pose>-0.5 -1.3 0.8 0.0 -0.0 0.785398163397</pose>
+    </include>
+    <include>
+      <name>bin3|gear_part_3</name>
+      <uri>model://gear_part_ariac</uri>
+      <pose>-0.5 -0.316333333333 0.8 0.0 -0.0 0.0</pose>
+    </include>
+    <include>
+      <name>bin3|gear_part_4</name>
+      <uri>model://gear_part_ariac</uri>
+      <pose>-0.5 -0.183 0.8 0.0 -0.0 0.0</pose>
+    </include>
+    <include>
+      <name>bin3|gear_part_5</name>
+      <uri>model://gear_part_ariac</uri>
+      <pose>-0.3 -0.583 0.8 0.0 -0.0 0.0</pose>
+    </include>
+    <include>
+      <name>bin3|gear_part_6</name>
+      <uri>model://gear_part_ariac</uri>
+      <pose>-0.3 -0.449666666667 0.8 0.0 -0.0 0.0</pose>
+    </include>
+
+    <!-- Populate the conveyor belt -->
+    <plugin filename="libROSPopulationPlugin.so" name="populate_conveyor">
+      <activation_topic>/ariac/populate_belt</activation_topic>
+      <rate_modifier_topic>/ariac/population/rate_modifier</rate_modifier_topic>
+      <control_topic>/ariac/population/control</control_topic>
+      <state_topic>/ariac/population/state</state_topic>
+      <start_index>0</start_index>
+      <prefix_object_names>false</prefix_object_names>
+      <loop_forever>true</loop_forever>
+      <frame>conveyor_belt::conveyor_belt_fixed</frame>
+      <object_sequence>
+          <object>
+          <time>1.0</time>
+          <type>piston_rod_part</type>
+          <pose>0.0 0.0 0.1 0.0 0.0 1.57079632679</pose>
+        </object>
+            <object>
+          <time>5.0</time>
+          <type>gear_part</type>
+          <pose>0.0 0.0 0.1 0.0 0.0 1.57079632679</pose>
+        </object>
+        </object_sequence>
+      <update_rate>10</update_rate>
+    </plugin>
+
+    <!-- AGV1 -->
+    <model name="agv1">
+      <pose>0.3 3.3 0 0 0 3.14159</pose>
+      <include>
+        <name>agv1</name>
+        <uri>model://warehouse_robot_ariac</uri>
+      </include>
+      <plugin name="agv_plugin" filename="libROSAGVPlugin.so">
+        <agv_control_service_name>/ariac/agv1/animate</agv_control_service_name>
+        <clear_tray_service_name>/ariac/kit_tray_1/clear_tray</clear_tray_service_name>
+        <lock_tray_service_name>/ariac/kit_tray_1/lock_models</lock_tray_service_name>
+        <index>1</index>
+      </plugin>
+
+      <!-- a tray for building kits -->
+      <!-- (this has to be in a model tag so logical cameras can detect it as a nested model) -->
+      <model name="kit_tray_1">
+        <pose>0.0 0.15 0.75 0 0 0</pose>
+        <include>
+          <name>kit_tray_1</name>
+          <uri>model://kit_tray_ariac</uri>
+        </include>
+        <plugin name="kit_tray_plugin" filename="libROSAriacKitTrayPlugin.so">
+          <contact_sensor_name>kit_tray_contact</contact_sensor_name>
+          <tf_frame_name>kit_tray_1</tf_frame_name>
+          <clear_tray_service_name>/ariac/kit_tray_1/clear_tray</clear_tray_service_name>
+          <lock_models_service_name>/ariac/kit_tray_1/lock_models</lock_models_service_name>
+          <get_content_service_name>/ariac/kit_tray_1/get_content</get_content_service_name>
+          <update_rate>20</update_rate>
+          <faulty_parts>
+            <name>piston_rod_part_5</name>
+          </faulty_parts>
+        </plugin>
+      </model>
+
+      <!-- join the tray and agv -->
+      <joint name="agv_tray" type="fixed">
+          <parent>agv1::link</parent>
+          <child>kit_tray_1::kit_tray_1::tray</child>
+      </joint>
+    </model>
+
+    <model name="quality_control_sensor_1">
+      <pose>0.3 3.5 1.5 0 1.574 -1.574</pose>
+      <plugin name="ros_logical_camera" filename="libROSLogicalCameraPlugin.so">
+        <robotNamespace>ariac</robotNamespace>
+        <position_noise>
+          <noise>
+            <type>gaussian</type>
+            <mean>0.0</mean>
+            <stddev>0.001</stddev>
+          </noise>
+        </position_noise>
+        <orientation_noise>
+          <noise>
+            <type>gaussian</type>
+            <mean>0.0</mean>
+            <stddev>0.01</stddev>
+          </noise>
+        </orientation_noise>
+        <known_model_names>
+          <name>piston_rod_part_5</name>
+        </known_model_names>
+      </plugin>
+      <link name="link">
+        <gravity>false</gravity>
+        <inertial>
+          <mass>0.1</mass>
+          <inertia>
+            <ixx>0.000166667</ixx>
+            <iyy>0.000166667</iyy>
+            <izz>0.000166667</izz>
+          </inertia>
+        </inertial>
+
+        <collision name="collision">
+          <pose>0 0.02 0 0 0 -1.5708</pose>
+          <geometry>
+            <mesh>
+              <uri>model://logical_camera/meshes/camera.dae</uri>
+            </mesh>
+          </geometry>
+        </collision>
+
+        <visual name="visual">
+          <pose>0 0.02 0 0 0 -1.5708</pose>
+          <geometry>
+            <mesh>
+              <uri>model://logical_camera/meshes/camera.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+
+        <sensor name="logical_camera" type="logical_camera">
+          <logical_camera>
+            <near>0.73</near>
+            <far>0.78</far>
+            <horizontal_fov>0.7</horizontal_fov>
+            <aspect_ratio>0.35</aspect_ratio>
+          </logical_camera>
+
+          <visualize>false</visualize>
+          <always_on>true</always_on>
+          <update_rate>10</update_rate>
+        </sensor>
+      </link>
+    </model>
+
+    <!-- AGV2 -->
+    <model name="agv2">
+      <pose>0.3 -3.3 0 0 0 0</pose>
+      <include>
+        <name>agv2</name>
+        <uri>model://warehouse_robot_ariac</uri>
+      </include>
+      <plugin name="agv_plugin" filename="libROSAGVPlugin.so">
+        <agv_control_service_name>/ariac/agv2/animate</agv_control_service_name>
+        <clear_tray_service_name>/ariac/kit_tray_2/clear_tray</clear_tray_service_name>
+        <lock_tray_service_name>/ariac/kit_tray_2/lock_models</lock_tray_service_name>
+        <index>2</index>
+      </plugin>
+
+      <!-- a tray for building kits -->
+      <!-- (this has to be in a model tag so logical cameras can detect it as a nested model) -->
+      <model name="kit_tray_2">
+        <pose>0.0 0.15 0.75 0 0 0</pose>
+        <include>
+          <name>kit_tray_2</name>
+          <uri>model://kit_tray_ariac</uri>
+        </include>
+        <plugin name="kit_tray_plugin" filename="libROSAriacKitTrayPlugin.so">
+          <contact_sensor_name>kit_tray_contact</contact_sensor_name>
+          <tf_frame_name>kit_tray_2</tf_frame_name>
+          <clear_tray_service_name>/ariac/kit_tray_2/clear_tray</clear_tray_service_name>
+          <lock_models_service_name>/ariac/kit_tray_2/lock_models</lock_models_service_name>
+          <get_content_service_name>/ariac/kit_tray_2/get_content</get_content_service_name>
+          <update_rate>20</update_rate>
+          <faulty_parts>
+            <name>piston_rod_part_5</name>
+          </faulty_parts>
+        </plugin>
+      </model>
+
+      <!-- join the tray and agv -->
+      <joint name="agv_tray" type="fixed">
+          <parent>agv2::link</parent>
+          <child>kit_tray_2::kit_tray_2::tray</child>
+      </joint>
+    </model>
+
+    <model name="quality_control_sensor_2">
+      <pose>0.3 -3.5 1.5 0 1.574 1.574</pose>
+      <plugin name="ros_logical_camera" filename="libROSLogicalCameraPlugin.so">
+        <robotNamespace>ariac</robotNamespace>
+        <position_noise>
+          <noise>
+            <type>gaussian</type>
+            <mean>0.0</mean>
+            <stddev>0.001</stddev>
+          </noise>
+        </position_noise>
+        <orientation_noise>
+          <noise>
+            <type>gaussian</type>
+            <mean>0.0</mean>
+            <stddev>0.01</stddev>
+          </noise>
+        </orientation_noise>
+        <known_model_names>
+          <name>piston_rod_part_5</name>
+        </known_model_names>
+      </plugin>
+      <link name="link">
+        <gravity>false</gravity>
+        <inertial>
+          <mass>0.1</mass>
+          <inertia>
+            <ixx>0.000166667</ixx>
+            <iyy>0.000166667</iyy>
+            <izz>0.000166667</izz>
+          </inertia>
+        </inertial>
+
+        <collision name="collision">
+          <pose>0 0.02 0 0 0 -1.5708</pose>
+          <geometry>
+            <mesh>
+              <uri>model://logical_camera/meshes/camera.dae</uri>
+            </mesh>
+          </geometry>
+        </collision>
+
+        <visual name="visual">
+          <pose>0 0.02 0 0 0 -1.5708</pose>
+          <geometry>
+            <mesh>
+              <uri>model://logical_camera/meshes/camera.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+
+        <sensor name="logical_camera" type="logical_camera">
+          <logical_camera>
+            <near>0.73</near>
+            <far>0.78</far>
+            <horizontal_fov>0.7</horizontal_fov>
+            <aspect_ratio>0.35</aspect_ratio>
+          </logical_camera>
+
+          <visualize>false</visualize>
+          <always_on>true</always_on>
+          <update_rate>10</update_rate>
+        </sensor>
+      </link>
+    </model>
+
+
+
+    <!-- The NIST-ARIAC task manager -->
+    <plugin filename="libROSAriacTaskManagerPlugin.so" name="task_manager">
+      <robot_namespace>ariac</robot_namespace>
+      <competition_time_limit>-1</competition_time_limit>
+      <start_competition_service_name>/ariac/start_competition</start_competition_service_name>
+      <end_competition_service_name>/ariac/end_competition</end_competition_service_name>
+      <population_activate_topic>/ariac/populate_belt</population_activate_topic>
+      <conveyor_control_service>/ariac/conveyor/control</conveyor_control_service>
+      <submit_tray_service_name>/ariac/submit_shipment</submit_tray_service_name>
+      <material_locations_service_name>/ariac/material_locations</material_locations_service_name>
+      <shipment_content_topic_name>/ariac/trays</shipment_content_topic_name>
+      <orders_topic>/ariac/orders</orders_topic>
+      <agv index="1">
+        <agv_control_service_name>/ariac/agv1</agv_control_service_name>
+        <agv_animate_service_name>/ariac/agv1/animate</agv_animate_service_name>
+        <get_content_service_name>/ariac/kit_tray_1/get_content</get_content_service_name>
+      </agv>
+      <agv index="2">
+        <agv_control_service_name>/ariac/agv2</agv_control_service_name>
+        <agv_animate_service_name>/ariac/agv2/animate</agv_animate_service_name>
+        <get_content_service_name>/ariac/kit_tray_2/get_content</get_content_service_name>
+      </agv>
+      <order>
+        <name>order_0</name>
+        <start_time>0.0</start_time>
+
+        <shipment>
+          <shipment_type>order_0_shipment_0</shipment_type>
+          <destination>any</destination>
+          <product>
+            <type>piston_rod_part</type>
+            <pose>0.1 -0.1 0.0 0.0 0.0 0.0</pose>
+          </product>
+          <product>
+            <type>gear_part</type>
+            <pose>-0.1 0.0 0.0 0.0 0.0 3.14159265359</pose>
+          </product>
+          <product>
+            <type>gear_part</type>
+            <pose>-0.1 0.15 0.0 0.0 0.0 0.0</pose>
+          </product>
+        </shipment>
+      </order>
+      <material_locations>
+        <material>
+          <type>piston_rod_part</type>
+          <location>
+            <storage_unit>bin2</storage_unit>
+          </location>
+          <location>
+            <storage_unit>belt</storage_unit>
+          </location>
+        </material>
+        <material>
+          <type>gasket_part</type>
+          <location>
+            <storage_unit>bin4</storage_unit>
+          </location>
+        </material>
+        <material>
+          <type>gear_part</type>
+          <location>
+            <storage_unit>bin3</storage_unit>
+          </location>
+          <location>
+            <storage_unit>belt</storage_unit>
+          </location>
+        </material>
+      </material_locations>
+      <update_rate>10</update_rate>
+
+    </plugin>
+
+    <!-- Plane under the workcell on which 'removed' models can be placed -->
+    <model name="under_workcell_plane">
+      <pose>0 0 -5.1 0 0 0</pose>
+      <static>true</static>
+      <link name="link">
+        <collision name="collision">
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>25 25</size>
+            </plane>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>100</mu>
+                <mu2>50</mu2>
+              </ode>
+            </friction>
+          </surface>
+        </collision>
+      </link>
+    </model>
+
+    <!-- A ground plane to hide the under_workcell_plane -->
+    <model name="ground_plane">
+      <static>true</static>
+      <pose>-50 50 -0.01 0 0 0</pose>
+      <link name="link">
+        <visual name="visual">
+          <cast_shadows>false</cast_shadows>
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>150 150</size>
+            </plane>
+          </geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grey</name>
+            </script>
+          </material>
+        </visual>
+      </link>
+    </model>
+
+    <!-- A visual and collision of the linear rail the robots ride on -->
+    <model name="linear_rail">
+      <pose>0.3 0 0.9 0 0 0</pose>
+      <static>true</static>
+      <link name="rail_link">
+        <visual name="rail_link_visual">
+          <geometry>
+            <box>
+              <size>0.2 4.6 0.1</size>
+            </box>
+          </geometry>
+          <material>
+            <script>Gazebo/Grey</script>
+          </material>
+        </visual>
+
+        <collision name="rail_link_collision">
+          <geometry>
+            <box>
+              <size>0.2 4.6 0.1</size>
+            </box>
+          </geometry>
+        </collision>
+      </link>
+    </model>
+
+  </world>
+</sdf>
