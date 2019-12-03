@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<robot name="conveyor_belt" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <material name="metal_grey">
+    <color rgba="0.768627450980392 0.749019607843137 0.729411764705882 1" />
+  </material>
+  <xacro:property name="metal" value="metal_grey"/>
+  <xacro:property name="padding" value="0.1"/>
+
+  <xacro:macro name="create_conveyor_belt" params="world *origin length width height">
+
+    <xacro:property name="length_belt" value="${length - 2*padding}"/>
+    <xacro:property name="width_belt" value="${width - 2*padding}"/>
+    <xacro:property name="height_belt" value="0.1"/>
+
+    <xacro:property name="length_base" value="${length}"/>
+    <xacro:property name="width_base" value="${width}"/>
+    <xacro:property name="height_base" value="${height - height_belt}"/>
+
+    <xacro:include filename="$(find conveyor_belt_simulation)/urdf/belt_component.template.xacro" />
+    <xacro:property name="belt_base" value="conveyor_belt_base" />
+
+    <link name = "conveyor_belt_base">
+      <visual>
+        <origin xyz="0 0 ${height_base/2}" rpy="0 0 0"/>
+        <geometry>
+          <box size = "${length_base} ${width_base} ${height_base}" />
+        </geometry>
+        <material name="${metal}"/>
+      </visual>
+      <collision>
+        <origin xyz="0 0 ${height_base/2}" rpy="0 0 0"/>
+        <geometry>
+          <box size = "${length_base} ${width_base} ${height_base}" />
+        </geometry>
+      </collision>
+      <inertial>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <mass value="100"/>
+        <inertia ixx="100" iyy="1781.5" izz="1784.72" ixy="0" iyz="0" ixz="0"/>
+      </inertial>
+    </link>
+    <gazebo reference="conveyor_belt_base">
+<!--      <mu>1.0</mu>-->
+<!--      <mu2>1.0</mu2>-->
+      <material>Gazebo/White</material>
+    </gazebo>
+    <joint name="conveyor_belt_fixed_base" type="fixed">
+      <xacro:insert_block name="origin" />
+      <parent link="${world}" />
+      <child link="conveyor_belt_base" />
+    </joint>
+
+    <xacro:create_belt_component belt_base="${belt_base}" length="${length_belt}" width="${width_belt}" height="${height_belt}">
+      <origin xyz="0 0 ${height_base}" rpy="0 0 0" />
+    </xacro:create_belt_component>
+  </xacro:macro>
+
+</robot>

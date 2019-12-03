@@ -1,0 +1,179 @@
+<?xml version="1.0"?>
+<robot name="belt_component" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <material name="belt_metal_grey">
+    <color rgba="0.768627450980392 0.749019607843137 0.729411764705882 1" />
+  </material>
+  <xacro:property name="belt_metal" value="belt_metal_grey"/>
+
+  <xacro:macro name="create_belt_component" params="belt_base *origin length width height">
+
+    <xacro:property name="belt_thickness" value="0.05"/>
+    <xacro:property name="PI" value="3.1415926535897931"/>
+
+    <link name = "belt_bottom">
+      <visual>
+        <origin xyz="0 0 ${(height-belt_thickness)/2}" rpy="0 0 0"/>
+        <geometry>
+          <box size = "${length} ${width} ${height-belt_thickness}" />
+        </geometry>
+        <material name="${belt_metal}"/>
+      </visual>
+      <collision>
+        <origin xyz="0 0 ${(height-belt_thickness)/2}" rpy="0 0 0"/>
+        <geometry>
+          <box size = "${length} ${width} ${height-belt_thickness}" />
+        </geometry>
+      </collision>
+      <inertial>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <mass value="100"/>
+        <inertia ixx="100" iyy="1781.5" izz="1784.72" ixy="0" iyz="0" ixz="0"/>
+      </inertial>
+    </link>
+    <gazebo reference="belt_bottom">
+<!--      <mu>1.0</mu>-->
+<!--      <mu2>1.0</mu2>-->
+      <material>Gazebo/White</material>
+    </gazebo>
+    <joint name="belt_bottom_joint" type="fixed">
+      <xacro:insert_block name="origin" />
+      <parent link="${belt_base}" />
+      <child link="belt_bottom" />
+    </joint>
+
+    <link name = "belt_top">
+      <visual>
+        <origin xyz="0 0 ${belt_thickness/2}" rpy="0 0 0"/>
+        <geometry>
+          <box size = "${length} ${width} ${belt_thickness}" />
+        </geometry>
+        <material name="${belt_metal}"/>
+      </visual>
+      <collision>
+        <origin xyz="0 0 ${belt_thickness/2}" rpy="0 0 0"/>
+        <geometry>
+          <box size = "${length} ${width} ${belt_thickness}" />
+        </geometry>
+      </collision>
+      <inertial>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <mass value="100"/>
+        <inertia ixx="100" iyy="1781.5" izz="1784.72" ixy="0" iyz="0" ixz="0"/>
+      </inertial>
+    </link>
+    <gazebo reference="belt_top">
+<!--      <mu>1.0</mu>-->
+<!--      <mu2>1.0</mu2>-->
+      <material>Gazebo/Green</material>
+    </gazebo>
+    <joint name="belt_top_joint" type="fixed">
+      <origin xyz="0 0 ${height-belt_thickness}" rpy="0 0 0" />
+      <parent link="belt_bottom" />
+      <child link="belt_top" />
+    </joint>
+
+    <link name = "belt_top_tip_0">
+      <visual>
+        <origin xyz="0 0 0" rpy="${PI/2} 0 0"/>
+        <geometry>
+          <cylinder radius="${belt_thickness/2}" length="${width}"/>
+        </geometry>
+        <material name="${belt_metal}"/>
+      </visual>
+      <collision>
+        <origin xyz="0 0 0" rpy="${PI/2} 0 0"/>
+        <geometry>
+          <cylinder radius="${belt_thickness/2}" length="${width}"/>
+        </geometry>
+      </collision>
+      <inertial>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <mass value="100"/>
+        <inertia ixx="100" iyy="1781.5" izz="1784.72" ixy="0" iyz="0" ixz="0"/>
+      </inertial>
+    </link>
+    <gazebo reference="belt_top_tip_0">
+      <material>Gazebo/Green</material>
+    </gazebo>
+    <joint name="belt_top_tip_0" type="fixed">
+      <origin xyz="${-length/2} 0 ${belt_thickness/2}" rpy="0 0 0" />
+      <parent link="belt_top" />
+      <child link="belt_top_tip_0" />
+    </joint>
+
+    <link name = "belt_top_tip_1">
+      <visual>
+        <origin xyz="0 0 0" rpy="${PI/2} 0 0"/>
+        <geometry>
+          <cylinder radius="${belt_thickness/2}" length="${width}"/>
+        </geometry>
+        <material name="${belt_metal}"/>
+      </visual>
+      <collision>
+        <origin xyz="0 0 0" rpy="${PI/2} 0 0"/>
+        <geometry>
+          <cylinder radius="${belt_thickness/2}" length="${width}"/>
+        </geometry>
+      </collision>
+      <inertial>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <mass value="100"/>
+        <inertia ixx="100" iyy="1781.5" izz="1784.72" ixy="0" iyz="0" ixz="0"/>
+      </inertial>
+    </link>
+    <gazebo reference="belt_top_tip_1">
+      <material>Gazebo/Green</material>
+    </gazebo>
+    <joint name="belt_top_tip_1" type="fixed">
+      <origin xyz="${length/2} 0 ${belt_thickness/2}" rpy="0 0 0" />
+      <parent link="belt_top" />
+      <child link="belt_top_tip_1" />
+    </joint>
+
+    <link name = "conveyor_belt_moving">
+<!--      <visual>-->
+<!--        <origin xyz="0 0 ${belt_thickness/2}" rpy="0 0 0"/>-->
+<!--        <geometry>-->
+<!--          <box size = "${length} ${width} ${belt_thickness}" />-->
+<!--        </geometry>-->
+<!--        <material name="${belt_metal}"/>-->
+<!--      </visual>-->
+      <collision>
+        <origin xyz="0 0 ${belt_thickness/2}" rpy="0 0 0"/>
+        <geometry>
+          <box size = "${length} ${width} ${belt_thickness}" />
+        </geometry>
+      </collision>
+      <inertial>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <mass value="100"/>
+        <inertia ixx="100" iyy="1781.5" izz="1784.72" ixy="0" iyz="0" ixz="0"/>
+      </inertial>
+    </link>
+    <gazebo reference="conveyor_belt_moving">
+<!--      <mu>1.0</mu>-->
+      <mu2>1.0</mu2>
+      <material>Gazebo/GreenTransparent</material>
+    </gazebo>
+    <joint name = "belt_joint" type = "prismatic">
+      <parent link = "belt_top"/>
+      <child link = "conveyor_belt_moving"/>
+      <origin xyz = "0 0 0.01" rpy = "0 0 0"/>
+      <limit effort = "30" velocity = "100" lower = "0" upper = "1.0" />
+      <axis xyz = "1 0 0"/>
+    </joint>
+
+    <gazebo>
+      <plugin name="conveyor_belt_plugin" filename="libROSConveyorBeltPlugin.so">
+        <enable_topic>conveyor_enable</enable_topic>
+        <population_rate_modifier_topic>population/rate_modifier</population_rate_modifier_topic>
+        <link>conveyor_belt_moving</link>
+        <power>0</power>
+        <update_rate>20</update_rate>
+      </plugin>
+    </gazebo>
+
+  </xacro:macro>
+
+</robot>
