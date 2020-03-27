@@ -1,0 +1,13 @@
+<launch>
+  <!-- robot_ip: IP-address of the robot's socket-messaging server -->
+  <arg name="robot_ip" doc="IP of the controller" default="127.0.0.1" />
+  <!-- robot_name: The general name of Indy robot (e.g. IndyRP2, Indy7, etc.) -->
+  <arg name="robot_name" doc="Name of Indy robot" default="NRMK-Indy7"/>  
+  
+  <!-- copy the specified arguments to the Parameter Server, for use by nodes below -->
+  <param name="robot_ip_address" type="str" value="$(arg robot_ip)"/>
+  <param name="robot_name" type="str" value="$(arg robot_name)"/>
+        
+  <node name="indy_driver_py" type="dcp_driver.py" pkg="indy_driver_py" />
+
+</launch>
