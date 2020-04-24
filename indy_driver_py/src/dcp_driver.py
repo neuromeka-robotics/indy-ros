@@ -9,7 +9,7 @@ from indydcp import indy_program_maker
 import rospy
 
 from sensor_msgs.msg import JointState
-from std_msgs.msg import Header, Bool, PoseArray, Empty
+from std_msgs.msg import Header, Bool, Empty
 from moveit_msgs.msg import MoveGroupActionResult, DisplayRobotState
 from geometry_msgs.msg import Pose
 
@@ -33,7 +33,7 @@ class IndyROSConnector:
 
         # Subscribe desired robot state
         ## task position
-        self.query_poses_sub = rospy.Subscriber("/indy/query_poses", PoseArray,  self.pose_callback, queue_size=10)
+        # self.query_poses_sub = rospy.Subscriber("/indy/query_poses", PoseArray,  self.pose_callback, queue_size=10)
         
         ## joint position
         self.query_joint_state_sub = rospy.Subscriber("/indy/query_joint_state", JointState,  self.joint_state_callback, queue_size=10)
@@ -76,7 +76,7 @@ class IndyROSConnector:
     def move_robot(self):
         prog = indy_program_maker.JsonProgramComponent(policy=0, resume_time=2)
             
-        if is_task_move:
+        if self.is_task_move:
             for pose in self.pose_list:
                 prog.add_task_move_to(utils_transf.xyz_uvw_from_pose(pose), vel=1, blend=5)
         else:

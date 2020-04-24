@@ -11,7 +11,7 @@ def degs2rads(deg_list):
     rads = [math.radians(deg) for deg in deg_list]
     return rads
 
-def xyz_uvw_from_pose(self, p):
+def xyz_uvw_from_pose(p):
     xyz_uvw = [0, 0, 0, 0, 0, 0]
     xyz_uvw[0] = p.position.x
     xyz_uvw[1] = p.position.y
@@ -30,7 +30,7 @@ def xyz_uvw_from_pose(self, p):
 
     return xyz_uvw
 
-def pose_from_xyz_uvw(self, xyz_uvw):
+def pose_from_xyz_uvw(xyz_uvw):
 
     p = Pose()
     p.position.x = xyz_uvw[0]
