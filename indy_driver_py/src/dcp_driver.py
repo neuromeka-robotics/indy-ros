@@ -32,9 +32,6 @@ class IndyROSConnector:
         self.task_state_pub = rospy.Publisher('/indy/pose', Pose, queue_size=10)
 
         # Subscribe desired robot state
-        ## task position
-        # self.query_poses_sub = rospy.Subscriber("/indy/query_poses", PoseArray,  self.pose_callback, queue_size=10)
-        
         ## joint position
         self.query_joint_state_sub = rospy.Subscriber("/indy/query_joint_state", JointState,  self.joint_state_callback, queue_size=10)
         self.joint_plan_result_sub = rospy.Subscriber("/move_group/result", MoveGroupActionResult, self.plan_result_callback, queue_size=1)

@@ -7,7 +7,8 @@
 	<xacro:property name="indy_material" value="metal_grey"/>
 	<!-- <material name="grey"> <color rgba="0.5 0.5 0.5 1"/> </material> -->
 
-	<link name="ground"/>
+	<link name="world"/>
+
 	<link name="link0">
 		<visual>
 			<origin xyz="0 0 0" rpy="0 0 0"/>
@@ -19,7 +20,7 @@
 		<collision>
 			<origin xyz="0 0 0" rpy="0 0 0"/>
 			<geometry>
-				<cylinder length="0.06" radius="0.102"/>
+				<cylinder length="0.075" radius="0.102"/>
 			</geometry>
 		</collision>
 		<inertial>
@@ -51,7 +52,7 @@
 		</collision>
 		<inertial>
 			<origin xyz="0 0 0" rpy="0 0 0"/>
-			<mass value="1.59306955"/>
+			<mass value="11.8030102"/>
 			<inertia ixx="+0.15418559" iyy="+0.12937017" izz="+0.05964415" ixy="-0.00000235" iyz="-0.04854267" ixz="+0.00001739"/>
 		</inertial>
 	</link>
@@ -84,8 +85,8 @@
 		</collision>
 		<inertial>
 			<origin xyz="0 0 0" rpy="0 0 0"/>
-			<mass value="0.18"/>
-			<inertia ixx="+0.29356980" iyy="+0.25088420" izz="+0.03620519" ixy="-0.00000040" iyz="+0.03727972" ixz="+0.00001441"/>
+			<mass value="7.99292141"/>
+			<inertia ixx="+0.29356980" iyy="+0.28094142" izz="+0.03620609" ixy="-0.00000040" iyz="+0.03727972" ixz="+0.00001441"/>
 		</inertial>
 	</link>
 
@@ -111,7 +112,7 @@
 		</collision>
 		<inertial>
 			<origin xyz="0 0 0" rpy="0 0 0"/>
-			<mass value="0.18"/>
+			<mass value="2.99134127"/>
 			<inertia ixx="+0.03424593" iyy="+0.03406024" izz="+0.00450477" ixy="+0.00000149" iyz="+0.00186009" ixz="+0.00000724"/>
 		</inertial>
 	</link>
@@ -144,8 +145,8 @@
 		</collision>
 		<inertial>
 			<origin xyz="0 0 0" rpy="0 0 0"/>
-			<mass value="0.18"/>
-			<inertia ixx="+0.00670405" iyy="+0.00670405" izz="+0.00617624" ixy="+0.00000375" iyz="-0.00127967" ixz="+0.00000150"/>
+			<mass value="2.12317035"/>
+			<inertia ixx="+0.00670405" iyy="+0.00279246" izz="+0.00619341" ixy="+0.00000375" iyz="-0.00127967" ixz="+0.00000150"/>
 		</inertial>
 	</link>
 
@@ -171,7 +172,7 @@
 		</collision>
 		<inertial>
 			<origin xyz="0 0 0" rpy="0 0 0"/>
-			<mass value="0.18"/>
+			<mass value="2.28865091"/>
 			<inertia ixx="+0.00994891" iyy="+0.00978189" izz="+0.00271492" ixy="+0.00000014" iyz="-0.00093546" ixz="+0.00000321"/>
 		</inertial>
 	</link>
@@ -192,14 +193,14 @@
 		</collision>
 		<inertial>
 			<origin xyz="0 0 0" rpy="0 0 0"/>
-			<mass value="0.18"/>
+			<mass value="0.40083918"/>
 			<inertia ixx="0.00043534" iyy="0.00044549" izz="0.00059634" ixy="+0.00000013" iyz="+0.00000051" ixz="-0.00000002"/>
 		</inertial>
 	</link>
 	<link name="tcp"/>
 
 	<joint name="global" type="fixed">
-		<parent link="ground"/>
+		<parent link="world"/>
 		<child link="link0"/>
 		<origin xyz="0 0 0" rpy="0 0 0"/>
 	</joint>
@@ -207,7 +208,7 @@
 	<joint name="joint0" type="revolute">
 		<parent link="link0"/>
 		<child link="link1"/>
-		<origin xyz="0 0 0.03000000" rpy="0 0 0"/>
+		<origin xyz="0 0 0.0775" rpy="0 0 0"/>
 		<axis xyz="0 0 1"/>
 		<limit effort="10" velocity="1" lower="-${175*PI/180}" upper="${175*PI/180}"/>
 	</joint>
