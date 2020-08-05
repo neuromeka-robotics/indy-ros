@@ -4,7 +4,7 @@
 	<xacro:property name="PI" value="3.1415926535897931"/>
 	<xacro:property name="indy_material" value="metal_grey"/>
 
-	<link name = "ground" />
+	<link name = "world" />
     <link name = "link0">
         <visual>
             <origin xyz = "0 0 0" rpy = "0 0 0"/>
@@ -175,7 +175,7 @@
     <link name = "tcp" />
 
     <joint name = "global" type = "fixed">
-    	<parent link = "ground"/>
+    	<parent link = "world"/>
     	<child link = "link0"/>
     	<origin xyz = "0 0 0" rpy = "0 0 0"/>
     </joint>

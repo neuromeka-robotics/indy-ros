@@ -9,11 +9,20 @@ from indydcp import indy_program_maker
 import rospy
 
 from sensor_msgs.msg import JointState
-from std_msgs.msg import Header, Bool, Empty
-from moveit_msgs.msg import MoveGroupActionResult, DisplayRobotState
+from std_msgs.msg import Header, Bool, Empty, Int32MultiArray
 from geometry_msgs.msg import Pose
-
+from actionlib_msgs.msg import GoalStatusArray, GoalStatus
+from trajectory_msgs.msg import JointTrajectory
+from control_msgs.msg import FollowJointTrajectoryFeedback
 import utils_transf
+
+ROBOT_STATE = {
+    0: "robot_ready", 
+    1: "busy",
+    2: "direct_teaching_mode",
+    3: "collided",
+    4: "emergency_stop",
+}
 
 class IndyROSConnector:
     def __init__(self, robot_ip, robot_name):
@@ -21,7 +30,6 @@ class IndyROSConnector:
         
         # Connect to Robot
         self.indy = indydcp_client.IndyDCPClient(robot_ip, robot_name)
-        self.indy.connect()
 
         # Initialize ROS node
         rospy.init_node('indy_driver_py')
@@ -29,60 +37,61 @@ class IndyROSConnector:
 
         # Publish current robot state
         self.joint_state_pub = rospy.Publisher('joint_states', JointState, queue_size=10)
-        self.task_state_pub = rospy.Publisher('/indy/pose', Pose, queue_size=10)
+        self.indy_state_pub = rospy.Publisher("/indy/status", GoalStatusArray, queue_size=10)
+        self.control_state_pub = rospy.Publisher("/feedback_states", FollowJointTrajectoryFeedback, queue_size=1)
 
         # Subscribe desired robot state
         ## joint position
-        self.query_joint_state_sub = rospy.Subscriber("/indy/query_joint_state", JointState,  self.joint_state_callback, queue_size=10)
-        self.joint_plan_result_sub = rospy.Subscriber("/move_group/result", MoveGroupActionResult, self.plan_result_callback, queue_size=1)
+        self.joint_execute_plan_sub = rospy.Subscriber("/joint_path_command", JointTrajectory, self.execute_result_callback, queue_size=1)
 
         # Subscribe command
-        self.indy_execute_plan_sub = rospy.Subscriber("/indy/execute_plan", Bool, self.indy_execute_plan_callback, queue_size=1)
-        self.stop_sub = rospy.Subscriber("/indy/stop_robot", Bool, self.stop_robot_callback, queue_size=1)
-        
+        self.query_joint_state_sub = rospy.Subscriber("/indy/execute_joint_state_goal", JointState, self.joint_state_goal_callback, queue_size=1)
+        self.indy_execute_planned_sub = rospy.Subscriber("/indy/execute_planned_path", Bool, self.indy_execute_plan_callback, queue_size=1)
+        self.stop_sub = rospy.Subscriber("/stop_motion", Bool, self.stop_robot_callback, queue_size=1)
+        self.set_motion_param_sub = rospy.Subscriber("/indy/motion_parameter", Int32MultiArray, self.set_motion_param_callback, queue_size=1)
+
         # Misc variable
         self.joint_state_list = []
-        self.pose_list = []
-        self.is_executed = False
-        self.is_task_move = False
+        self.execute = False
+        self.vel = 3
+        self.blend = 5
 
     def __del__(self):
         self.indy.disconnect()
 
-    def joint_state_callback(self, msg):
+    def joint_state_goal_callback(self, msg):
         self.joint_state_list = [msg.state.position]
         self.is_task_move = False
     
-    def pose_callback(self, msg):
-        self.pose_list = [p for p in msg.poses]
-        self.is_task_move = True
-        
     def indy_execute_plan_callback(self, msg):
-        if msg.data == True and self.is_executed == False:
-            self.is_executed = True
+        if msg.data == True and self.execute == False:
+            self.execute = True
 
-    def plan_result_callback(self, msg):
+    def execute_result_callback(self, msg):
         # download planned path from ros moveit
         self.joint_state_list = []
-        self.joint_state_list = [p.positions for p in msg.result.planned_trajectory.joint_trajectory.points]
+        if msg.points:
+            self.joint_state_list = [p.positions for p in msg.points]
+        else:
+            self.indy.stop_motion()
 
+        if self.execute == False:
+            self.execute = True
+    
     def stop_robot_callback(self, msg):
         if msg.data == True:
             self.indy.stop_motion()
 
     def move_robot(self):
-        prog = indy_program_maker.JsonProgramComponent(policy=0, resume_time=2)
-            
-        if self.is_task_move:
-            for pose in self.pose_list:
-                prog.add_task_move_to(utils_transf.xyz_uvw_from_pose(pose), vel=1, blend=5)
-        else:
+        if self.joint_state_list:
+            prog = indy_program_maker.JsonProgramComponent(policy=0, resume_time=2)
+                
             for j_pos in self.joint_state_list:
-                prog.add_joint_move_to(utils_transf.rads2degs(j_pos), vel=1, blend=5)
-        
-        json_string = json.dumps(prog.json_program)
-        self.indy.set_and_start_json_program(json_string)
-        self.joint_state_list = []
+                prog.add_joint_move_to(utils_transf.rads2degs(j_pos), vel=self.vel, blend=self.blend)
+            
+            json_string = json.dumps(prog.json_program)
+            self.indy.set_and_start_json_program(json_string)
+            self.joint_state_list = []
 
     def publish_joint_state(self):
         joint_state_msg = JointState()
@@ -97,22 +106,74 @@ class IndyROSConnector:
         joint_state_msg.velocity = []
         joint_state_msg.effort = []
 
-        self.joint_state_pub.publish(joint_state_msg)
+        control_state_msg = FollowJointTrajectoryFeedback()
+        control_state_msg.header.stamp = rospy.Time.now()
+        if self.robot_name == 'NRMK-IndyRP2':
+            control_state_msg.joint_names = ['joint0', 'joint1', 'joint2', 'joint3', 'joint4', 'joint5', 'joint6']
+        else:
+            control_state_msg.joint_names = ['joint0', 'joint1', 'joint2', 'joint3', 'joint4', 'joint5']
 
-    def publish_pose(self):
-        task_pos_msg = utils_transf.pose_from_xyz_uvw(self.indy.get_task_pos())
-        self.task_state_pub.publish(task_pos_msg)
+        control_state_msg.actual.positions = utils_transf.degs2rads(self.indy.get_joint_pos())
+
+        self.joint_state_pub.publish(joint_state_msg)
+        self.control_state_pub.publish(control_state_msg)
+
+# gwkim
+    def publish_robot_state(self):
+        if self.current_robot_status['ready']:
+            state_num = 0
+
+        if self.current_robot_status['busy']:
+            state_num = 1
+
+        if self.current_robot_status['direct_teaching']:
+            state_num = 2
+
+        if self.current_robot_status['collision']:
+            state_num = 3
+
+        if self.current_robot_status['emergency']:
+            state_num = 4
+
+        status_msg = GoalStatusArray()
+        status_msg.header.stamp = rospy.Time.now()
+
+        status = GoalStatus()
+        status.goal_id.stamp = rospy.Time.now()
+        status.goal_id.id = ""
+        status.status = state_num
+        status.text = ROBOT_STATE[state_num]
+
+        status_msg.status_list=[status]
+
+        self.indy_state_pub.publish(status_msg)
+
+    def set_motion_param_callback(self, msg):
+        param_array = msg.data
+        self.vel = param_array[0]
+        self.blend = param_array[1]
 
     def run(self):
         while not rospy.is_shutdown():
-            if self.is_executed:
-                self.move_robot()
-                self.is_executed = False
-            else:
-                self.publish_joint_state()
-                self.publish_pose()
+            self.indy.connect()
+            self.current_robot_status = self.indy.get_robot_status()
+            self.publish_joint_state()
+            self.publish_robot_state()
 
-            self.rate.sleep()
+            if self.execute:
+                self.execute = False
+                if self.current_robot_status['busy']:
+                    continue
+                if self.current_robot_status['direct_teaching']:
+                    continue
+                if self.current_robot_status['collision']:
+                    continue
+                if self.current_robot_status['emergency']:
+                    continue
+                if self.current_robot_status['ready']:
+                    self.move_robot()
+
+            self.indy.disconnect()
 
 def main():
     robot_ip = rospy.get_param("robot_ip_address")

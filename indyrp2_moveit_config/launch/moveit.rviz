@@ -65,7 +65,7 @@ Visualization Manager:
           Expand Link Details: false
           Expand Tree: false
           Link Tree Style: Links in Alphabetic Order
-          ground:
+          world:
             Alpha: 1
             Show Axes: false
             Show Trail: false
@@ -158,7 +158,7 @@ Visualization Manager:
           Expand Link Details: false
           Expand Tree: false
           Link Tree Style: Links in Alphabetic Order
-          ground:
+          world:
             Alpha: 1
             Show Axes: false
             Show Trail: false
@@ -220,7 +220,7 @@ Visualization Manager:
         Expand Link Details: false
         Expand Tree: false
         Link Tree Style: Links in Alphabetic Order
-        ground:
+        world:
           Alpha: 1
           Show Axes: false
           Show Trail: false
@@ -279,7 +279,7 @@ Visualization Manager:
       Frame Timeout: 15
       Frames:
         All Enabled: true
-        ground:
+        world:
           Value: true
         link0:
           Value: true
@@ -305,7 +305,7 @@ Visualization Manager:
       Show Axes: true
       Show Names: true
       Tree:
-        ground:
+        world:
           link0:
             link1:
               link2:
@@ -320,7 +320,7 @@ Visualization Manager:
   Global Options:
     Background Color: 48; 48; 48
     Default Light: true
-    Fixed Frame: ground
+    Fixed Frame: world
     Frame Rate: 30
   Name: root
   Tools:
@@ -348,7 +348,7 @@ Visualization Manager:
       Name: Current View
       Near Clip Distance: 0.00999999978
       Pitch: 0.39979732
-      Target Frame: ground
+      Target Frame: world
       Value: XYOrbit (rviz)
       Yaw: 4.05676079
     Saved: ~

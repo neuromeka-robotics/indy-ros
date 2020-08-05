@@ -7,7 +7,7 @@
 	<xacro:property name="indy_material" value="metal_grey"/>
 	<!-- <material name="grey"> <color rgba="0.5 0.5 0.5 1"/> </material> -->
 
-	<link name="ground"/>
+	<link name="world"/>
 	<link name="link0">
 		<visual>
 			<origin xyz="0 0 0" rpy="0 0 0"/>
@@ -209,7 +209,7 @@
 	<link name="tcp"/>
 
 	<joint name="global" type="fixed">
-		<parent link="ground"/>
+		<parent link="world"/>
 		<child link="link0"/>
 		<origin xyz="0 0 0" rpy="0 0 0"/>
 	</joint>
