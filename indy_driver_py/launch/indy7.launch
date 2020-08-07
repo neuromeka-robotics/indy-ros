@@ -2,8 +2,8 @@
   <arg name="robot_ip"/>
   <arg name="robot_name"/>
 
-  <param name="robot_description" command="$(find xacro)/xacro --inorder '$(find indy7_description)/urdf/indy7.xacro'"/>
-	<node name="robot_state_publisher" pkg="robot_state_publisher" type="state_publisher"/>
+  <param name="robot_description" command="$(find xacro)/xacro --inorder '$(find indy7_description)/urdf/indy7_fixed.xacro'"/>
+	<node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"/>
 	<node name="rviz" pkg="rviz" type="rviz" args="-d $(find indy_driver_py)/rviz_config/example.rviz"/>
 
   <include file="$(find indy_driver_py)/launch/indy_interface_py.launch" >

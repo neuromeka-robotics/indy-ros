@@ -1,8 +1,6 @@
 <launch>
 	<param name="robot_description" command="$(find xacro)/xacro --inorder '$(find indy7_description)/urdf/indy7_eye.xacro'"/>
-	<node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher">
-		<param name="use_gui" value="TRUE"/>
-	</node>
-	<node name="robot_state_publisher" pkg="robot_state_publisher" type="state_publisher"/>
+	<node name="joint_state_publisher_gui" pkg="joint_state_publisher_gui" type="joint_state_publisher_gui"/>
+	<node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"/>
 	<node name="rviz" pkg="rviz" type="rviz" args="-d $(find indy7_description)/rviz_config/indy7_eye.rviz"/>
 </launch>
