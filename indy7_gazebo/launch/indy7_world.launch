@@ -26,6 +26,6 @@
     args="-urdf -model indy7 -param robot_description"/>
 
   <!-- ros_control indy7 launch file -->
-  <!--include file="$(find indy7_control)/launch/indy7_control.launch" /-->
+  <include file="$(find indy7_control)/launch/indy7_controller.launch"/>
 
 </launch>
