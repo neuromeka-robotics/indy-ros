@@ -16,7 +16,7 @@
 			<material name="${indy_material}"/>
 		</visual>
 		<collision>
-			<origin xyz="0 0 0" rpy="0 0 0"/>
+			<origin xyz="0 0 0.0375" rpy="0 0 0"/>
 			<geometry>
 				<cylinder length="0.075" radius="0.102"/>
 			</geometry>
@@ -204,7 +204,7 @@
 		<child link="link1"/>
 		<origin xyz="0 0 0.0775" rpy="0 0 0"/>
 		<axis xyz="0 0 1"/>
-		<limit effort="10" velocity="1" lower="-${175*PI/180}" upper="${175*PI/180}"/>
+		<limit effort="200" velocity="1" lower="-${175*PI/180}" upper="${175*PI/180}"/>
 	</joint>
 
 	<joint name="joint1" type="revolute">
@@ -212,7 +212,7 @@
 		<child link="link2"/>
 		<origin xyz="0 -0.10900000 0.22200000" rpy="${PI/2} ${PI/2} 0"/>
 		<axis xyz="0 0 1"/>
-		<limit effort="10" velocity="1" lower="-${175*PI/180}" upper="${175*PI/180}"/>
+		<limit effort="200" velocity="1" lower="-${175*PI/180}" upper="${175*PI/180}"/>
 	</joint>
 
 	<joint name="joint2" type="revolute">
@@ -220,7 +220,7 @@
 		<child link="link3"/>
 		<origin xyz="-0.45000000 +0.00000000 -0.03050000" rpy="0 0 0"/>
 		<axis xyz="0 0 1"/>
-		<limit effort="10" velocity="1" lower="-${175*PI/180}" upper="${175*PI/180}"/>
+		<limit effort="200" velocity="1" lower="-${175*PI/180}" upper="${175*PI/180}"/>
 	</joint>
 
 	<joint name="joint3" type="revolute">
