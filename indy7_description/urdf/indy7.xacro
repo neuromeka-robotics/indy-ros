@@ -18,7 +18,9 @@
 		<collision>
 			<origin xyz="0 0 0" rpy="0 0 0"/>
 			<geometry>
-				<cylinder length="0.075" radius="0.102"/>
+				<mesh filename="package://indy7_description/meshes/stl/Indy7_0.stl"/>
+
+				<!--<cylinder length="0.075" radius="0.102"/>-->
 			</geometry>
 		</collision>
 		<inertial>
