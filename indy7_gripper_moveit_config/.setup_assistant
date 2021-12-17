@@ -1,0 +1,11 @@
+moveit_setup_assistant_config:
+  URDF:
+    package: indy7_description
+    relative_path: urdf/indy7_gripper.xacro
+    xacro_args: ""
+  SRDF:
+    relative_path: config/indy7.srdf
+  CONFIG:
+    author_name: Minchang Sung
+    author_email: tjdalsckd@gmail.com
+    generated_timestamp: 1639725606
