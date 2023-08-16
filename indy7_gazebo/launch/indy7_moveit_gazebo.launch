@@ -4,7 +4,7 @@
   <arg name="db_path" default="$(find indy7_moveit_config)/default_warehouse_mongo_db" />
 
   <include file="$(find indy7_gazebo)/launch/indy7_world.launch"/>
-  <include file="$(find indy7_control)/launch/indy7_controller.launch"/>
+  <!-- <include file="$(find indy7_control)/launch/indy7_controller.launch"/> -->
 
   <include file="$(find indy7_moveit_config)/launch/gazebo_move_group.launch"/>
 

@@ -20,9 +20,9 @@
 			</geometry>
         </collision>        
          <inertial>
-            <origin xyz="0 0 0" rpy="0 0 0"/>
-            <mass value="5.44309" />
-            <inertia ixx="0.0236" iyy="0.0234" izz="0.0137" ixy="0" iyz="0.0001" ixz="0"/>
+            <origin xyz="0.00131966 -0.00000218 0.03212832" rpy="0 0 0"/>
+			<mass value="1.67030785"/>
+			<inertia ixx="+0.00661309" iyy="+0.00644765" izz="+0.00792090" ixy="+0.00000183" iyz="-0.00000027" ixz="+0.00002695"/>
         </inertial>
     </link>
 
@@ -41,9 +41,9 @@
 			</geometry>
         </collision>    
          <inertial>
-            <origin xyz="0 0 0" rpy="0 0 0"/>
-            <mass value="5.50328" />
-            <inertia ixx="0.0227" iyy="0.0121" izz="0.0212" ixy="0" iyz="0.0013" ixz="0" />
+            <origin xyz="-0.00023749 -0.04310313 0.13245396" rpy="0 0 0"/>
+			<mass value="11.44444535"/>
+			<inertia ixx="+0.35065005" iyy="+0.30479800" izz="+0.06003147" ixy="+0.00011931" iyz="-0.10984447" ixz="-0.00037553"/>
         </inertial>
     </link>
 
@@ -62,9 +62,9 @@
 			</geometry>
         </collision>
          <inertial>
-            <origin xyz="0 0 0" rpy="0 0 0"/>
-            <mass value="5.95397" />
-            <inertia ixx="0.1175" iyy="0.1172" izz="0.0131" ixy="00" iyz="0.0037" ixz="0"/>
+            <origin xyz="-0.19234403 0.05941510 0.15292668" rpy="0 0 0"/>
+            <mass value="4.43308185" />
+            <inertia ixx="+0.03742681" iyy="+0.32119654" izz="+0.29396155" ixy="-0.00003176" iyz="-0.00000808" ixz="+0.07906734"/>
         </inertial>
     </link>
 
@@ -83,9 +83,9 @@
 			</geometry>
         </collision>
          <inertial>
-            <origin xyz="0 0 0" rpy="0 0 0"/>
-            <mass value="4.08259" />
-            <inertia ixx="0.0132" iyy="0.0068" izz="0.0125" ixy="0" iyz="-0.0008" ixz="0"/>
+            <origin xyz="-0.60631468 0.12700778 0.02546394" rpy="0 0 0"/>
+            <mass value="2.87045928" />
+            <inertia ixx="+0.04098160" iyy="+0.02106773" izz="+0.02277477" ixy="+0.00000747" iyz="-0.01817157" ixz="-0.00000916"/>
         </inertial>
     </link>
 
@@ -104,9 +104,9 @@
 			</geometry>
         </collision>
          <inertial>
-            <origin xyz="0 0 0" rpy="0 0 0"/>
-            <mass value="4.02733" />
-            <inertia ixx="0.0674" iyy="0.067" izz="0.0071" ixy="0" iyz="-0.0027" ixz="0"/>
+            <origin xyz="-0.16804016 0.00021421 -0.07000383" rpy="0 0 0"/>
+			<mass value="2.68206064"/>
+			<inertia ixx="+0.01617210" iyy="+0.11364055" izz="+0.10022522" ixy="-0.00011817" iyz="-0.00004371" ixz="+0.03341882"/>
         </inertial>
     </link>
 
@@ -125,9 +125,9 @@
 			</geometry>
         </collision>
          <inertial>
-            <origin xyz="0 0 0" rpy="0 0 0"/>
-            <mass value="2.52863" />
-            <inertia ixx="0.0066" iyy="0.0033" izz="0.0062" ixy="0" iyz="0.0003" ixz="0"/>
+            <origin xyz="-0.00026847 -0.07098440 0.07649128" rpy="0 0 0"/>
+			<mass value="2.12987371"/>
+			<inertia ixx="+0.02798891" iyy="+0.01443076" izz="+0.01496211" ixy="+0.00003893" iyz="-0.01266296" ixz="-0.00004768"/>
         </inertial>
     </link>
 
@@ -146,9 +146,9 @@
 			</geometry>
         </collision>
          <inertial>
-            <origin xyz="0 0 0" rpy="0 0 0"/>
-            <mass value="2.03152" />
-            <inertia ixx="0.0042" iyy="0.0041" izz="0.0018" ixy="0" iyz="0.0003" ixz="0"/>
+            <origin xyz="-0.09796232 -0.00023114 0.06445892" rpy="0 0 0"/>
+			<mass value="2.22412271"/>
+			<inertia ixx="+0.01105297" iyy="+0.03698291" izz="+0.02754795" ixy="+0.00005517" iyz="-0.00003740" ixz="-0.01481977"/>
         </inertial>
     </link>
 
@@ -167,9 +167,9 @@
             </geometry>
         </collision>
          <inertial>
-            <origin xyz="0 0 0" rpy="0 0 0"/>
-            <mass value="0.17194" />
-            <inertia ixx="0.0001" iyy="0.0001" izz="0.0001" ixy="0" iyz="0" ixz="0"/>
+            <origin xyz="0.00008147 -0.00046556 0.03079097" rpy="0 0 0"/>
+			<mass value="0.38254932"/>
+			<inertia ixx="+0.00078982" iyy="+0.00079764" izz="+0.00058319" ixy="-0.00000034" iyz="-0.00000508" ixz="+0.00000083"/>
         </inertial>
     </link>
     <link name = "tcp" />
