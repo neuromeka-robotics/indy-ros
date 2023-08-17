@@ -1,0 +1,11 @@
+<?xml version="1.0" ?>
+<robot name="indy7_v2" xmlns:xacro="http://ros.org/wiki/xacro">
+  	<xacro:include filename="$(find indy7_v2_description)/urdf/indy7_v2.xacro"/>
+
+	<link name="world"/>
+    <joint name="global" type="fixed">
+		<parent link="world"/>
+		<child link="link0"/>
+		<origin xyz="0 0 0.1" rpy="0 0 0"/>
+	</joint>
+</robot>

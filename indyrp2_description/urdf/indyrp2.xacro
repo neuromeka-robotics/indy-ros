@@ -62,9 +62,9 @@
 			</geometry>
         </collision>
          <inertial>
-            <origin xyz="-0.19234403 0.05941510 0.15292668" rpy="0 0 0"/>
+            <origin xyz="-0.21209188 -0.00001715 0.07901191" rpy="0 0 0"/>
             <mass value="4.43308185" />
-            <inertia ixx="+0.03742681" iyy="+0.32119654" izz="+0.29396155" ixy="-0.00003176" iyz="-0.00000808" ixz="+0.07906734"/>
+            <inertia ixx="+0.03742681" iyy="+0.32119654" izz="+0.29396155" ixy="+0.00003176" iyz="-0.00000808" ixz="-0.07906734"/>
         </inertial>
     </link>
 
@@ -83,9 +83,9 @@
 			</geometry>
         </collision>
          <inertial>
-            <origin xyz="-0.60631468 0.12700778 0.02546394" rpy="0 0 0"/>
+            <origin xyz="0.00003637 0.07143055 0.07746050" rpy="0 0 0"/>
             <mass value="2.87045928" />
-            <inertia ixx="+0.04098160" iyy="+0.02106773" izz="+0.02277477" ixy="+0.00000747" iyz="-0.01817157" ixz="-0.00000916"/>
+            <inertia ixx="+0.04098160" iyy="+0.02106773" izz="+0.02277477" ixy="+0.00000747" iyz="+0.01817157" ixz="+0.00000916"/>
         </inertial>
     </link>
 
@@ -185,6 +185,7 @@
     	<child link = "link1"/>
     	<origin xyz = "+0.00000000 +0.00000000 +0.07720000" rpy = "0 0 0"/>
     	<axis xyz = "0 0 1"/>
+		<limit effort="10" velocity="1" lower="-${175*PI/180}" upper="${175*PI/180}"/>
     </joint>
 
     <joint name = "joint1" type = "continuous">
@@ -192,6 +193,7 @@
     	<child link = "link2"/>
     	<origin xyz = "+0.00000000 -0.10930000 +0.22280000" rpy = "${PI/2} ${PI/2} 0"/>
     	<axis xyz = "0 0 1"/>
+		<limit effort="10" velocity="1" lower="-${175*PI/180}" upper="${175*PI/180}"/>
     </joint>
 
     <joint name = "joint2" type = "continuous">
@@ -199,6 +201,7 @@
     	<child link = "link3"/>
     	<origin xyz = "-0.38400000 +0.00000000 +0.08470000" rpy = "-${PI/2} 0 ${PI/2}"/>
     	<axis xyz = "0 0 1"/>
+		<limit effort="10" velocity="1" lower="-${175*PI/180}" upper="${175*PI/180}"/>
     </joint>
 
     <joint name = "joint3" type = "continuous">
@@ -206,6 +209,7 @@
     	<child link = "link4"/>
     	<origin xyz = "+0.00000000 +0.11530000 +0.06550000" rpy = "${PI/2} ${PI/2} 0"/>
     	<axis xyz = "0 0 1"/>
+		<limit effort="10" velocity="1" lower="-${175*PI/180}" upper="${175*PI/180}"/>
     </joint>
 
     <joint name = "joint4" type = "continuous">
@@ -213,6 +217,7 @@
     	<child link = "link5"/>
     	<origin xyz = "-0.26650000 +0.00000000 -0.07470000" rpy = "-${PI/2} 0 ${PI/2}"/>
     	<axis xyz = "0 0 1"/>
+		<limit effort="10" velocity="1" lower="-${175*PI/180}" upper="${175*PI/180}"/>
     </joint>
 
     <joint name = "joint5" type = "continuous">
@@ -220,6 +225,7 @@
     	<child link = "link6"/>
     	<origin xyz = "+0.00000000 -0.11430000 +0.08350000" rpy = "${PI/2} ${PI/2} 0"/>
     	<axis xyz = "0 0 1"/>
+		<limit effort="10" velocity="1" lower="-${175*PI/180}" upper="${175*PI/180}"/>
     </joint>
 
     <joint name = "joint6" type = "continuous">
@@ -227,6 +233,7 @@
         <child link = "link7"/>
         <origin xyz = "-0.16800000 +0.00000000 +0.06870000" rpy = "-${PI/2} 0 ${PI/2}"/>
         <axis xyz = "0 0 1"/>
+		<limit effort="10" velocity="1" lower="-${175*PI/180}" upper="${175*PI/180}"/>
     </joint>
 
     <joint name = "tcp" type = "fixed">
