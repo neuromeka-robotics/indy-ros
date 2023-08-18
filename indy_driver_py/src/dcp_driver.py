@@ -99,7 +99,7 @@ class IndyROSConnector:
         joint_state_msg = JointState()
         joint_state_msg.header.stamp = rospy.Time.now()
 
-        if self.robot_name == 'NRMK-IndyRP2':
+        if (self.robot_name == 'NRMK-IndyRP2') or (self.robot_name == 'NRMK-IndyRP2_v2'):
             joint_state_msg.name = ['joint0', 'joint1', 'joint2', 'joint3', 'joint4', 'joint5', 'joint6']
         else:
             joint_state_msg.name = ['joint0', 'joint1', 'joint2', 'joint3', 'joint4', 'joint5']
@@ -110,7 +110,7 @@ class IndyROSConnector:
 
         control_state_msg = FollowJointTrajectoryFeedback()
         control_state_msg.header.stamp = rospy.Time.now()
-        if self.robot_name == 'NRMK-IndyRP2':
+        if (self.robot_name == 'NRMK-IndyRP2') or (self.robot_name == 'NRMK-IndyRP2_v2'):
             control_state_msg.joint_names = ['joint0', 'joint1', 'joint2', 'joint3', 'joint4', 'joint5', 'joint6']
         else:
             control_state_msg.joint_names = ['joint0', 'joint1', 'joint2', 'joint3', 'joint4', 'joint5']

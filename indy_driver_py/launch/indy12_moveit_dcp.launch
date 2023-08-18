@@ -1,0 +1,19 @@
+<launch>
+  <arg name="robot_ip"/>
+  <arg name="robot_name"/>
+
+  <param name="robot_description" command="$(find xacro)/xacro --inorder '$(find indy12_description)/urdf/indy12_fixed.xacro'"/>
+	<node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"/>
+	<node name="rviz" pkg="rviz" type="rviz" args="-d $(find indy_driver_py)/rviz_config/indy12_moveit_dcp.rviz"/>
+
+  <include file="$(find indy_driver_py)/launch/dcp.launch" >
+    <arg name="robot_ip" value="$(arg robot_ip)"/>
+    <arg name="robot_name" value="$(arg robot_name)"/>
+  </include>
+
+  <include file="$(find indy12_moveit_config)/launch/move_group.launch">
+    <arg name="publish_monitored_planning_scene" value="true" />
+  </include>
+  
+   <node pkg="industrial_robot_client" type="joint_trajectory_action" name="joint_trajectory_action"/>
+</launch>

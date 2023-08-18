@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <package format="2">
-  <name>indyrp2_description</name>
+  <name>indy12_description</name>
   <version>1.0.3</version>
-  <description>The indyrp2_description package</description>
+  <description>The indy12_description package</description>
   <author>Thach Do</author>
   <maintainer email="thach.do@neuromeka.com">Thach Do</maintainer>
   

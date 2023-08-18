@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <package format="2">
-  <name>indy7_description</name>
+  <name>indy7_v2_description</name>
   <version>1.0.3</version>
-  <description>The indy7_description package</description>
+  <description>The indy7_v2_description package</description>
   <author>Thach Do</author>
   <maintainer email="thach.do@neuromeka.com">Thach Do</maintainer>
   

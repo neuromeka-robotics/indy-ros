@@ -1,0 +1,11 @@
+<launch>
+
+  <rosparam file="$(find indy12_v2_control)/config/indy12_v2_control.yaml" command="load"/>
+
+  <node name="joint_controller_spawner" pkg="controller_manager" type="spawner" respawn="false" output="screen" args=
+       "joint_state_controller
+        indy12_v2_controller"/>
+
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" respawn="false" output="screen"/>
+
+</launch>

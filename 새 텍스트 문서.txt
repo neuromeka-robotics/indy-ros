@@ -10,3 +10,16 @@ indyrp2_v2 동역학 정보 변경, 충돌 stl 적용, 경로/타입 변경
 기구학 및 limit 7_v2 수정   -   effort, vel값 수정 못함(rp2 포함)
 
 launch 파일 수정
+ 
+rp rviz 파일 링크7 추가
+
+description cmakelist , package , change log 수정(indy 이름부분만 수정)
+
+gazebo랑 control도 전부 수정완료
+
+moveit
+rp랑 7의 v2 폴더 바깥쪽에 있는것만 수정
+rp2_v2 수정
+7_v2 수정
+
+12, 12_v2 moveit이랑 driver 남음

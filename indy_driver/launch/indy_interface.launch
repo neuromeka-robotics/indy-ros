@@ -15,7 +15,7 @@
   <!-- robot_ip: IP-address of the robot's socket-messaging server -->
   <arg name="robot_ip" doc="IP of the controller" default="127.0.0.1" />
 
-  <!-- robot_name: The general name of Indy robot (e.g. IndyRP, Indy7, Indy15, etc.) -->
+  <!-- robot_name: The general name of Indy robot (e.g. IndyRP2, Indy7, Indy12, etc.) -->
   <arg name="robot_name" doc="Name of Indy robot" default=""/>  
   <arg name="robot_redundancy" doc="Robot Redundancy" default="false" />  
   
