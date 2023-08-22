@@ -160,7 +160,7 @@
     	<origin xyz = "0 0 0" rpy = "0 0 0"/>
     </joint>
 
-    <joint name = "joint0" type = "continuous">
+    <joint name = "joint0" type = "revolute">
     	<parent link = "link0"/>
     	<child link = "link1"/>
     	<origin xyz = "+0.00000000 +0.00000000 +0.08300000" rpy = "0 0 0"/>
@@ -168,7 +168,7 @@
 		<limit effort="10" velocity="1" lower="-${175*PI/180}" upper="${175*PI/180}"/>
     </joint>
 
-    <joint name = "joint1" type = "continuous">
+    <joint name = "joint1" type = "revolute">
     	<parent link = "link1"/>
     	<child link = "link2"/>
     	<origin xyz = "+0.00000000 -0.13700000 +0.26750000" rpy = "${PI/2} -${PI/2} 0"/>
@@ -176,7 +176,7 @@
 		<limit effort="10" velocity="1" lower="-${175*PI/180}" upper="${175*PI/180}"/>
     </joint>
 
-    <joint name = "joint2" type = "continuous">
+    <joint name = "joint2" type = "revolute">
     	<parent link = "link2"/>
     	<child link = "link3"/>
     	<origin xyz = "+0.65200000 +0.00000000 -0.02050000" rpy = "0 0 ${PI/2}"/>
@@ -184,7 +184,7 @@
 		<limit effort="10" velocity="1" lower="-${175*PI/180}" upper="${175*PI/180}"/>
     </joint>
 
-    <joint name = "joint3" type = "continuous">
+    <joint name = "joint3" type = "revolute">
     	<parent link = "link3"/>
     	<child link = "link4"/>
     	<origin xyz = "+0.00000000 -0.21000000 -0.10595000" rpy = "-${PI/2} 0 ${PI}"/>
@@ -192,7 +192,7 @@
 		<limit effort="10" velocity="1" lower="-${175*PI/180}" upper="${175*PI/180}"/>
     </joint>
 
-    <joint name = "joint4" type = "continuous">
+    <joint name = "joint4" type = "revolute">
     	<parent link = "link4"/>
     	<child link = "link5"/>
     	<origin xyz = "+0.00000000 -0.13050000 +0.36280000" rpy = "-${PI/2} 0 ${PI}"/>
@@ -200,7 +200,7 @@
 		<limit effort="10" velocity="1" lower="-${175*PI/180}" upper="${175*PI/180}"/>
     </joint>
 
-    <joint name = "joint5" type = "continuous">
+    <joint name = "joint5" type = "revolute">
     	<parent link = "link5"/>
     	<child link = "link6"/>
     	<origin xyz = "+0.00000000 -0.07500000 +0.08000000" rpy = "-${PI/2} 0 ${PI}"/>
