@@ -186,7 +186,7 @@
     <joint name = "joint3" type = "continuous">
     	<parent link = "link3"/>
     	<child link = "link4"/>
-    	<origin xyz = "+0.00000000 -0.27475000 +0.11700000" rpy = "-${PI/2} 0 ${PI}"/>
+    	<origin xyz = "+0.00000000 -0.27475000 -0.11700000" rpy = "-${PI/2} 0 ${PI}"/>
     	<axis xyz = "0 0 1"/>
 		<limit effort="10" velocity="1" lower="-${175*PI/180}" upper="${175*PI/180}"/>
     </joint>
