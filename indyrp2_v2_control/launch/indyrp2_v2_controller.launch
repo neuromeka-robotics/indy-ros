@@ -1,6 +1,6 @@
 <launch>
 
-  <rosparam file="$(find indy7rp2_v2_control)/config/indyrp2_v2_control.yaml" command="load"/>
+  <rosparam file="$(find indyrp2_v2_control)/config/indyrp2_v2_control.yaml" command="load"/>
 
   <node name="joint_controller_spawner" pkg="controller_manager" type="spawner" respawn="false" output="screen" args=
        "joint_state_controller
