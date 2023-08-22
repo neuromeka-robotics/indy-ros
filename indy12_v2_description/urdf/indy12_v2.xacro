@@ -1,6 +1,7 @@
 <?xml version="1.0" ?>
 <robot name = "indy12_v2" xmlns:xacro="http://ros.org/wiki/xacro">
 	<xacro:include filename="$(find indy12_v2_description)/urdf/materials.xacro" />
+	<xacro:include filename="$(find indy12_v2_description)/urdf/indy12_v2.gazebo"/>
 	<xacro:property name="PI" value="3.1415926535897931"/>
 	<xacro:property name="indy_material" value="metal_grey"/>
 
