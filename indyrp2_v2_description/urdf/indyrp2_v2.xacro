@@ -79,7 +79,7 @@
          <collision>
             <origin xyz="0 0 0" rpy="0 0 0"/>
            	<geometry>
-				<mesh filename="package://indyrp2_v2_description/collision/stl/IndyRP2_v2_3.stl" />
+				<mesh filename="package://indyrp2_v2_description/meshes/collision/IndyRP2_v2_3.stl" />
 			</geometry>
         </collision>
          <inertial>
@@ -100,7 +100,7 @@
          <collision>
             <origin xyz="0 0 0" rpy="0 0 0"/>
            	<geometry>
-				<mesh filename="package://indyrp2_v2_description/collision/stl/IndyRP2_v2_4.stl" />
+				<mesh filename="package://indyrp2_v2_description/meshes/collision/IndyRP2_v2_4.stl" />
 			</geometry>
         </collision>
          <inertial>
@@ -121,7 +121,7 @@
          <collision>
             <origin xyz="0 0 0" rpy="0 0 0"/>
            	<geometry>
-				<mesh filename="package://indyrp2_v2_description/collision/stl/IndyRP2_v2_5.stl" />
+				<mesh filename="package://indyrp2_v2_description/meshes/collision/IndyRP2_v2_5.stl" />
 			</geometry>
         </collision>
          <inertial>
@@ -142,7 +142,7 @@
          <collision>
             <origin xyz="0 0 0" rpy="0 0 0"/>
            	<geometry>
-				<mesh filename="package://indyrp2_v2_description/collision/stl/IndyRP2_v2_6.stl" />
+				<mesh filename="package://indyrp2_v2_description/meshes/collision/IndyRP2_v2_6.stl" />
 			</geometry>
         </collision>
          <inertial>
@@ -163,7 +163,7 @@
          <collision>
             <origin xyz="0 0 0" rpy="0 0 0"/>
             <geometry>
-				<mesh filename="package://indyrp2_v2_description/collision/stl/IndyRP2_v2_7.stl" />
+				<mesh filename="package://indyrp2_v2_description/meshes/collision/IndyRP2_v2_7.stl" />
             </geometry>
         </collision>
          <inertial>
