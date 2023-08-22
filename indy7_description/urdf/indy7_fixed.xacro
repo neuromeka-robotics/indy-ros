@@ -6,6 +6,18 @@
     <joint name="global" type="fixed">
 		<parent link="world"/>
 		<child link="link0"/>
-		<origin xyz="0 0 0.1" rpy="0 0 0"/>
+		<origin xyz="0 0 0.0" rpy="0 0 0"/>
 	</joint>
+	
+	
+	
+	
+    <!-- Import macro for realsense-RS200 camera-->
+    <xacro:include filename="$(find realsense_gazebo_plugin)/urdf/realsense-RS200.macro.xacro"/>
+    <!-- Create camera instance -->
+    <xacro:realsense-rs200 prefix="" parent="tcp">
+    <origin rpy="0 -1.5707 0 " xyz="-0.05 0 0.05"/>
+    </xacro:realsense-rs200>
+
+  
 </robot>

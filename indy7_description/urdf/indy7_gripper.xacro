@@ -1,0 +1,28 @@
+<?xml version="1.0" ?>
+<robot name="indy7" xmlns:xacro="http://ros.org/wiki/xacro">
+  	<xacro:include filename="$(find indy7_description)/urdf/indy7.xacro"/>
+  <xacro:include filename="$(find indy7_description)/urdf/robotiq_arg85_description.xacro"/>
+
+	<link name="world"/>
+    <joint name="virtual_joint" type="fixed">
+		<parent link="world"/>
+		<child link="link0"/>
+		<origin xyz="0 0 0.0" rpy="0 0 0"/>
+	</joint>
+	
+
+	<joint name="indy7_joint_tcp" type="fixed">
+	<parent link="tcp"/>
+	<child link="robotiq_85_base_link"/>
+	<origin rpy="0 0 1.57079" xyz="0 0 0"/>
+	</joint>
+
+    <!-- Import macro for realsense-RS200 camera-->
+    <xacro:include filename="$(find realsense_gazebo_plugin)/urdf/realsense-RS200.macro.xacro"/>
+    <!-- Create camera instance -->
+    <xacro:realsense-rs200 prefix="" parent="tcp">
+    <origin rpy="0 -1.5707 0 " xyz="-0.05 0 0.05"/>
+    </xacro:realsense-rs200>
+
+  
+</robot>
