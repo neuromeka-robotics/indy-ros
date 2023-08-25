@@ -15,12 +15,12 @@
 			</geometry>
 			<material name="${indy_material}"/>
 		</visual>
-		<collision>
-			<origin xyz="0 0 0" rpy="0 0 0"/>
-			<geometry>
-				<cylinder length="0.075" radius="0.102"/>
+         <collision>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+           	<geometry>
+				<mesh filename="package://indy7_description/meshes/collision/Indy7_0.stl"/>
 			</geometry>
-		</collision>
+        </collision> 
 		<inertial>
 			<origin xyz="0.00131966 -0.00000218 0.03212832" rpy="0 0 0"/>
 			<mass value="1.67030785"/>
@@ -36,18 +36,12 @@
 			</geometry>
 			<material name="${indy_material}"/>
 		</visual>
-		<collision>
-			<origin xyz="0 0 0.111" rpy="0 0 0"/>
-			<geometry>
-				<cylinder length="0.222" radius="0.075"/>
+         <collision>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+           	<geometry>
+				<mesh filename="package://indy7_description/meshes/collision/Indy7_1.stl"/>
 			</geometry>
-		</collision>
-		<collision>
-			<origin xyz="0 -0.0545 0.222" rpy="${PI/2} 0 0"/>
-			<geometry>
-				<cylinder length="0.109" radius="0.075"/>
-			</geometry>
-		</collision>
+        </collision> 
 		<inertial>
 			<origin xyz="-0.00023749 -0.04310313 0.13245396" rpy="0 0 0"/>
 			<mass value="11.44444535"/>
@@ -63,24 +57,12 @@
 			</geometry>
 			<material name="${indy_material}"/>
 		</visual>
-		<collision>
-			<origin xyz="-0.225 0 0.09" rpy="${PI/2} 0 -${PI/2}"/>
-			<geometry>
-				<cylinder length="0.450" radius="0.063"/>
+         <collision>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+           	<geometry>
+				<mesh filename="package://indy7_description/meshes/collision/Indy7_2.stl"/>
 			</geometry>
-		</collision>
-		<collision>
-			<origin xyz="0 0 0.045" rpy="0 0 0"/>
-			<geometry>
-				<cylinder length="0.09" radius="0.075"/>
-			</geometry>
-		</collision>
-		<collision>
-			<origin xyz="-0.45 0 0.02975 " rpy="0 0 0"/>
-			<geometry>
-				<cylinder length="0.1205" radius="0.045"/>
-			</geometry>
-		</collision>
+        </collision> 
 		<inertial>
 			<origin xyz="-0.29477536 -0.00002361 0.04762554" rpy="0 0 0"/>
 			<mass value="5.84766553"/>
@@ -96,18 +78,12 @@
 			</geometry>
 			<material name="${indy_material}"/>
 		</visual>
-		<collision>
-			<origin xyz="-0.1335 0 -0.075" rpy="${PI/2} 0 -${PI/2}"/>
-			<geometry>
-				<cylinder length="0.267" radius="0.045"/>
+         <collision>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+           	<geometry>
+				<mesh filename="package://indy7_description/meshes/collision/Indy7_3.stl"/>
 			</geometry>
-		</collision>
-		<collision>
-			<origin xyz="0 0 -0.0375" rpy="0 0 0"/>
-			<geometry>
-				<cylinder length="0.075" radius="0.045"/>
-			</geometry>
-		</collision>
+        </collision> 
 		<inertial>
 			<origin xyz="-0.16804016 0.00021421 -0.07000383" rpy="0 0 0"/>
 			<mass value="2.68206064"/>
@@ -123,24 +99,12 @@
 			</geometry>
 			<material name="${indy_material}"/>
 		</visual>
-		<collision>
-			<origin xyz="0 -0.057 0.083" rpy="${PI/2} 0 0"/>
-			<geometry>
-				<cylinder length="0.114" radius="0.045"/>
+         <collision>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+           	<geometry>
+				<mesh filename="package://indy7_description/meshes/collision/Indy7_4.stl"/>
 			</geometry>
-		</collision>
-		<collision>
-			<origin xyz="0 -0.057 0.083" rpy="${PI/2} 0 0"/>
-			<geometry>
-				<cylinder length="0.114" radius="0.045"/>
-			</geometry>
-		</collision>
-		<collision>
-			<origin xyz="0 0 0.0415" rpy="0 0 0"/>
-			<geometry>
-				<cylinder length="0.083" radius="0.045"/>
-			</geometry>
-		</collision>
+        </collision> 
 		<inertial>
 			<origin xyz="-0.00026847 -0.07098440 0.07649128" rpy="0 0 0"/>
 			<mass value="2.12987371"/>
@@ -156,18 +120,12 @@
 			</geometry>
 			<material name="${indy_material}"/>
 		</visual>
-		<collision>
-			<origin xyz="-0.084 0 0.069" rpy="${PI/2} 0 -${PI/2}"/>
-			<geometry>
-				<cylinder length="0.168" radius="0.045"/>
+         <collision>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+           	<geometry>
+				<mesh filename="package://indy7_description/meshes/collision/Indy7_5.stl"/>
 			</geometry>
-		</collision>
-		<collision>
-			<origin xyz="-0 0 0.0345" rpy="0 0 0"/>
-			<geometry>
-				<cylinder length="0.069" radius="0.045"/>
-			</geometry>
-		</collision>
+        </collision> 
 		<inertial>
 			<origin xyz="-0.09796232 -0.00023114 0.06445892" rpy="0 0 0"/>
 			<mass value="2.22412271"/>
@@ -183,12 +141,12 @@
 			</geometry>
 			<material name="${indy_material}"/>
 		</visual>
-		<collision>
-			<origin xyz="0 0 0.03" rpy="0 0 0"/>
-			<geometry>
-				<cylinder length="0.06" radius="0.045"/>
+         <collision>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+           	<geometry>
+				<mesh filename="package://indy7_description/meshes/collision/Indy7_6.stl"/>
 			</geometry>
-		</collision>
+        </collision> 
 		<inertial>
 			<origin xyz="0.00008147 -0.00046556 0.03079097" rpy="0 0 0"/>
 			<mass value="0.38254932"/>

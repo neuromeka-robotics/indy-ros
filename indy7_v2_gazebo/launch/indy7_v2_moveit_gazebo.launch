@@ -1,0 +1,19 @@
+<launch>
+
+  <arg name="db" default="false" />
+  <arg name="db_path" default="$(find indy7_v2_moveit_config)/default_warehouse_mongo_db" />
+
+  <include file="$(find indy7_v2_gazebo)/launch/indy7_v2_world.launch"/>
+  <!-- <include file="$(find indy7_v2_control)/launch/indy7_v2_controller.launch"/> -->
+
+  <include file="$(find indy7_v2_moveit_config)/launch/gazebo_move_group.launch"/>
+
+  <include file="$(find indy7_v2_moveit_config)/launch/moveit_rviz.launch">
+    <arg name="config" value="true"/>
+  </include>
+
+  <include file="$(find indy7_v2_moveit_config)/launch/default_warehouse_db.launch" if="$(arg db)">
+    <arg name="moveit_warehouse_database_path" value="$(arg db_path)"/>
+  </include>
+
+</launch>

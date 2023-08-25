@@ -113,7 +113,7 @@ Visualization Manager:
             Alpha: 1
             Show Axes: false
             Show Trail: false
-        Loop Animation: true
+        Loop Animation: false
         Robot Alpha: 0.5
         Robot Color: 150; 50; 150
         Show Robot Collision: false
@@ -313,7 +313,9 @@ Visualization Manager:
                   link4:
                     link5:
                       link6:
-                        {}
+                        link7:
+                          tcp:
+                            {}
       Update Interval: 0
       Value: true
   Enabled: true

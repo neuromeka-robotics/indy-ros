@@ -1,6 +1,7 @@
 <?xml version="1.0" ?>
 <robot name = "indyrp2" xmlns:xacro="http://ros.org/wiki/xacro">
 	<xacro:include filename="$(find indyrp2_description)/urdf/materials.xacro" />
+	<xacro:include filename="$(find indyrp2_description)/urdf/indyrp2.gazebo"/>
 	<xacro:property name="PI" value="3.1415926535897931"/>
 	<xacro:property name="indy_material" value="metal_grey"/>
 
@@ -62,9 +63,9 @@
 			</geometry>
         </collision>
          <inertial>
-            <origin xyz="-0.19234403 0.05941510 0.15292668" rpy="0 0 0"/>
+            <origin xyz="-0.21209188 -0.00001715 0.07901191" rpy="0 0 0"/>
             <mass value="4.43308185" />
-            <inertia ixx="+0.03742681" iyy="+0.32119654" izz="+0.29396155" ixy="-0.00003176" iyz="-0.00000808" ixz="+0.07906734"/>
+            <inertia ixx="+0.03742681" iyy="+0.32119654" izz="+0.29396155" ixy="+0.00003176" iyz="-0.00000808" ixz="-0.07906734"/>
         </inertial>
     </link>
 
@@ -83,9 +84,9 @@
 			</geometry>
         </collision>
          <inertial>
-            <origin xyz="-0.60631468 0.12700778 0.02546394" rpy="0 0 0"/>
+            <origin xyz="0.00003637 0.07143055 0.07746050" rpy="0 0 0"/>
             <mass value="2.87045928" />
-            <inertia ixx="+0.04098160" iyy="+0.02106773" izz="+0.02277477" ixy="+0.00000747" iyz="-0.01817157" ixz="-0.00000916"/>
+            <inertia ixx="+0.04098160" iyy="+0.02106773" izz="+0.02277477" ixy="+0.00000747" iyz="+0.01817157" ixz="+0.00000916"/>
         </inertial>
     </link>
 
@@ -180,53 +181,60 @@
     	<origin xyz = "0 0 0" rpy = "0 0 0"/>
     </joint>
 
-    <joint name = "joint0" type = "continuous">
+    <joint name = "joint0" type = "revolute">
     	<parent link = "link0"/>
     	<child link = "link1"/>
     	<origin xyz = "+0.00000000 +0.00000000 +0.07720000" rpy = "0 0 0"/>
     	<axis xyz = "0 0 1"/>
+		<limit effort="10" velocity="1" lower="-${175*PI/180}" upper="${175*PI/180}"/>
     </joint>
 
-    <joint name = "joint1" type = "continuous">
+    <joint name = "joint1" type = "revolute">
     	<parent link = "link1"/>
     	<child link = "link2"/>
     	<origin xyz = "+0.00000000 -0.10930000 +0.22280000" rpy = "${PI/2} ${PI/2} 0"/>
     	<axis xyz = "0 0 1"/>
+		<limit effort="10" velocity="1" lower="-${175*PI/180}" upper="${175*PI/180}"/>
     </joint>
 
-    <joint name = "joint2" type = "continuous">
+    <joint name = "joint2" type = "revolute">
     	<parent link = "link2"/>
     	<child link = "link3"/>
     	<origin xyz = "-0.38400000 +0.00000000 +0.08470000" rpy = "-${PI/2} 0 ${PI/2}"/>
     	<axis xyz = "0 0 1"/>
+		<limit effort="10" velocity="1" lower="-${175*PI/180}" upper="${175*PI/180}"/>
     </joint>
 
-    <joint name = "joint3" type = "continuous">
+    <joint name = "joint3" type = "revolute">
     	<parent link = "link3"/>
     	<child link = "link4"/>
     	<origin xyz = "+0.00000000 +0.11530000 +0.06550000" rpy = "${PI/2} ${PI/2} 0"/>
     	<axis xyz = "0 0 1"/>
+		<limit effort="10" velocity="1" lower="-${175*PI/180}" upper="${175*PI/180}"/>
     </joint>
 
-    <joint name = "joint4" type = "continuous">
+    <joint name = "joint4" type = "revolute">
     	<parent link = "link4"/>
     	<child link = "link5"/>
     	<origin xyz = "-0.26650000 +0.00000000 -0.07470000" rpy = "-${PI/2} 0 ${PI/2}"/>
     	<axis xyz = "0 0 1"/>
+		<limit effort="10" velocity="1" lower="-${175*PI/180}" upper="${175*PI/180}"/>
     </joint>
 
-    <joint name = "joint5" type = "continuous">
+    <joint name = "joint5" type = "revolute">
     	<parent link = "link5"/>
     	<child link = "link6"/>
     	<origin xyz = "+0.00000000 -0.11430000 +0.08350000" rpy = "${PI/2} ${PI/2} 0"/>
     	<axis xyz = "0 0 1"/>
+		<limit effort="10" velocity="1" lower="-${175*PI/180}" upper="${175*PI/180}"/>
     </joint>
 
-    <joint name = "joint6" type = "continuous">
+    <joint name = "joint6" type = "revolute">
         <parent link = "link6"/>
         <child link = "link7"/>
         <origin xyz = "-0.16800000 +0.00000000 +0.06870000" rpy = "-${PI/2} 0 ${PI/2}"/>
         <axis xyz = "0 0 1"/>
+		<limit effort="10" velocity="1" lower="-${175*PI/180}" upper="${175*PI/180}"/>
     </joint>
 
     <joint name = "tcp" type = "fixed">
@@ -235,5 +243,81 @@
     	<origin xyz = "0 0 0.06" rpy = "0 0 0"/>
     </joint>
 
+	<transmission name="tran0">
+		<type>transmission_interface/SimpleTransmission</type>
+		<joint name="joint0">
+			<hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+		</joint>
+		<actuator name="motor0">
+			<hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+			<mechanicalReduction>1</mechanicalReduction>
+		</actuator>
+	</transmission>
+
+	<transmission name="tran1">
+		<type>transmission_interface/SimpleTransmission</type>
+		<joint name="joint1">
+			<hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+		</joint>
+		<actuator name="motor1">
+			<hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+			<mechanicalReduction>1</mechanicalReduction>
+		</actuator>
+	</transmission>
+
+	<transmission name="tran2">
+		<type>transmission_interface/SimpleTransmission</type>
+		<joint name="joint2">
+			<hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+		</joint>
+		<actuator name="motor2">
+			<hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+			<mechanicalReduction>1</mechanicalReduction>
+		</actuator>
+	</transmission>
+
+	<transmission name="tran3">
+		<type>transmission_interface/SimpleTransmission</type>
+		<joint name="joint3">
+			<hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+		</joint>
+		<actuator name="motor3">
+			<hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+			<mechanicalReduction>1</mechanicalReduction>
+		</actuator>
+	</transmission>
+
+	<transmission name="tran4">
+		<type>transmission_interface/SimpleTransmission</type>
+		<joint name="joint4">
+			<hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+		</joint>
+		<actuator name="motor4">
+			<hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+			<mechanicalReduction>1</mechanicalReduction>
+		</actuator>
+	</transmission>
+
+	<transmission name="tran5">
+		<type>transmission_interface/SimpleTransmission</type>
+		<joint name="joint5">
+			<hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+		</joint>
+		<actuator name="motor5">
+			<hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+			<mechanicalReduction>1</mechanicalReduction>
+		</actuator>
+	</transmission>
+
+	<transmission name="tran6">
+		<type>transmission_interface/SimpleTransmission</type>
+		<joint name="joint6">
+			<hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+		</joint>
+		<actuator name="motor6">
+			<hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+			<mechanicalReduction>1</mechanicalReduction>
+		</actuator>
+	</transmission>
 
 </robot>

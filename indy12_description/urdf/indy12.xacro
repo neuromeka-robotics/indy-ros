@@ -1,0 +1,285 @@
+<?xml version="1.0" ?>
+<robot name = "indy12" xmlns:xacro="http://ros.org/wiki/xacro">
+	<xacro:include filename="$(find indy12_description)/urdf/materials.xacro" />
+	<xacro:include filename="$(find indy12_description)/urdf/indy12.gazebo"/>
+	
+	<xacro:property name="PI" value="3.1415926535897931"/>
+	<xacro:property name="indy_material" value="metal_grey"/>
+
+	<link name = "world" />
+    <link name = "link0">
+        <visual>
+            <origin xyz = "0 0 0" rpy = "0 0 0"/>
+           	<geometry>
+				<mesh filename="package://indy12_description/meshes/stl/Indy12_0.stl" />
+			</geometry>
+			<material name="${indy_material}"/>
+        </visual>
+         <collision>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+           	<geometry>
+				<mesh filename="package://indy12_description/meshes/collision/Indy12_0.stl" />
+			</geometry>
+        </collision>        
+         <inertial>
+            <origin xyz="-0.00097315 -0.00001067 0.04283787" rpy="0 0 0"/>
+			<mass value="2.66011637"/>
+			<inertia ixx="+0.01927017" iyy="+0.01958893" izz="+0.02237911" ixy="+0.00000209" iyz="-0.00000161" ixz="-0.00018510"/>
+        </inertial>
+    </link>
+
+     <link name = "link1">
+        <visual>
+            <origin xyz = "0 0 0" rpy = "0 0 0"/>
+           	<geometry>
+				<mesh filename="package://indy12_description/meshes/stl/Indy12_1.stl" />
+			</geometry>
+			<material name="${indy_material}"/>
+        </visual>
+         <collision>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+           	<geometry>
+				<mesh filename="package://indy12_description/meshes/collision/Indy12_1.stl" />
+			</geometry>
+        </collision>    
+         <inertial>
+            <origin xyz="-0.00000317 -0.03899639 0.12657986" rpy="0 0 0"/>
+			<mass value="21.79610064"/>
+			<inertia ixx="+0.64644592" iyy="+0.57818705" izz="+0.11837303" ixy="-0.00003372" iyz="-0.18649956" ixz="+0.00009653"/>
+        </inertial>
+    </link>
+
+    <link name = "link2">
+        <visual>
+            <origin xyz = "0 0 0" rpy = "0 0 0"/>
+           	<geometry>
+				<mesh filename="package://indy12_description/meshes/stl/Indy12_2.stl" />
+			</geometry>
+			<material name="${indy_material}"/>
+        </visual>
+         <collision>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+           	<geometry>
+				<mesh filename="package://indy12_description/meshes/collision/Indy12_2.stl" />
+			</geometry>
+        </collision>
+         <inertial>
+            <origin xyz="0.43289670 0.00009936 0.06604965" rpy="0 0 0"/>
+            <mass value="12.60732858" />
+            <inertia ixx="+0.13229838" iyy="+3.23685598" izz="+3.15391475" ixy="+0.00076742" iyz="+0.00006199" ixz="+0.26489776"/>
+        </inertial>
+    </link>
+
+    <link name = "link3">
+    	<visual>
+            <origin xyz = "0 0 0" rpy = "0 0 0"/>
+           	<geometry>
+				<mesh filename="package://indy12_description/meshes/stl/Indy12_3.stl" />
+			</geometry>
+			<material name="${indy_material}"/>
+        </visual>
+         <collision>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+           	<geometry>
+				<mesh filename="package://indy12_description/meshes/collision/Indy12_3.stl" />
+			</geometry>
+        </collision>
+         <inertial>
+            <origin xyz="-0.00008637 -0.16831579 -0.09969111" rpy="0 0 0"/>
+            <mass value="4.23106394" />
+            <inertia ixx="+0.21380764" iyy="+0.05312553" izz="+0.17094678" ixy="+0.00008360" iyz="+0.07683268" ixz="+0.00004813"/>
+        </inertial>
+    </link>
+
+    <link name = "link4">
+    	<visual>
+            <origin xyz = "0 0 0" rpy = "0 0 0"/>
+           	<geometry>
+				<mesh filename="package://indy12_description/meshes/stl/Indy12_4.stl" />
+			</geometry>
+			<material name="${indy_material}"/>
+        </visual>
+         <collision>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+           	<geometry>
+				<mesh filename="package://indy12_description/meshes/collision/Indy12_4.stl" />
+			</geometry>
+        </collision>
+         <inertial>
+            <origin xyz="-0.00009292 -0.05782084 0.20600122" rpy="0 0 0"/>
+			<mass value="4.38018787"/>
+			<inertia ixx="+0.26334164" iyy="+0.23849973" izz="+0.03312887" ixy="+0.00002727" iyz="-0.06989898" ixz="-0.00008141"/>
+        </inertial>
+    </link>
+
+    <link name = "link5">
+    	<visual>
+            <origin xyz = "0 0 0" rpy = "0 0 0"/>
+           	<geometry>
+				<mesh filename="package://indy12_description/meshes/stl/Indy12_5.stl" />
+			</geometry>
+			<material name="${indy_material}"/>
+        </visual>
+         <collision>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+           	<geometry>
+				<mesh filename="package://indy12_description/meshes/collision/Indy12_5.stl" />
+			</geometry>
+        </collision>
+         <inertial>
+            <origin xyz="-0.00001242 -0.09704958 0.07235011" rpy="0 0 0"/>
+			<mass value="3.34480372"/>
+			<inertia ixx="+0.06379181" iyy="+0.02330575" izz="+0.04532227" ixy="+0.00000349" iyz="-0.02607468" ixz="-0.00000426"/>
+        </inertial>
+    </link>
+
+    <link name = "link6">
+    	<visual>
+            <origin xyz = "0 0 0" rpy = "0 0 0"/>
+           	<geometry>
+				<mesh filename="package://indy12_description/meshes/stl/Indy12_6.stl" />
+			</geometry>
+			<material name="${indy_material}"/>
+        </visual>
+         <collision>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+           	<geometry>
+				<mesh filename="package://indy12_description/meshes/collision/Indy12_6.stl" />
+			</geometry>
+        </collision>
+         <inertial>
+            <origin xyz="0.00085635 -0.00030276 0.03417689" rpy="0 0 0"/>
+			<mass value="1.17565610"/>
+			<inertia ixx="+0.01197125" iyy="+0.01231621" izz="+0.00623213" ixy="-0.00004800" iyz="+0.00006597" ixz="-0.00060569"/>
+        </inertial>
+    </link>
+    <link name = "tcp" />
+
+    <joint name = "global" type = "fixed">
+    	<parent link = "world"/>
+    	<child link = "link0"/>
+    	<origin xyz = "0 0 0" rpy = "0 0 0"/>
+    </joint>
+
+    <joint name = "joint0" type = "revolute">
+    	<parent link = "link0"/>
+    	<child link = "link1"/>
+    	<origin xyz = "+0.00000000 +0.00000000 +0.13000000" rpy = "0 0 0"/>
+    	<axis xyz = "0 0 1"/>
+		<limit effort="10" velocity="1" lower="-${175*PI/180}" upper="${175*PI/180}"/>
+    </joint>
+
+    <joint name = "joint1" type = "revolute">
+    	<parent link = "link1"/>
+    	<child link = "link2"/>
+    	<origin xyz = "+0.00000000 -0.12750000 +0.22000000" rpy = "${PI/2} -${PI/2} 0"/>
+    	<axis xyz = "0 0 1"/>
+		<limit effort="10" velocity="1" lower="-${175*PI/180}" upper="${175*PI/180}"/>
+    </joint>
+
+    <joint name = "joint2" type = "revolute">
+    	<parent link = "link2"/>
+    	<child link = "link3"/>
+    	<origin xyz = "+0.65000000 +0.00000000 +0.00000000" rpy = "0 0 ${PI/2}"/>
+    	<axis xyz = "0 0 1"/>
+		<limit effort="10" velocity="1" lower="-${175*PI/180}" upper="${175*PI/180}"/>
+    </joint>
+
+    <joint name = "joint3" type = "revolute">
+    	<parent link = "link3"/>
+    	<child link = "link4"/>
+    	<origin xyz = "+0.00000000 -0.27475000 -0.11700000" rpy = "-${PI/2} 0 ${PI}"/>
+    	<axis xyz = "0 0 1"/>
+		<limit effort="10" velocity="1" lower="-${175*PI/180}" upper="${175*PI/180}"/>
+    </joint>
+
+    <joint name = "joint4" type = "revolute">
+    	<parent link = "link4"/>
+    	<child link = "link5"/>
+    	<origin xyz = "+0.00000000 -0.11700000 +0.27525000" rpy = "-${PI/2} 0 ${PI}"/>
+    	<axis xyz = "0 0 1"/>
+		<limit effort="10" velocity="1" lower="-${175*PI/180}" upper="${175*PI/180}"/>
+    </joint>
+
+    <joint name = "joint5" type = "revolute">
+    	<parent link = "link5"/>
+    	<child link = "link6"/>
+    	<origin xyz = "+0.00000000 -0.18500000 +0.10150000" rpy = "-${PI/2} 0 ${PI}"/>
+    	<axis xyz = "0 0 1"/>
+		<limit effort="10" velocity="1" lower="-${215*PI/180}" upper="${215*PI/180}"/>
+    </joint>
+
+    <joint name = "tcp" type = "fixed">
+    	<parent link = "link6"/>
+    	<child link = "tcp"/>
+    	<origin xyz = "0 0 0.06" rpy = "0 0 0"/>
+    </joint>
+
+	
+	<transmission name="tran0">
+		<type>transmission_interface/SimpleTransmission</type>
+		<joint name="joint0">
+			<hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+		</joint>
+		<actuator name="motor0">
+			<hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+			<mechanicalReduction>1</mechanicalReduction>
+		</actuator>
+	</transmission>
+
+	<transmission name="tran1">
+		<type>transmission_interface/SimpleTransmission</type>
+		<joint name="joint1">
+			<hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+		</joint>
+		<actuator name="motor1">
+			<hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+			<mechanicalReduction>1</mechanicalReduction>
+		</actuator>
+	</transmission>
+
+	<transmission name="tran2">
+		<type>transmission_interface/SimpleTransmission</type>
+		<joint name="joint2">
+			<hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+		</joint>
+		<actuator name="motor2">
+			<hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+			<mechanicalReduction>1</mechanicalReduction>
+		</actuator>
+	</transmission>
+
+	<transmission name="tran3">
+		<type>transmission_interface/SimpleTransmission</type>
+		<joint name="joint3">
+			<hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+		</joint>
+		<actuator name="motor3">
+			<hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+			<mechanicalReduction>1</mechanicalReduction>
+		</actuator>
+	</transmission>
+
+	<transmission name="tran4">
+		<type>transmission_interface/SimpleTransmission</type>
+		<joint name="joint4">
+			<hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+		</joint>
+		<actuator name="motor4">
+			<hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+			<mechanicalReduction>1</mechanicalReduction>
+		</actuator>
+	</transmission>
+
+	<transmission name="tran5">
+		<type>transmission_interface/SimpleTransmission</type>
+		<joint name="joint5">
+			<hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+		</joint>
+		<actuator name="motor5">
+			<hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+			<mechanicalReduction>1</mechanicalReduction>
+		</actuator>
+	</transmission>
+
+</robot>
