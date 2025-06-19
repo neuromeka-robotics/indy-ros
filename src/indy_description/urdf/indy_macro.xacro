@@ -15,6 +15,7 @@
         kinematics_parameters_file
         physical_parameters_file
         visual_parameters_file
+        joint_axes_parameters_file
         transmission_hw_interface:=hardware_interface/PositionJointInterface
         *origin">
         <!-- Load configuration data from the provided .yaml files -->
@@ -131,8 +132,10 @@
         <xacro:macro name="define_joint" params="joint_type joint_index parent_link child_link">
             <xacro:property name="config_joint_limit_parameters" value="${xacro.load_yaml(joint_limits_parameters_file)}"/>
             <xacro:property name="config_kinematics_parameters" value="${xacro.load_yaml(kinematics_parameters_file)}"/>
+            <xacro:property name="config_joint_axes_parameters" value="${xacro.load_yaml(joint_axes_parameters_file)}"/>
             <xacro:property name="sec_kinematics" value="${config_kinematics_parameters['kinematics']}" />
             <xacro:property name="sec_limits" value="${config_joint_limit_parameters['joint_limits']}"/>
+            <xacro:property name="sec_joint_axes" value="${config_joint_axes_parameters['joint_axes']}" />
 
             <joint name="${prefix}${joint_index}" type="${joint_type}">
                 <parent link="${prefix}${parent_link}"/>
@@ -146,7 +149,13 @@
                         ${sec_kinematics[joint_index]['yaw']}"/>
                         
                 <xacro:if value="${joint_type == 'revolute' or joint_type == 'continuous'}">
-                    <axis xyz="0 0 1"/>
+                    <!-- Use configurable axis if available, fallback to default [0,0,1] -->
+                    <xacro:if value="${joint_index in sec_joint_axes}">
+                        <axis xyz="${sec_joint_axes[joint_index][0]} ${sec_joint_axes[joint_index][1]} ${sec_joint_axes[joint_index][2]}"/>
+                    </xacro:if>
+                    <xacro:unless value="${joint_index in sec_joint_axes}">
+                        <axis xyz="0 0 1"/>
+                    </xacro:unless>
                     <dynamics damping="0.1" friction="10.0"/>
                 </xacro:if>
 

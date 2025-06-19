@@ -237,7 +237,7 @@
     <parent link="link5"/>
     <child link="link6"/>
     <origin rpy="-1.570796327                         0                         3.14159265" xyz="0                          -0.075                          0.08"/>
-    <axis xyz="0 0 1"/>
+    <axis xyz="0 0 -1"/>
     <dynamics damping="0.1" friction="10.0"/>
     <limit effort="79.79" lower="-3.7524578917878086" upper="3.7524578917878086" velocity="2.6179938779914944"/>
   </joint>

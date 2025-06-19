@@ -337,8 +337,8 @@ class IndyROSConnector:
         self.connect()
         while not rospy.is_shutdown():
             self.joint_state_publisher()
-            self.publish_servo_rx_data()
-            self.publish_servo_tx_data()
+            # self.publish_servo_rx_data()
+            # self.publish_servo_tx_data()
             self.wrench_publisher()
             
 def main():

@@ -272,7 +272,7 @@
   <joint name="tcp" type="fixed">
     <parent link="link7"/>
     <child link="tcp"/>
-    <origin rpy="0.0                         0.0                         0.0" xyz="0.0                          0.0                          0.06"/>
+    <origin rpy="0.0                         0.0                         0.0" xyz="0.0                          0.0                          0.057"/>
   </joint>
   <transmission name="tran0">
     <type>transmission_interface/SimpleTransmission</type>
