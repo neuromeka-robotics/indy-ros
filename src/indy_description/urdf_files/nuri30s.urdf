@@ -51,14 +51,14 @@
     <visual>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="file:///home/user/indy-ros/src/indy_description/meshes/nuri35c/visual/Nuri35c_0.stl"/>
+        <mesh filename="file:///home/user/indy-ros/src/indy_description/meshes/nuri30s/visual/Nuri30s_0.stl"/>
       </geometry>
       <material name="indy_white"/>
     </visual>
     <collision>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="file:///home/user/indy-ros/src/indy_description/meshes/nuri35c/collision/Nuri35c_0.stl"/>
+        <mesh filename="file:///home/user/indy-ros/src/indy_description/meshes/nuri30s/collision/Nuri30s_0.stl"/>
       </geometry>
     </collision>
     <inertial>
@@ -71,120 +71,120 @@
     <visual>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="file:///home/user/indy-ros/src/indy_description/meshes/nuri35c/visual/Nuri35c_1.stl"/>
+        <mesh filename="file:///home/user/indy-ros/src/indy_description/meshes/nuri30s/visual/Nuri30s_1.stl"/>
       </geometry>
       <material name="indy_white"/>
     </visual>
     <collision>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="file:///home/user/indy-ros/src/indy_description/meshes/nuri35c/collision/Nuri35c_1.stl"/>
+        <mesh filename="file:///home/user/indy-ros/src/indy_description/meshes/nuri30s/collision/Nuri30s_1.stl"/>
       </geometry>
     </collision>
     <inertial>
-      <mass value="30.0"/>
-      <origin rpy="0 0 0" xyz="7e-06                             0.02402                             0.115969"/>
-      <inertia ixx="0.6829" ixy="-1.5608e-06" ixz="7.98813e-05" iyy="0.5527" iyz="0.008554" izz="0.5809"/>
+      <mass value="20.5"/>
+      <origin rpy="0 0 0" xyz="-7e-05                             0.01872                             0.15976"/>
+      <inertia ixx="0.67598172" ixy="5.74e-06" ixz="-0.00031887" iyy="0.66525144" iyz="5.74e-06" izz="0.152611"/>
     </inertial>
   </link>
   <link name="link2">
     <visual>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="file:///home/user/indy-ros/src/indy_description/meshes/nuri35c/visual/Nuri35c_2.stl"/>
+        <mesh filename="file:///home/user/indy-ros/src/indy_description/meshes/nuri30s/visual/Nuri30s_2.stl"/>
       </geometry>
       <material name="indy_white"/>
     </visual>
     <collision>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="file:///home/user/indy-ros/src/indy_description/meshes/nuri35c/collision/Nuri35c_2.stl"/>
+        <mesh filename="file:///home/user/indy-ros/src/indy_description/meshes/nuri30s/collision/Nuri30s_2.stl"/>
       </geometry>
     </collision>
     <inertial>
-      <mass value="20.0"/>
-      <origin rpy="0 0 0" xyz="0.000847                             0.395788                             -0.112624"/>
-      <inertia ixx="25.39" ixy="-0.0002374" ixz="8.31826e-05" iyy="1.145" iyz="-0.2939" izz="25.19"/>
+      <mass value="43.88"/>
+      <origin rpy="0 0 0" xyz="6e-05                             0.23171                             0.56622"/>
+      <inertia ixx="23.03041833" ixy="0.00075591" ixz="0.00145494" iyy="20.64392689" iyz="5.66204375" izz="2.63952348"/>
     </inertial>
   </link>
   <link name="link3">
     <visual>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="file:///home/user/indy-ros/src/indy_description/meshes/nuri35c/visual/Nuri35c_3.stl"/>
+        <mesh filename="file:///home/user/indy-ros/src/indy_description/meshes/nuri30s/visual/Nuri30s_3.stl"/>
       </geometry>
       <material name="indy_white"/>
     </visual>
     <collision>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="file:///home/user/indy-ros/src/indy_description/meshes/nuri35c/collision/Nuri35c_3.stl"/>
+        <mesh filename="file:///home/user/indy-ros/src/indy_description/meshes/nuri30s/collision/Nuri30s_3.stl"/>
       </geometry>
     </collision>
     <inertial>
-      <mass value="9.0"/>
-      <origin rpy="0 0 0" xyz="-2.9e-05                             0.388213                             0.076464"/>
-      <inertia ixx="7.317" ixy="-0.0008483" ixz="4.0223e-05" iyy="0.2155" iyz="-0.2049" izz="7.295"/>
+      <mass value="11.9"/>
+      <origin rpy="0 0 0" xyz="9e-05                             0.07416                             1.54273"/>
+      <inertia ixx="29.50703546" ixy="-1.87e-05" ixz="0.00229692" iyy="29.43187446" iyz="1.37778101" izz="0.10287378"/>
     </inertial>
   </link>
   <link name="link4">
     <visual>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="file:///home/user/indy-ros/src/indy_description/meshes/nuri35c/visual/Nuri35c_4.stl"/>
+        <mesh filename="file:///home/user/indy-ros/src/indy_description/meshes/nuri30s/visual/Nuri30s_4.stl"/>
       </geometry>
       <material name="indy_white"/>
     </visual>
     <collision>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="file:///home/user/indy-ros/src/indy_description/meshes/nuri35c/collision/Nuri35c_4.stl"/>
+        <mesh filename="file:///home/user/indy-ros/src/indy_description/meshes/nuri30s/collision/Nuri30s_4.stl"/>
       </geometry>
     </collision>
     <inertial>
-      <mass value="8.0"/>
-      <origin rpy="0 0 0" xyz="-6e-06                             0.00463                             -0.066051"/>
-      <inertia ixx="0.0529" ixy="-9.029e-07" ixz="3.834e-07" iyy="0.03253" iyz="0.0003494" izz="0.05006"/>
+      <mass value="5.0"/>
+      <origin rpy="0 0 0" xyz="-0.00032                             0.21233                             1.85695"/>
+      <inertia ixx="17.47924083" ixy="-0.00032799" ixz="-0.00282143" iyy="17.25357224" iyz="1.972012" izz="1.972012"/>
     </inertial>
   </link>
   <link name="link5">
     <visual>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="file:///home/user/indy-ros/src/indy_description/meshes/nuri35c/visual/Nuri35c_5.stl"/>
+        <mesh filename="file:///home/user/indy-ros/src/indy_description/meshes/nuri30s/visual/Nuri30s_5.stl"/>
       </geometry>
       <material name="indy_white"/>
     </visual>
     <collision>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="file:///home/user/indy-ros/src/indy_description/meshes/nuri35c/collision/Nuri35c_5.stl"/>
+        <mesh filename="file:///home/user/indy-ros/src/indy_description/meshes/nuri30s/collision/Nuri30s_5.stl"/>
       </geometry>
     </collision>
     <inertial>
-      <mass value="8.0"/>
-      <origin rpy="0 0 0" xyz="6e-06                             0.00463                             0.066051"/>
-      <inertia ixx="0.0529" ixy="9.029e-07" ixz="3.834e-07" iyy="0.03253" iyz="-0.0003494" izz="0.05006"/>
+      <mass value="5.0"/>
+      <origin rpy="0 0 0" xyz="0.00034                             0.24126                             1.98171"/>
+      <inertia ixx="19.93869554" ixy="0.00027303" ixz="0.00333374" iyy="19.64479808" iyz="2.39116689" izz="0.3025035"/>
     </inertial>
   </link>
   <link name="link6">
     <visual>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="file:///home/user/indy-ros/src/indy_description/meshes/nuri35c/visual/Nuri35c_6.stl"/>
+        <mesh filename="file:///home/user/indy-ros/src/indy_description/meshes/nuri30s/visual/Nuri30s_6.stl"/>
       </geometry>
       <material name="indy_white"/>
     </visual>
     <collision>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="file:///home/user/indy-ros/src/indy_description/meshes/nuri35c/collision/Nuri35c_6.stl"/>
+        <mesh filename="file:///home/user/indy-ros/src/indy_description/meshes/nuri30s/collision/Nuri30s_6.stl"/>
       </geometry>
     </collision>
     <inertial>
-      <mass value="1.0"/>
-      <origin rpy="0 0 0" xyz="-1.3e-05                             -0.00024                             0.021432"/>
-      <inertia ixx="0.003768" ixy="-2.45e-08" ixz="4.611e-07" iyy="0.003701" iyz="-4.0733e-06" izz="0.006321"/>
+      <mass value="0.9"/>
+      <origin rpy="0 0 0" xyz="-6e-05                             0.32015                             1.98733"/>
+      <inertia ixx="3.65406347" ixy="-1.84e-05" ixz="-0.00011346" iyy="3.56230225" iyz="5.7355037" izz="0.09366403"/>
     </inertial>
   </link>
   <link name="tcp"/>
