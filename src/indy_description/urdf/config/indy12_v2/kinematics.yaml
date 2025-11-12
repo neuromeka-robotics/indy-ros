@@ -48,4 +48,4 @@ kinematics:
     z: 0.085
     roll: 0.0
     pitch: 0.0
-    yaw: -0.785398
+    yaw: 0.0

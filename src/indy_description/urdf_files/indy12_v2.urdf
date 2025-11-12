@@ -237,14 +237,14 @@
     <parent link="link5"/>
     <child link="link6"/>
     <origin rpy="-1.570796327                         0                         3.14159265" xyz="0                          -0.074                          0.0795"/>
-    <axis xyz="0 0 -1"/>
+    <axis xyz="0 0 1"/>
     <dynamics damping="0.1" friction="10.0"/>
     <limit effort="79.79" lower="-3.7524578917878086" upper="3.7524578917878086" velocity="2.6179938779914944"/>
   </joint>
   <joint name="tcp" type="fixed">
     <parent link="link6"/>
     <child link="tcp"/>
-    <origin rpy="0.0                         0.0                         -0.785398" xyz="0.0                          0.0                          0.085"/>
+    <origin rpy="0.0                         0.0                         0.0" xyz="0.0                          0.0                          0.085"/>
   </joint>
   <transmission name="tran0">
     <type>transmission_interface/SimpleTransmission</type>
