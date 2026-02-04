@@ -130,7 +130,7 @@ class IndyROSConnector:
             # # send waypoints
             # for j_pos in self.joint_state_list:
             #     try:
-            #         self.indy.movetelej_abs(jpos=rads2degs(j_pos))
+            #         self.indy.movetelej_abs(jpos=rads2degs(j_pos), vel_ratio=0.8, acc_ratio=7.0)
             #     except Exception as e:
             #         print('THERE ARE ISSUE WHEN EXECUTE WAYPOINT, PLEASE TRY AGAIN!')
             #         break
@@ -218,7 +218,7 @@ class IndyROSConnector:
         if msg.data and self.previous_joint_trajectory_sub != msg.data:
             # if TELE MODE
             if self.indy_msg_status == MSG_TELE_JOINT_ABS:
-                self.indy.movetelej_abs(jpos=rads2degs(msg.data))
+                self.indy.movetelej_abs(jpos=rads2degs(msg.data), vel_ratio=0.8, acc_ratio=7.0)
             self.previous_joint_trajectory_sub = msg.data
         else:
             self.indy.stop_motion()
