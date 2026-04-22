@@ -21,7 +21,7 @@
         <!-- Load configuration data from the provided .yaml files -->
         <xacro:define_initialize visual_parameters_file="${visual_parameters_file}"/>
 
-        <xacro:if value="${ indy_type == 'indy7' or indy_type == 'indy7_v2' or indy_type == 'indyrp2' or 
+        <xacro:if value="${ indy_type == 'indy7' or indy_type == 'indy7_v2' or indy_type == 'indy7_v3' or indy_type == 'indyrp2' or 
                             indy_type == 'indyrp2_v2' or indy_type == 'indy12' or indy_type == 'indy12_v2' or 
                             indy_type == 'nuri3s' or indy_type == 'nuri4s' or indy_type == 'nuri7c' or 
                             indy_type == 'nuri20c' or indy_type == 'nuri30s' or indy_type == 'opti5'}">

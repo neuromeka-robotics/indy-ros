@@ -51,140 +51,160 @@
     <visual>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="file:///home/user/indy-ros/src/indy_description/meshes/indy7_v2/visual/Indy7_v2_0.stl"/>
+        <mesh filename="file:///home/user/indy-ros/src/indy_description/meshes/ar5_left/visual/AR5_LEFT_0.stl"/>
       </geometry>
       <material name="indy_white"/>
     </visual>
     <collision>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="file:///home/user/indy-ros/src/indy_description/meshes/indy7_v2/collision/Indy7_v2_0.stl"/>
+        <mesh filename="file:///home/user/indy-ros/src/indy_description/meshes/ar5_left/collision/AR5_LEFT_0.stl"/>
       </geometry>
     </collision>
     <inertial>
-      <mass value="1.66957888"/>
-      <origin rpy="0 0 0" xyz="0.00133032                             -2.18e-06                             0.03163661"/>
-      <inertia ixx="0.00655829" ixy="1.83e-06" ixz="2.634e-05" iyy="0.00639165" iyz="-2.7e-07" izz="0.00791712"/>
+      <mass value="1.6703078"/>
+      <origin rpy="0 0 0" xyz="0.00131966                             -2.18e-06                             0.03212832"/>
+      <inertia ixx="0.00661309" ixy="1.83e-06" ixz="2.695e-05" iyy="0.00644765" iyz="-2.7e-07" izz="0.0079209"/>
     </inertial>
   </link>
   <link name="link1">
     <visual>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="file:///home/user/indy-ros/src/indy_description/meshes/indy7_v2/visual/Indy7_v2_1.stl"/>
+        <mesh filename="file:///home/user/indy-ros/src/indy_description/meshes/ar5_left/visual/AR5_LEFT_1.stl"/>
       </geometry>
       <material name="indy_white"/>
     </visual>
     <collision>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="file:///home/user/indy-ros/src/indy_description/meshes/indy7_v2/collision/Indy7_v2_1.stl"/>
+        <mesh filename="file:///home/user/indy-ros/src/indy_description/meshes/ar5_left/collision/AR5_LEFT_1.stl"/>
       </geometry>
     </collision>
     <inertial>
-      <mass value="11.43955917"/>
-      <origin rpy="0 0 0" xyz="-0.00027386                             -0.04348767                             0.13216705"/>
-      <inertia ixx="0.35097123" ixy="0.00013006" ixz="-0.00042705" iyy="0.3043588" iyz="-0.11072619" izz="0.06048047"/>
+      <mass value="11.44444535"/>
+      <origin rpy="0 0 0" xyz="-0.00023749                             -0.04310313                             0.13245396"/>
+      <inertia ixx="0.35065005" ixy="0.00011931" ixz="-0.00037553" iyy="0.304798" iyz="-0.10984447" izz="0.06003147"/>
     </inertial>
   </link>
   <link name="link2">
     <visual>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="file:///home/user/indy-ros/src/indy_description/meshes/indy7_v2/visual/Indy7_v2_2.stl"/>
+        <mesh filename="file:///home/user/indy-ros/src/indy_description/meshes/ar5_left/visual/AR5_LEFT_2.stl"/>
       </geometry>
       <material name="indy_white"/>
     </visual>
     <collision>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="file:///home/user/indy-ros/src/indy_description/meshes/indy7_v2/collision/Indy7_v2_2.stl"/>
+        <mesh filename="file:///home/user/indy-ros/src/indy_description/meshes/ar5_left/collision/AR5_LEFT_2.stl"/>
       </geometry>
     </collision>
     <inertial>
-      <mass value="6.11383823"/>
-      <origin rpy="0 0 0" xyz="-0.00010864                             0.29071865                             0.04588251"/>
-      <inertia ixx="0.74655601" ixy="-0.00032714" ixz="4.81e-06" iyy="0.03850444" iyz="0.05314531" izz="0.72200046"/>
+      <mass value="4.43308185"/>
+      <origin rpy="0 0 0" xyz="-0.21209188                             -1.715e-05                             0.07901191"/>
+      <inertia ixx="0.03742681" ixy="3.176e-05" ixz="-0.07906734" iyy="0.32119654" iyz="-8.08e-06" izz="0.29396155"/>
     </inertial>
   </link>
   <link name="link3">
     <visual>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="file:///home/user/indy-ros/src/indy_description/meshes/indy7_v2/visual/Indy7_v2_3.stl"/>
+        <mesh filename="file:///home/user/indy-ros/src/indy_description/meshes/ar5_left/visual/AR5_LEFT_3.stl"/>
       </geometry>
       <material name="indy_white"/>
     </visual>
     <collision>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="file:///home/user/indy-ros/src/indy_description/meshes/indy7_v2/collision/Indy7_v2_3.stl"/>
+        <mesh filename="file:///home/user/indy-ros/src/indy_description/meshes/ar5_left/collision/AR5_LEFT_3.stl"/>
       </geometry>
     </collision>
     <inertial>
-      <mass value="2.68211719"/>
-      <origin rpy="0 0 0" xyz="6.691e-05                             -0.16802208                             -0.07025671"/>
-      <inertia ixx="0.11373278" ixy="-3.686e-05" ixz="-1.286e-05" iyy="0.01627234" iyz="0.03355709" izz="0.10021441"/>
+      <mass value="2.87045928"/>
+      <origin rpy="0 0 0" xyz="3.637e-05                             0.07143055                             0.0774605"/>
+      <inertia ixx="0.0409816" ixy="7.47e-06" ixz="9.16e-06" iyy="0.02106773" iyz="0.01817157" izz="0.02277477"/>
     </inertial>
   </link>
   <link name="link4">
     <visual>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="file:///home/user/indy-ros/src/indy_description/meshes/indy7_v2/visual/Indy7_v2_4.stl"/>
+        <mesh filename="file:///home/user/indy-ros/src/indy_description/meshes/ar5_left/visual/AR5_LEFT_4.stl"/>
       </geometry>
       <material name="indy_white"/>
     </visual>
     <collision>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="file:///home/user/indy-ros/src/indy_description/meshes/indy7_v2/collision/Indy7_v2_4.stl"/>
+        <mesh filename="file:///home/user/indy-ros/src/indy_description/meshes/ar5_left/collision/AR5_LEFT_4.stl"/>
       </geometry>
     </collision>
     <inertial>
-      <mass value="2.12830848"/>
-      <origin rpy="0 0 0" xyz="-0.00026808                             -0.07105971                             0.07645329"/>
-      <inertia ixx="0.02795227" ixy="3.938e-05" ixz="-4.713e-05" iyy="0.0143985" iyz="-0.01265087" izz="0.01495514"/>
+      <mass value="2.68206064"/>
+      <origin rpy="0 0 0" xyz="-0.16804016                             0.00021421                             -0.07000383"/>
+      <inertia ixx="0.0161721" ixy="-0.00011817" ixz="0.03341882" iyy="0.11364055" iyz="-4.371e-05" izz="0.10022522"/>
     </inertial>
   </link>
   <link name="link5">
     <visual>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="file:///home/user/indy-ros/src/indy_description/meshes/indy7_v2/visual/Indy7_v2_5.stl"/>
+        <mesh filename="file:///home/user/indy-ros/src/indy_description/meshes/ar5_left/visual/AR5_LEFT_5.stl"/>
       </geometry>
       <material name="indy_white"/>
     </visual>
     <collision>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="file:///home/user/indy-ros/src/indy_description/meshes/indy7_v2/collision/Indy7_v2_5.stl"/>
+        <mesh filename="file:///home/user/indy-ros/src/indy_description/meshes/ar5_left/collision/AR5_LEFT_5.stl"/>
       </geometry>
     </collision>
     <inertial>
-      <mass value="2.32413397"/>
-      <origin rpy="0 0 0" xyz="-0.00022538                             -0.00354123                             0.07650762"/>
-      <inertia ixx="0.01771876" ixy="9.04e-06" ixz="-4.336e-05" iyy="0.01593616" iyz="-0.00069656" izz="0.00358348"/>
+      <mass value="2.12987371"/>
+      <origin rpy="0 0 0" xyz="-0.00026847                             -0.0709844                             0.07649128"/>
+      <inertia ixx="0.02798891" ixy="3.893e-05" ixz="-4.768e-05" iyy="0.01443076" iyz="-0.01266296" izz="0.01496211"/>
     </inertial>
   </link>
   <link name="link6">
     <visual>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="file:///home/user/indy-ros/src/indy_description/meshes/indy7_v2/visual/Indy7_v2_6.stl"/>
+        <mesh filename="file:///home/user/indy-ros/src/indy_description/meshes/ar5_left/visual/AR5_LEFT_6.stl"/>
       </geometry>
       <material name="indy_white"/>
     </visual>
     <collision>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="file:///home/user/indy-ros/src/indy_description/meshes/indy7_v2/collision/Indy7_v2_6.stl"/>
+        <mesh filename="file:///home/user/indy-ros/src/indy_description/meshes/ar5_left/collision/AR5_LEFT_6.stl"/>
       </geometry>
     </collision>
     <inertial>
-      <mass value="0.39652271"/>
-      <origin rpy="0 0 0" xyz="0.0                             -0.00071501                             0.03219123"/>
-      <inertia ixx="0.00077839" ixy="2.6e-07" ixz="0.0" iyy="0.00076561" iyz="-6.99e-06" izz="0.00051275"/>
+      <mass value="2.22412271"/>
+      <origin rpy="0 0 0" xyz="-0.09796232                             -0.00023114                             0.06445892"/>
+      <inertia ixx="0.01105297" ixy="5.517e-05" ixz="-0.01481977" iyy="0.03698291" iyz="-3.74e-05" izz="0.02754795"/>
+    </inertial>
+  </link>
+  <link name="link7">
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <mesh filename="file:///home/user/indy-ros/src/indy_description/meshes/ar5_left/visual/AR5_LEFT_7.stl"/>
+      </geometry>
+      <material name="indy_white"/>
+    </visual>
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <mesh filename="file:///home/user/indy-ros/src/indy_description/meshes/ar5_left/collision/AR5_LEFT_7.stl"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="0.38254932"/>
+      <origin rpy="0 0 0" xyz="8.147e-05                             -0.00046556                             0.03079097"/>
+      <inertia ixx="0.00078982" ixy="-3.4e-07" ixz="8.3e-07" iyy="0.00079764" iyz="-5.08e-06" izz="0.00058319"/>
     </inertial>
   </link>
   <link name="tcp"/>
@@ -196,7 +216,7 @@
   <joint name="joint0" type="revolute">
     <parent link="link0"/>
     <child link="link1"/>
-    <origin rpy="0                         0                         0" xyz="0                          0                          0.0775"/>
+    <origin rpy="0                         0                         0" xyz="0                          0                          0.1042"/>
     <axis xyz="0 0 1"/>
     <dynamics damping="0.1" friction="10.0"/>
     <limit effort="431.97" lower="-3.0543261909900767" upper="3.0543261909900767" velocity="2.6179938779914944"/>
@@ -204,7 +224,7 @@
   <joint name="joint1" type="revolute">
     <parent link="link1"/>
     <child link="link2"/>
-    <origin rpy="1.570796327                         0                         0" xyz="0                          -0.109                          0.222"/>
+    <origin rpy="1.570796327                         0                         0" xyz="0                          -0.05315                          0.0703"/>
     <axis xyz="0 0 1"/>
     <dynamics damping="0.1" friction="10.0"/>
     <limit effort="431.97" lower="-3.0543261909900767" upper="3.0543261909900767" velocity="2.6179938779914944"/>
@@ -212,7 +232,7 @@
   <joint name="joint2" type="revolute">
     <parent link="link2"/>
     <child link="link3"/>
-    <origin rpy="0                         0                         3.1415926536" xyz="0                          0.45                          -0.0305"/>
+    <origin rpy="-1.570796327                         0                         0" xyz="0                          0.183                          -0.0529"/>
     <axis xyz="0 0 1"/>
     <dynamics damping="0.1" friction="10.0"/>
     <limit effort="197.23" lower="-3.0543261909900767" upper="3.0543261909900767" velocity="2.6179938779914944"/>
@@ -220,15 +240,15 @@
   <joint name="joint3" type="revolute">
     <parent link="link3"/>
     <child link="link4"/>
-    <origin rpy="-1.570796327                         0                         3.1415926536" xyz="0                          -0.267                          -0.075"/>
+    <origin rpy="1.570796327                         0                         0" xyz="0.01                          -0.05075                          0.131"/>
     <axis xyz="0 0 1"/>
     <dynamics damping="0.1" friction="10.0"/>
-    <limit effort="79.79" lower="-3.0543261909900767" upper="3.0543261909900767" velocity="3.141592653589793"/>
+    <limit effort="197.23" lower="-3.0543261909900767" upper="3.0543261909900767" velocity="2.6179938779914944"/>
   </joint>
   <joint name="joint4" type="revolute">
     <parent link="link4"/>
     <child link="link5"/>
-    <origin rpy="1.570796327                         0                         0" xyz="0                          -0.114                          0.0835"/>
+    <origin rpy="-1.570796327                         0                         0" xyz="-0.01                          0.128                          -0.05075"/>
     <axis xyz="0 0 1"/>
     <dynamics damping="0.1" friction="10.0"/>
     <limit effort="79.79" lower="-3.0543261909900767" upper="3.0543261909900767" velocity="3.141592653589793"/>
@@ -236,15 +256,23 @@
   <joint name="joint5" type="revolute">
     <parent link="link5"/>
     <child link="link6"/>
-    <origin rpy="-1.570796327                         0                         0" xyz="0                          0.052                          0.085"/>
+    <origin rpy="1.570796327                         0                         0" xyz="0                          -0.0385                          0.0465"/>
     <axis xyz="0 0 1"/>
     <dynamics damping="0.1" friction="10.0"/>
-    <limit effort="79.79" lower="-3.7524578917878086" upper="3.7524578917878086" velocity="3.141592653589793"/>
+    <limit effort="79.79" lower="-3.0543261909900767" upper="3.0543261909900767" velocity="3.141592653589793"/>
+  </joint>
+  <joint name="joint6" type="revolute">
+    <parent link="link6"/>
+    <child link="link7"/>
+    <origin rpy="-1.570796327                         0                         0" xyz="0                          0.1245                          -0.0385"/>
+    <axis xyz="0 0 1"/>
+    <dynamics damping="0.1" friction="10.0"/>
+    <limit effort="79.79" lower="-3.0543261909900767" upper="3.0543261909900767" velocity="3.141592653589793"/>
   </joint>
   <joint name="tcp" type="fixed">
-    <parent link="link6"/>
+    <parent link="link7"/>
     <child link="tcp"/>
-    <origin rpy="0.0                         0.0                         0.0" xyz="0.0                          0.0                          0.0505"/>
+    <origin rpy="0.0                         0.0                         0.0" xyz="0.0                          0.0                          0.037"/>
   </joint>
   <transmission name="tran0">
     <type>transmission_interface/SimpleTransmission</type>
@@ -297,6 +325,15 @@
       <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
     </joint>
     <actuator name="motor5">
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+  <transmission name="tran6">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="joint6">
+      <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="motor6">
       <mechanicalReduction>1</mechanicalReduction>
     </actuator>
   </transmission>
