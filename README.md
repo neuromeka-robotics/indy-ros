@@ -66,8 +66,8 @@ Supported **indy_type** values:
 ```
 indy7, indy7_v2, indy7_v3, indy12, indy12_v2, indy12_v3,
 indyrp2, indyrp2_v2, icon7l, icon3,
-nuri3s, nuri4s, nuri7c, nuri12c, nuri20c, nuri30,
-opti5
+nuri3s, nuri4s, nuri5s, nuri5sdual, nuri7c, nuri12c, nuri20c, nuri30, nuri50,
+opti5, opti3
 ```
 
 Use **indy_eye** to enable the Indy Eye model.
@@ -81,6 +81,16 @@ indy7, indy7_v2, indy7_v3, indy12_v3, indyrp2, indyrp2_v2
 To enable Indy Eye, add **indy_eye:=true** to the end of command.
 
 If not specified, the default value will be indy7.
+
+`nuri5s` uses the NURI4s model and parameters. `nuri5sdual` has two NURI4s
+arms; its real robot driver is not configured.
+
+For `nuri5sdual` simulation, launch Gazebo and MoveIt in separate terminals:
+
+```bash
+roslaunch indy_gazebo indy_gazebo.launch indy_type:=nuri5sdual
+roslaunch indy_moveit moveit_gazebo.launch indy_type:=nuri5sdual
+```
 
 When used with a real robot, you need to provide an **indy_ip** value.
 

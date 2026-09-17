@@ -17,6 +17,8 @@
   <param name="request_adapters" value="$(arg planning_adapters)" />
   <param name="start_state_max_bounds_error" value="$(arg start_state_max_bounds_error)" />
 
-  <rosparam command="load" file="$(find indy_moveit)/config/ompl_planning.yaml"/>
+  <arg name="indy_type" default="indy7"/>
+  <rosparam unless="$(eval arg('indy_type') == 'nuri5sdual')" command="load" file="$(find indy_moveit)/config/ompl_planning.yaml"/>
+  <rosparam if="$(eval arg('indy_type') == 'nuri5sdual')" command="load" file="$(find indy_moveit)/config/ompl_planning_nuri5sdual.yaml"/>
 
 </launch>

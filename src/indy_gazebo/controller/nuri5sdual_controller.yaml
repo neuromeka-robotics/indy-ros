@@ -1,0 +1,21 @@
+joint_state_controller:
+  type: joint_state_controller/JointStateController
+  publish_rate: 50
+
+left_arm_controller:
+  type: position_controllers/JointTrajectoryController
+  joints: [left_arm_joint0, left_arm_joint1, left_arm_joint2, left_arm_joint3, left_arm_joint4, left_arm_joint5]
+  constraints:
+    goal_time: 0.5
+    stopped_velocity_tolerance: 0.05
+  state_publish_rate: 25
+  action_monitor_rate: 20
+
+right_arm_controller:
+  type: position_controllers/JointTrajectoryController
+  joints: [right_arm_joint0, right_arm_joint1, right_arm_joint2, right_arm_joint3, right_arm_joint4, right_arm_joint5]
+  constraints:
+    goal_time: 0.5
+    stopped_velocity_tolerance: 0.05
+  state_publish_rate: 25
+  action_monitor_rate: 20

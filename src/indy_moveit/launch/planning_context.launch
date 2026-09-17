@@ -21,12 +21,15 @@
   <group if="$(eval arg('indy_type') == 'indyrp2' or arg('indy_type') == 'indyrp2_v2')" ns="$(arg robot_description)_planning">
     <rosparam command="load" file="$(find indy_moveit)/config/joint_limits_7dof.yaml"/>
   </group>
-  <group unless="$(eval arg('indy_type') == 'indyrp2' or arg('indy_type') == 'indyrp2_v2')" ns="$(arg robot_description)_planning">
+  <group unless="$(eval arg('indy_type') == 'indyrp2' or arg('indy_type') == 'indyrp2_v2' or arg('indy_type') == 'nuri5sdual')" ns="$(arg robot_description)_planning">
     <rosparam command="load" file="$(find indy_moveit)/config/joint_limits_6dof.yaml"/>
   </group>
 
   <!-- Load default settings for kinematics; these settings are overridden by settings in a node's namespace -->
-  <group ns="$(arg robot_description)_kinematics">
+  <group if="$(eval arg('indy_type') == 'nuri5sdual')" ns="$(arg robot_description)_kinematics">
+    <rosparam command="load" file="$(find indy_moveit)/config/kinematics_nuri5sdual.yaml"/>
+  </group>
+  <group unless="$(eval arg('indy_type') == 'nuri5sdual')" ns="$(arg robot_description)_kinematics">
     <rosparam command="load" file="$(find indy_moveit)/config/kinematics.yaml"/>
   </group>
   

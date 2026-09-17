@@ -32,6 +32,7 @@
   <!-- Planning Functionality -->
   <include ns="move_group" file="$(find indy_moveit)/launch/planning_pipeline.launch.xml">
     <arg name="pipeline" value="ompl" />
+    <arg name="indy_type" value="$(arg indy_type)"/>
   </include>
 
   <!-- Trajectory Execution Functionality -->

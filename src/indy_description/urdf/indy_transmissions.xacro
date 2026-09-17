@@ -15,11 +15,22 @@
             </transmission>
         </xacro:macro>
 
-        <xacro:if value="${indy_type == 'dual_icon3'}">
-            
+        <xacro:if value="${indy_type == 'nuri5sdual'}">
+            <xacro:define_transmission tran="left_tran0" joint="left_arm_joint0" motor="left_motor0"/>
+            <xacro:define_transmission tran="left_tran1" joint="left_arm_joint1" motor="left_motor1"/>
+            <xacro:define_transmission tran="left_tran2" joint="left_arm_joint2" motor="left_motor2"/>
+            <xacro:define_transmission tran="left_tran3" joint="left_arm_joint3" motor="left_motor3"/>
+            <xacro:define_transmission tran="left_tran4" joint="left_arm_joint4" motor="left_motor4"/>
+            <xacro:define_transmission tran="left_tran5" joint="left_arm_joint5" motor="left_motor5"/>
+            <xacro:define_transmission tran="right_tran0" joint="right_arm_joint0" motor="right_motor0"/>
+            <xacro:define_transmission tran="right_tran1" joint="right_arm_joint1" motor="right_motor1"/>
+            <xacro:define_transmission tran="right_tran2" joint="right_arm_joint2" motor="right_motor2"/>
+            <xacro:define_transmission tran="right_tran3" joint="right_arm_joint3" motor="right_motor3"/>
+            <xacro:define_transmission tran="right_tran4" joint="right_arm_joint4" motor="right_motor4"/>
+            <xacro:define_transmission tran="right_tran5" joint="right_arm_joint5" motor="right_motor5"/>
         </xacro:if>
 
-        <xacro:unless value="${indy_type == 'dual_icon3'}">
+        <xacro:unless value="${indy_type == 'dual_icon3' or indy_type == 'nuri5sdual'}">
             <xacro:define_transmission tran="tran0" joint="joint0" motor="motor0"/>
             <xacro:define_transmission tran="tran1" joint="joint1" motor="motor1"/>
             <xacro:define_transmission tran="tran2" joint="joint2" motor="motor2"/>

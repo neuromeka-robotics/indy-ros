@@ -9,15 +9,18 @@
 		<group if="$(eval arg('indy_type') == 'indyrp2' or arg('indy_type') == 'indyrp2_v2')">
 			<rosparam file= "$(find indy_moveit)/config/controllers_7dof.yaml" />
 		</group>
-		<group unless="$(eval arg('indy_type') == 'indyrp2' or arg('indy_type') == 'indyrp2_v2')">
+		<group unless="$(eval arg('indy_type') == 'indyrp2' or arg('indy_type') == 'indyrp2_v2' or arg('indy_type') == 'nuri5sdual')">
 			<rosparam file= "$(find indy_moveit)/config/controllers_6dof.yaml" />
 		</group>
 	</group>
 	<group unless="$(eval arg('sim_gazebo') == false)">
+		<group if="$(eval arg('indy_type') == 'nuri5sdual')">
+			<rosparam file="$(find indy_moveit)/config/controllers_nuri5sdual_gazebo.yaml" />
+		</group>
 		<group if="$(eval arg('indy_type') == 'indyrp2' or arg('indy_type') == 'indyrp2_v2')">
 			<rosparam file= "$(find indy_moveit)/config/controllers_7dof_gazebo.yaml" />
 		</group>
-		<group unless="$(eval arg('indy_type') == 'indyrp2' or arg('indy_type') == 'indyrp2_v2')">
+		<group unless="$(eval arg('indy_type') == 'indyrp2' or arg('indy_type') == 'indyrp2_v2' or arg('indy_type') == 'nuri5sdual')">
 			<rosparam file= "$(find indy_moveit)/config/controllers_6dof_gazebo.yaml" />
 		</group>
 	</group>

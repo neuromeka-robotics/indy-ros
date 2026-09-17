@@ -42,7 +42,7 @@
   <arg name="yaw"         default="0.0"/>
   <!-- <arg name="tf_prefix"   default=""/> -->
 
-  <node name="spawn_gazebo_model" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen" 
+  <node name="spawn_gazebo_model" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen"
     args="-urdf 
           -param /robot_description 
           -model $(arg robot_name) 
@@ -55,15 +55,20 @@
   <group if="$(eval arg('indy_type') == 'indyrp2' or arg('indy_type') == 'indyrp2_v2')">
     <rosparam file="$(find indy_gazebo)/controller/indy_controller_7dof.yaml" command="load"/>
   </group>
-  <group unless="$(eval arg('indy_type') == 'indyrp2' or arg('indy_type') == 'indyrp2_v2')">
+  <group if="$(eval arg('indy_type') == 'nuri5sdual')">
+    <rosparam file="$(find indy_gazebo)/controller/nuri5sdual_controller.yaml" command="load"/>
+    <node name="joint_controller_spawner" pkg="controller_manager" type="spawner" output="screen"
+      args="joint_state_controller left_arm_controller right_arm_controller"/>
+  </group>
+  <group unless="$(eval arg('indy_type') == 'indyrp2' or arg('indy_type') == 'indyrp2_v2' or arg('indy_type') == 'nuri5sdual')">
     <rosparam file="$(find indy_gazebo)/controller/indy_controller_6dof.yaml" command="load"/>
   </group>
 
-  <node name="joint_controller_spawner" pkg="controller_manager" type="spawner" respawn="false" output="screen" 
+  <node unless="$(eval arg('indy_type') == 'nuri5sdual')" name="joint_controller_spawner" pkg="controller_manager" type="spawner" respawn="false" output="screen"
     args="joint_state_controller joint_trajectory_controller"/>
   
   <!-- for servoing -->
-  <node name="ros_control_controller_manager" pkg="controller_manager" type="controller_manager" respawn="false" output="screen" 
+  <node unless="$(eval arg('indy_type') == 'nuri5sdual')" name="ros_control_controller_manager" pkg="controller_manager" type="controller_manager" respawn="false" output="screen"
       args="load joint_group_position_controller"/>
   
 </launch>

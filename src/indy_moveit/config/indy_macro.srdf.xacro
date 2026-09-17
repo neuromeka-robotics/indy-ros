@@ -5,6 +5,34 @@
     A URDF file must exist for this robot as well, where the joints and the links that are referenced are defined
     -->
     <xacro:macro name="indy_srdf" params="name prefix indy_type">
+        <xacro:if value="${indy_type == 'nuri5sdual'}">
+            <group name="left_arm">
+                <chain base_link="${prefix}left_arm_link0" tip_link="${prefix}left_arm_tcp"/>
+            </group>
+            <group name="right_arm">
+                <chain base_link="${prefix}right_arm_link0" tip_link="${prefix}right_arm_tcp"/>
+            </group>
+            <group name="dual_arm">
+                <group name="left_arm"/>
+                <group name="right_arm"/>
+            </group>
+            <virtual_joint name="FixedBase" type="fixed" parent_frame="global" child_link="world"/>
+            <disable_collisions link1="${prefix}body_base" link2="${prefix}left_arm_link0" reason="Adjacent"/>
+            <disable_collisions link1="${prefix}body_base" link2="${prefix}right_arm_link0" reason="Adjacent"/>
+            <disable_collisions link1="${prefix}left_arm_link0" link2="${prefix}left_arm_link1" reason="Adjacent"/>
+            <disable_collisions link1="${prefix}left_arm_link1" link2="${prefix}left_arm_link2" reason="Adjacent"/>
+            <disable_collisions link1="${prefix}left_arm_link2" link2="${prefix}left_arm_link3" reason="Adjacent"/>
+            <disable_collisions link1="${prefix}left_arm_link3" link2="${prefix}left_arm_link4" reason="Adjacent"/>
+            <disable_collisions link1="${prefix}left_arm_link4" link2="${prefix}left_arm_link5" reason="Adjacent"/>
+            <disable_collisions link1="${prefix}left_arm_link5" link2="${prefix}left_arm_link6" reason="Adjacent"/>
+            <disable_collisions link1="${prefix}right_arm_link0" link2="${prefix}right_arm_link1" reason="Adjacent"/>
+            <disable_collisions link1="${prefix}right_arm_link1" link2="${prefix}right_arm_link2" reason="Adjacent"/>
+            <disable_collisions link1="${prefix}right_arm_link2" link2="${prefix}right_arm_link3" reason="Adjacent"/>
+            <disable_collisions link1="${prefix}right_arm_link3" link2="${prefix}right_arm_link4" reason="Adjacent"/>
+            <disable_collisions link1="${prefix}right_arm_link4" link2="${prefix}right_arm_link5" reason="Adjacent"/>
+            <disable_collisions link1="${prefix}right_arm_link5" link2="${prefix}right_arm_link6" reason="Adjacent"/>
+        </xacro:if>
+        <xacro:unless value="${indy_type == 'nuri5sdual'}">
         <!--GROUPS - Representation of a set of joints and links. This can be useful for specifying DOF to plan for, defining arms, end effectors, etc-->
         <!--LINKS - When a link is specified, the parent joint of that link (if it exists) is automatically included-->
         <!--JOINTS - When a joint is specified, the child link of that joint (which will always exist) is automatically included-->
@@ -84,5 +112,6 @@
             <disable_collisions link1="link4" link2="link6" reason="Never" />
         </xacro:unless>
 
+        </xacro:unless>
     </xacro:macro>
 </robot>
